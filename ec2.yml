@@ -9,9 +9,9 @@
          key_name: my_key
          group: test
          instance_type: t2.micro
-         image: "{{ ami_id }}"
+         image: ami-ecc27c95
          wait: true
-         exact_count: 5
+         exact_count: 1
          count_tag:
             Name: Demo
          instance_tags:
