@@ -11,9 +11,9 @@
          instance_type: t2.micro
          image: ami-ecc27c95
          wait: true
-         count: {{ aws_ec2_count }}
+         count: "{{ aws_ec2_count }}"
          instance_tags:
-            Name: {{ aws_ec2_name }}
+            Name: "{{ aws_ec2_name }}"
          assign_public_ip: no
       register: ec2
 
