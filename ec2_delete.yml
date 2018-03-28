@@ -1,0 +1,15 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: Provision a set of instances
+      ec2:
+         state: absent
+         region: eu-west-1 
+         wait: true
+         instance_tags:
+            Name: "{{ aws_ec2_name }}"
+      register: ec2
+
