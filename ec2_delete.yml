@@ -15,7 +15,7 @@
     # Conditional example
     - name: Gather facts
       ec2_instance_facts:
-      register: ec2 
+
 
     - name: Conditional
       debug:
