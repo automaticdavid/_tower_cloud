@@ -23,7 +23,7 @@
 
     - name: Remove a set of instances by name
       debug:
-        msg: "{{ item.1 }}"
+        msg: "{{ item }}"
       with_subelements:
          - "{{ ec2.instances }}"
          - instance_id
