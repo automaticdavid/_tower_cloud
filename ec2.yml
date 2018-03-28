@@ -17,5 +17,4 @@
             Name: Demo
          assign_public_ip: no
          key_name: my_key
-         group: test
       register: ec2
