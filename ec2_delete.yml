@@ -14,9 +14,11 @@
 
     # Conditional example
     - name: Gather facts
-      ec2_facts:
+      ec2_instance_facts:
+        filters:
+          "name": Demo   
+      register: ec2 
 
     - name: Conditional
       debug:
-        msg: "This instance is a t1.micro"
-      when: ansible_ec2_instance_type == "t1.micro"
+        msg: "{{ ec2 }}"
