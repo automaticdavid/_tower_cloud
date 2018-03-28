@@ -6,8 +6,7 @@
 
     - name: Provision a set of instances
       ec2:
-         key_name: my_key
-         group: test
+         region: eu-west-1 
          instance_type: t2.micro
          image: ami-ecc27c95
          wait: true
@@ -16,4 +15,7 @@
             Name: Demo
          instance_tags:
             Name: Demo
+         assign_public_ip: no
+         key_name: my_key
+         group: test
       register: ec2
