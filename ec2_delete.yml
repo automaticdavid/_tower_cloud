@@ -4,21 +4,29 @@
 
   tasks:
 
-    # - name: Provision a set of instances
-    #   ec2:
-    #      state: absent
-    #      region: eu-west-1 
-    #      wait: true
-
-    #   register: ec2
-
-    # Conditional example
     - name: Gather facts
       ec2_instance_facts:
         region: eu-west-1 
         filters: 
           "tag:Name": "{{ aws_ec2_name }}"
       register: ec2
+
+    # - name: Remove a set of instances by name
+    #   ec2:
+    #      state: absent
+    #      region: eu-west-1 
+    #      wait: true
+    #      instance_ids: "{{ item.1 }}"
+    #   with_subelements:
+    #      - "{{ ec2.instances }}"
+    #      - instance_id
+
+    - name: Remove a set of instances by name
+      debug:
+        msg: "{{ item.1 }}"
+      with_subelements:
+         - "{{ ec2.instances }}"
+         - instance_id
 
     - name: Conditional
       debug:
