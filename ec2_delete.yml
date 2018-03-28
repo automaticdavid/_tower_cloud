@@ -4,19 +4,24 @@
 
   tasks:
 
-    - name: Gather facts
+    - name: Gather facts for instances name
       ec2_instance_facts:
         region: eu-west-1 
         filters: 
           "tag:Name": "{{ aws_ec2_name }}"
       register: ec2
 
-    - name: Remove a set of instances by name
+
+    - name: Build a list of ids
+      vars:
+        ids_to_remove: "{{ ec2.instances | map(attribute='instance_id') | list }}"
+      set_fact:
+        ids_to_remove: "{{ ids_to_remove }}"
+
+    - name: Remove a list of instances ids
       ec2:
          state: absent
          region: eu-west-1 
          wait: true
-         instance_ids: "{{ item.instance_id }}"
-      with_items:
-         - "{{ ec2.instances }}"
+         instance_ids: "{{ ids_to_remove }}"
 
