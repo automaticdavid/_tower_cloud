@@ -16,5 +16,4 @@
          instance_tags:
             Name: Demo
          assign_public_ip: no
-         key_name: my_key
       register: ec2
