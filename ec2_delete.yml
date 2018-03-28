@@ -15,6 +15,7 @@
     # Conditional example
     - name: Gather facts
       ec2_instance_facts:
+        region: eu-west-1 
         filters:
           "name": Demo   
       register: ec2 
