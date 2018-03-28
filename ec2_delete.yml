@@ -16,8 +16,9 @@
     - name: Gather facts
       ec2_instance_facts:
         region: eu-west-1 
+        filter: 
+          "tag:Name": "{{ aws_ec2_name }}"
       register: ec2
-
 
     - name: Conditional
       debug:
