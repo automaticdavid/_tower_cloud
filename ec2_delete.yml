@@ -16,6 +16,7 @@
     - name: Gather facts
       ec2_instance_facts:
         region: eu-west-1 
+      register: ec2
 
 
     - name: Conditional
