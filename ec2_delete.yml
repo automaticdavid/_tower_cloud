@@ -28,6 +28,6 @@
          - "{{ ec2.instances }}"
          - instance_id
 
-    - name: Conditional
-      debug:
-        msg: "{{ ec2 }}"
+    # - name: Conditional
+    #   debug:
+    #     msg: "{{ ec2 }}"
