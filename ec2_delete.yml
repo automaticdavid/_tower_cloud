@@ -23,9 +23,9 @@
 
     - name: Remove a set of instances by name
       debug:
-        msg: "{{ item }}"
+        msg: "{{ item.instance_id }}"
       with_items:
-         - "{{ ec2.instances.instance_id }}"
+         - "{{ ec2.instances }}"
 
     # - name: Conditional
     #   debug:
