@@ -6,16 +6,14 @@
 
     - name: Provision a set of instances
       ec2:
+         state: present
          region: eu-west-1 
          instance_type: t2.micro
          image: ami-ecc27c95
          wait: true
-         exact_count: {{ aws_ec2_count }}
-         count_tag:
-            Name: {{ aws_ec2_name }}
+         count: {{ aws_ec2_count }}
          instance_tags:
-            Name: Demo
+            Name: {{ aws_ec2_name }}
          assign_public_ip: no
       register: ec2
 
-    
