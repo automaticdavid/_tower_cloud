@@ -1,9 +1,9 @@
 - name: install nginx
   hosts: all
-  user: ec2-user
   become: true
 
   roles:
+    - user: ec2-user
     - role: nginxinc.nginx
 
   tasks:
@@ -45,4 +45,4 @@
     notify: nginx
 
 
-    
+
