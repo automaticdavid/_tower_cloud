@@ -5,6 +5,10 @@
 
   tasks:
 
+  - name: Needed depency on the node
+    pip:
+      name: pyOpenSSL
+
   - name: Creates cert directory
     file: 
       path: /etc/nginx/ssl
