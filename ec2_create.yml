@@ -14,7 +14,6 @@
          count: "{{ aws_ec2_count }}"
          instance_tags:
             Name: "{{ aws_ec2_name }}"
-         aws_access_key: AKIAI6VCJHRJJYZJPD3A
 
       register: ec2
 
