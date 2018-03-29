@@ -26,7 +26,7 @@
     delegate_to: localhost
 
   - name: Include customized nginx role
-    include: role.nginx.yml
+    import_tasks: role.nginx.yml
 
   - name: Creates node cert directory
     file: 
