@@ -1,6 +1,5 @@
 - name: Create selfsigned certs
   hosts: localhost
-  become: true
 
   tasks:
     
