@@ -6,20 +6,20 @@
     
   - name: Generate an OpenSSL private key
     openssl_privatekey:
-      path: /home/certs/{{ ansible_nodename }}.pem
+      path: /certs/{{ ansible_nodename }}.pem
 
   - name: Generate an OpenSSL CSR
     openssl_csr:
-      path: /home/certs/{{ ansible_nodename }}.csr
-      privatekey_path: /home/certs/{{ ansible_nodename }}.pem
+      path: /certs/{{ ansible_nodename }}.csr
+      privatekey_path: /certs/{{ ansible_nodename }}.pem
       common_name: "{{ ansible_nodename }}"
       subject_alt_name: '"{{ ansible_hostname }}"'
   
   - name: Generate a Self Signed OpenSSL certificate
     openssl_certificate:
-      path: /home/certs/{{ ansible_nodename }}.crt
-      privatekey_path: /home/certs/{{ ansible_nodename }}.pem
-      csr_path: /home/certs/{{ ansible_nodename }}.csr
+      path: /certs/{{ ansible_nodename }}.crt
+      privatekey_path: /certs/{{ ansible_nodename }}.pem
+      csr_path: /certs/{{ ansible_nodename }}.csr
       provider: selfsigned
 
 
