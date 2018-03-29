@@ -1,7 +1,6 @@
 - name: install nginx
   hosts: all
   become: true
-  user: ec2-user
 
   roles:
     - role: nginxinc.nginx
