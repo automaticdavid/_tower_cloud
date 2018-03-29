@@ -8,7 +8,7 @@
 
   tasks:
   - name: create self-signed SSL cert
-  shell: >
+    shell: >
     openssl req -new -nodes -x509
     -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=${ansible_fqdn}"
     -days 3650 -keyout /etc/nginx/ssl/server.key
