@@ -8,7 +8,28 @@
 
   tasks:
     
-  - name: Creates cert directory
+  - name: Generate an OpenSSL private key
+    openssl_privatekey:
+      path: /tmp/nginx.key.pem
+    delegate_to: localhost
+
+  - name: Generate an OpenSSL CSR
+    openssl_csr:
+      path: /tmp/nginx.csr
+      privatekey_path: /tmp/nginx.key.pem
+      common_name: "{{ ansible_nodename }}"
+      subject_alt_name: '"{{ ansible_hostname }}"'
+    delegate_to: localhost
+  
+  - name: Generate a Self Signed OpenSSL certificate
+    openssl_certificate:
+      path: /tmp/nginx.crt
+      privatekey_path: /tmp/nginx.key.pem
+      csr_path: /tmp/nginx.csr
+      provider: selfsigned
+    delegate_to: localhost
+
+  - name: Creates Node cert directory
     file: 
       path: /etc/nginx/ssl
       state: directory
@@ -16,21 +37,12 @@
       group: root
       mode: 0600
 
-  - name: Generate an OpenSSL private key
-    openssl_privatekey:
-      path: /etc/nginx/ssl/nginx.key.pem
+  - name: Creates Node cert directory
+    copy: 
+      src=/tmp/nginx.crt 
+      dest=/etc/nginx/ssl/nginx.crt 
+      force=no
+    notify: nginx
 
-  - name: Generate an OpenSSL CSR
-    openssl_csr:
-      path: /etc/nginx/ssl/nginx.csr
-      privatekey_path: /etc/nginx/ssl/nginx.key.pem
-      common_name: "{{ ansible_nodename }}"
-      subject_alt_name: '"{{ ansible_hostname }}"'
-  
-  - name: Generate a Self Signed OpenSSL certificate
-    openssl_certificate:
-      path: /etc/nginx/ssl/nginx.crt
-      privatekey_path: /etc/nginx/ssl/nginx.key.pem
-      csr_path: /etc/nginx/ssl/nginx.csr
-      provider: selfsigned
-    notify: reload nginx
+
+    
