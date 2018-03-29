@@ -25,20 +25,7 @@
       provider: selfsigned
     delegate_to: localhost
 
-  # - name: Creates node cert directory
-  #   file: 
-  #     path: /etc/nginx/ssl
-  #     state: directory
-  #     owner: root
-  #     group: root
-  #     mode: 0600
 
-  # - name: Copy node cert
-  #   copy: 
-  #     src=/home/certs/nginx.crt 
-  #     dest=/etc/nginx/ssl/nginx.crt 
-  #     force=no
-  #   notify: nginx
 
 
 
