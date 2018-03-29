@@ -28,6 +28,7 @@
   - name: Needed depency on the node
     pip:
       name: pyOpenSSL
+      version: 0.15
 
   - name: Creates cert directory
     file: 
