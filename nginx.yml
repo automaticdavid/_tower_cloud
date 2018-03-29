@@ -7,20 +7,30 @@
     - role: nginxinc.nginx
 
   tasks:
-
+    
   - name: Creates cert directory
     file: 
       path: /etc/nginx/ssl
       state: directory
       owner: root
       group: root
-    mode: 0600
+      mode: 0600
+
+  - name: Generate an OpenSSL private key
+    openssl_privatekey:
+      path: /etc/nginx/ssl/nginx.key.pem
+
+  - name: Generate an OpenSSL CSR
+    openssl_csr:
+      path: /etc/nginx/ssl/nginx.csr
+      privatekey_path: /etc/nginx/ssl/nginx.key.pem
+      common_name: "{{ ansible_nodename }}"
+      subject_alt_name: '"{{ ansible_hostname }}"'
   
-  - name: create self-signed SSL cert
-    shell: >
-      openssl req -new -nodes -x509
-      -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=${ansible_fqdn}"
-      -days 3650 -keyout /etc/nginx/ssl/server.key
-      -out /etc/nginx/ssl/server.crt
-      -extensions v3_ca creates=/etc/nginx/ssl/server.crt
+  - name: Generate a Self Signed OpenSSL certificate
+    openssl_certificate:
+      path: /etc/nginx/ssl/nginx.crt
+      privatekey_path: /etc/nginx/ssl/nginx.key.pem
+      csr_path: /etc/nginx/ssl/nginx.csr
+      provider: selfsigned
     notify: reload nginx
