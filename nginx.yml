@@ -2,10 +2,6 @@
   hosts: all
   become: true
 
-  roles:
-    - user: ec2-user
-    - role: nginxinc.nginx
-
   tasks:
     
   - name: Generate an OpenSSL private key
@@ -29,7 +25,10 @@
       provider: selfsigned
     delegate_to: localhost
 
-  - name: Creates Node cert directory
+  - name: Include customized nginx role
+    include: role.nginx.yml
+
+  - name: Creates node cert directory
     file: 
       path: /etc/nginx/ssl
       state: directory
@@ -37,7 +36,7 @@
       group: root
       mode: 0600
 
-  - name: Creates Node cert directory
+  - name: Copy node cert
     copy: 
       src=/home/certs/nginx.crt 
       dest=/etc/nginx/ssl/nginx.crt 
