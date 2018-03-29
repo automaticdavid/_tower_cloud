@@ -14,4 +14,4 @@
       -days 3650 -keyout /etc/nginx/ssl/server.key
       -out /etc/nginx/ssl/server.crt
       -extensions v3_ca creates=/etc/nginx/ssl/server.crt
-  notify: reload nginx
+    notify: reload nginx
