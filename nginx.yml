@@ -10,22 +10,22 @@
     
   - name: Generate an OpenSSL private key
     openssl_privatekey:
-      path: /tmp/nginx.key.pem
+      path: /home/certs/nginx.key.pem
     delegate_to: localhost
 
   - name: Generate an OpenSSL CSR
     openssl_csr:
-      path: /tmp/nginx.csr
-      privatekey_path: /tmp/nginx.key.pem
+      path: /home/certs/nginx.csr
+      privatekey_path: /home/certs/nginx.key.pem
       common_name: "{{ ansible_nodename }}"
       subject_alt_name: '"{{ ansible_hostname }}"'
     delegate_to: localhost
   
   - name: Generate a Self Signed OpenSSL certificate
     openssl_certificate:
-      path: /tmp/nginx.crt
-      privatekey_path: /tmp/nginx.key.pem
-      csr_path: /tmp/nginx.csr
+      path: /home/certs/nginx.crt
+      privatekey_path: /home/certs/nginx.key.pem
+      csr_path: /home/certs/nginx.csr
       provider: selfsigned
     delegate_to: localhost
 
@@ -39,7 +39,7 @@
 
   - name: Creates Node cert directory
     copy: 
-      src=/tmp/nginx.crt 
+      src=/home/certs/nginx.crt 
       dest=/etc/nginx/ssl/nginx.crt 
       force=no
     notify: nginx
