@@ -1,29 +1,26 @@
 - name: Create selfsigned certs
-  hosts: all
+  hosts: localhost
   become: true
 
   tasks:
     
   - name: Generate an OpenSSL private key
     openssl_privatekey:
-      path: /home/certs/nginx.key.pem
-    delegate_to: localhost
+      path: /home/certs/"{{ ansible_nodename }}".pem
 
   - name: Generate an OpenSSL CSR
     openssl_csr:
-      path: /home/certs/nginx.csr
-      privatekey_path: /home/certs/nginx.key.pem
+      path: /home/certs/"{{ ansible_nodename }}".csr
+      privatekey_path: /home/certs/"{{ ansible_nodename }}".pem
       common_name: "{{ ansible_nodename }}"
       subject_alt_name: '"{{ ansible_hostname }}"'
-    delegate_to: localhost
   
   - name: Generate a Self Signed OpenSSL certificate
     openssl_certificate:
-      path: /home/certs/nginx.crt
-      privatekey_path: /home/certs/nginx.key.pem
-      csr_path: /home/certs/nginx.csr
+      path: /home/certs/"{{ ansible_nodename }}".crt
+      privatekey_path: /home/certs/"{{ ansible_nodename }}".pem
+      csr_path: /home/certs/"{{ ansible_nodename }}".csr
       provider: selfsigned
-    delegate_to: localhost
 
 
 
