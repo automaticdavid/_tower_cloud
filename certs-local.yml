@@ -1,0 +1,62 @@
+- name: Create selfsigned certs
+  hosts: all
+  become: True
+  user: ec2-user
+
+  tasks:
+
+  - name: "create temporary directory to store configuration"
+    tempfile:
+      state: directory
+      suffix: certs
+    register: r_tempfile
+    delegate_to: localhost
+
+  - name: Generate an OpenSSL private key
+    openssl_privatekey:
+      path: "{{ r_tempfile.path }}.{{ ansible_nodename }}".pem
+    delegate_to: localhost
+
+  - name: Generate an OpenSSL CSR
+    openssl_csr:
+      path: "{{ r_tempfile.path }}.{{ ansible_nodename }}".csr
+      privatekey_path: "{{ r_tempfile.path }}.{{ ansible_nodename }}".pem
+      common_name: "{{ ansible_nodename }}"
+      subject_alt_name: '"{{ ansible_hostname }}"'
+    delegate_to: localhost
+  
+  - name: Generate a Self Signed OpenSSL certificate
+    openssl_certificate:
+      path: "{{ r_tempfile.path }}.{{ ansible_nodename }}".crt
+      privatekey_path: "{{ r_tempfile.path }}.{{ ansible_nodename }}".pem
+      csr_path: "{{ r_tempfile.path }}.{{ ansible_nodename }}".csr
+      provider: selfsigned
+    delegate_to: localhost
+
+  - name: Creates cert directory
+    file: 
+      path: /etc/nginx/ssl
+      state: directory
+      owner: root
+      group: root
+      mode: 0600
+    
+  - name: Copy the key to node
+    copy:
+      src: "{{ r_tempfile.path }}.{{ ansible_nodename }}".pem
+      dest: /etc/nginx/ssl/
+      owner: nginx
+      group: nginx
+      mode: 0644
+      force: no
+
+  - name: Copy the cert to node
+    copy:
+      src: "{{ r_tempfile.path }}.{{ ansible_nodename }}".crt
+      dest: /etc/nginx/ssl/
+      owner: nginx
+      group: nginx
+      mode: 0644
+      force: no
+    notify: nginx
+

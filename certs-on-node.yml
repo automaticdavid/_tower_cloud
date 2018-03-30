@@ -5,15 +5,10 @@
 
   tasks:
 
-  - name: Install wget
-    yum:
-      name: wget
-      state: present 
-
   - name: Get EPEL
-    shell: >
-      wget -P /tmp 
-      https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    get_url:
+      url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      dest: /tmp
 
   - name: Install EPEL
     yum:
