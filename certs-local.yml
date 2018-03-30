@@ -62,10 +62,10 @@
     notify: nginx
 
 
-handlers:
-- name: restart_nginx
-service:
-  name: nginx
-  state: restarted
+  handlers:
+  - name: restart_nginx
+  service:
+    name: nginx
+    state: restarted
 
 
