@@ -61,3 +61,11 @@
     become: True
     notify: nginx
 
+
+handlers:
+- name: restart_nginx
+service:
+  name: nginx
+  state: restarted
+
+
