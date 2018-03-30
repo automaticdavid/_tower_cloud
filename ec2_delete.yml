@@ -9,7 +9,7 @@
       ec2_instance_facts:
         region: eu-west-1 
         filters: 
-          "tag:Name": "{{ aws_ec2_name }}"
+          "tag:Name": "{{ aws_ec2_delete_name }}"
       register: ec2
 
 
