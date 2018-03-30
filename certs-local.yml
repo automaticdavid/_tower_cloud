@@ -48,6 +48,7 @@
       group: nginx
       mode: 0644
       force: no
+    become: True
 
   - name: Copy the cert to node
     copy:
@@ -57,5 +58,6 @@
       group: nginx
       mode: 0644
       force: no
+    become: True
     notify: nginx
 
