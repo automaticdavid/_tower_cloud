@@ -64,8 +64,8 @@
 
   handlers:
   - name: restart_nginx
-  service:
-    name: nginx
-    state: restarted
+    service:
+      name: nginx
+      state: restarted
 
 
