@@ -13,7 +13,7 @@
 
   - name: Generate an OpenSSL private key
     openssl_privatekey:
-      path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.pem"
+      path: "{{ r_tempfile.path }}/key.pem"
     delegate_to: localhost
 
   - name: Generate an OpenSSL CSR
@@ -26,8 +26,8 @@
   
   - name: Generate a Self Signed OpenSSL certificate
     openssl_certificate:
-      path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.crt"
-      privatekey_path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.pem"
+      path: "{{ r_tempfile.path }}/cert.crt"
+      privatekey_path: "{{ r_tempfile.path }}/key.pem"
       csr_path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.csr"
       provider: selfsigned
     delegate_to: localhost
@@ -36,27 +36,28 @@
     file: 
       path: /etc/nginx/ssl
       state: directory
-      owner: root
-      group: root
+      owner: nginx
+      group: nginx
       mode: 0600
+    become: True
     
   - name: Copy the key to node
     copy:
-      src: "{{ r_tempfile.path }}/{{ ansible_nodename }}.pem"
+      src: "{{ r_tempfile.path }}/key.pem"
       dest: /etc/nginx/ssl/
       owner: nginx
       group: nginx
-      mode: 0644
+      mode: 0600
       force: no
     become: True
 
   - name: Copy the cert to node
     copy:
-      src: "{{ r_tempfile.path }}/{{ ansible_nodename }}.crt"
+      src: "{{ r_tempfile.path }}/cert.crt"
       dest: /etc/nginx/ssl/
       owner: nginx
       group: nginx
-      mode: 0644
+      mode: 0600
       force: no
     become: True
     notify: nginx
