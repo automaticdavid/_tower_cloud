@@ -43,7 +43,7 @@
     
   - name: Copy the key to node
     copy:
-      src: "{{ r_tempfile.path }}.{{ ansible_nodename }}".pem
+      src: "{{ r_tempfile.path }}/{{ ansible_nodename }}.pem"
       dest: /etc/nginx/ssl/
       owner: nginx
       group: nginx
@@ -52,7 +52,7 @@
 
   - name: Copy the cert to node
     copy:
-      src: "{{ r_tempfile.path }}.{{ ansible_nodename }}".crt
+      src: "{{ r_tempfile.path }}/{{ ansible_nodename }}.crt"
       dest: /etc/nginx/ssl/
       owner: nginx
       group: nginx
