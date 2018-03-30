@@ -1,6 +1,5 @@
 - name: Create selfsigned certs
   hosts: all
-  become: True
   user: ec2-user
 
   tasks:
