@@ -1,5 +1,5 @@
 - name: Create selfsigned certs
-  hosts: all
+  hosts: "{{ ec2_nginx_scope }}"
   become: True
   user: ec2-user
 
