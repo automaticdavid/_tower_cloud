@@ -18,8 +18,8 @@
 
   - name: Generate an OpenSSL CSR
     openssl_csr:
-      path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.csr"
-      privatekey_path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.pem"
+      path: "{{ r_tempfile.path }}/nginx.csr"
+      privatekey_path: "{{ r_tempfile.path }}/key.pem"
       common_name: "{{ ansible_nodename }}"
       # subject_alt_name: '"{{ ansible_hostname }}"'
     delegate_to: localhost
@@ -28,7 +28,7 @@
     openssl_certificate:
       path: "{{ r_tempfile.path }}/cert.crt"
       privatekey_path: "{{ r_tempfile.path }}/key.pem"
-      csr_path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.csr"
+      csr_path: "{{ r_tempfile.path }}/nginx.csr"
       provider: selfsigned
     delegate_to: localhost
 
