@@ -21,7 +21,7 @@
       path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.csr"
       privatekey_path: "{{ r_tempfile.path }}/{{ ansible_nodename }}.pem"
       common_name: "{{ ansible_nodename }}"
-      subject_alt_name: '"{{ ansible_hostname }}"'
+      # subject_alt_name: '"{{ ansible_hostname }}"'
     delegate_to: localhost
   
   - name: Generate a Self Signed OpenSSL certificate
