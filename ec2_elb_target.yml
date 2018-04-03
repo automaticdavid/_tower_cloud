@@ -1,35 +1,29 @@
-- name: create ec2 instances  
+- name: add ec2 instance to ELB target 
   hosts: localhost
   connection: local
   gather_facts: False
 
   tasks:
 
-    - name: Provision a set of instances
-      ec2:
-         key_name: dcl
-         state: present
-         region: eu-west-1 
-         instance_type: t2.micro
-         image: ami-ecc27c95
-         wait: true
-         count: "{{ aws_ec2_count }}"
-         instance_tags:
-            Name: "{{ aws_ec2_name }}"
-         group_id: "{{ aws_ec2_groupid }}"
-
+    - name: Gather facts for instances name
+      ec2_instance_facts:
+        region: eu-west-1 
+        filters: 
+          "tag:Name": "{{ aws_ec2_name }}"
       register: ec2
 
-    # - name: Output the ec2 return values
-    #   debug:
-    #     msg: "{{ ec2 }}"
+    - name: Build a list of ids
+      vars:
+        ids_to_add: "{{ ec2.instances | map(attribute='instance_id') | list }}"
+      set_fact:
+        ids_to_add: "{{ ids_to_add }}"
 
     - name: Build the list of instances id and ports
       vars:
         ids_and_ports: []
       set_fact:
         ids_and_ports: "{{ ids_and_ports +  [ {'Id': item, 'Port': 80} ] }}"
-      with_items: "{{ ec2.instance_ids }}"
+      with_items: "{{ ids_to_add }}"
       
     # - name: Output the ids_and_ports fact
     #   debug:
