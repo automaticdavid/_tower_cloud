@@ -24,13 +24,13 @@
     #   debug:
     #     msg: "{{ ec2 }}"
 
-    - name: Initialize an list of instances id and ports
-      set_fact:
-        ids_and_ports: []
+    # - name: Initialize an list of instances id and ports
+    #   set_fact:
+    #     ids_and_ports: []
 
     - name: Build the list of instances id and ports
       set_fact:
-        ids_and_ports: "{{ ids_and_ports }} + {{ item }} " 
+        ids_and_ports: { 'Id': "{{ item }}", 'Port': 80 }  
       with_items: "{{ ec2.instance_ids }}"
 
 
