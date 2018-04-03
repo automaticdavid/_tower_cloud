@@ -30,10 +30,7 @@
 
     - name: Build the list of instances id and ports
       set_fact:
-        iter:  
-          - Id: item  
-            Port: 80
-        ids_and_ports: "{{ ids_and_ports }} + {{ iter }} " 
+        ids_and_ports: "{{ ids_and_ports }} + {{ item }} " 
       with_items: "{{ ec2.instance_ids }}"
 
 
