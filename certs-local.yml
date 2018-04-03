@@ -4,7 +4,7 @@
 
   tasks:
 
-  - name: "create temporary directory to store configuration"
+  - name: Create temporary directory to store configuration
     tempfile:
       state: directory
       suffix: certs
