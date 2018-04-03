@@ -47,8 +47,7 @@
         vpc_id: vpc-01234567
         modify_targets: True
         state: present
-        target_type: instance
-        instances: "{{ ids_and_ports }}"
+        targets: "{{ ids_and_ports }}"
 
 
 
