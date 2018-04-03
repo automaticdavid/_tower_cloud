@@ -20,16 +20,24 @@
 
       register: ec2
 
+    # - name: Show the ec2 return values
+    #   debug:
+    #     msg: "{{ ec2 }}"
 
-    - name: Show the ec2 return values
-      debug:
-        msg: "{{ ec2 }}"
+    - name: Build a list of ids
+      vars:
+        ids_ports: "{{ 'Id' : ec2.instances | map(attribute='instance_id') | list, 'Port': 80 }}"
+      set_fact:
+        ids_ports: "{{ ids_ports}}"
 
-    # - name: Add Instances to LB target 
-    #   elb_target_group:
-    #     name: "{{ aws_lb_target }}"
-    #     protocol: https
-    #     port: 443
-    #     vpc_id: vpc-01234567
-    #     modify_targets: True
-    #     state: present
+    - name: Add Instances to LB target 
+      elb_target_group:
+        name: "{{ aws_lb_target }}"
+        protocol: https
+        port: 443
+        vpc_id: vpc-01234567
+        modify_targets: True
+        state: present
+        target_type: instance
+        instances: "{{ ids_ports}}"
+

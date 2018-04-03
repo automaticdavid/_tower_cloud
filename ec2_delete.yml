@@ -12,7 +12,6 @@
           "tag:Name": "{{ aws_ec2_delete_name }}"
       register: ec2
 
-
     - name: Build a list of ids
       vars:
         ids_to_remove: "{{ ec2.instances | map(attribute='instance_id') | list }}"
