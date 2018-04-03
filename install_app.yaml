@@ -4,33 +4,33 @@ user: ec2-user
 
 tasks:
 
-- name: Create temporary directory to get app
-  tempfile:
-    state: directory
-    suffix: app
-  register: r_tempfile
-  delegate_to: localhost
+  - name: Create temporary directory to get app
+    tempfile:
+      state: directory
+      suffix: app
+    register: r_tempfile
+    delegate_to: localhost
 
-- name: Git clone the website
-  git:
-    repo: "{{ app }}"
-    version: "{{ ver }}"
-    dest: "{{ r_tempfile.path }}"
-  delegate_to: localhost
+  - name: Git clone the website
+    git:
+      repo: "{{ app }}"
+      version: "{{ ver }}"
+      dest: "{{ r_tempfile.path }}"
+    delegate_to: localhost
 
-- name: Copy conf to nodes 
-  copy:
-    src: "{{ r_tempfile.path }}/config/hello.conf" 
-    dest: /etc/nginx/conf.d/default.conf 
-  notify: restart_nginx
-  become: True
+  - name: Copy conf to nodes 
+    copy:
+      src: "{{ r_tempfile.path }}/config/hello.conf" 
+      dest: /etc/nginx/conf.d/default.conf 
+    notify: restart_nginx
+    become: True
 
-- name: Copy app to nodes 
-  copy:
-    src: "{{ r_tempfile.path }}/app/index.html" 
-    dest: /usr/share/nginx/html/index.html 
-  become: True
-  
+  - name: Copy app to nodes 
+    copy:
+      src: "{{ r_tempfile.path }}/app/index.html" 
+      dest: /usr/share/nginx/html/index.html 
+    become: True
+    
 handlers:
   - name: restart_nginx
     service:
