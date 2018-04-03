@@ -20,13 +20,13 @@
     dest: "{{ r_tempfile.path }}"
   delegate_to: localhost
 
--name: Copy conf to nodes 
+- name: Copy conf to nodes 
   copy:
     src: "{{ r_tempfile.path }}/config/hello.conf" 
     dest: /etc/nginx/conf.d/default.conf 
   notify: restart_nginx
 
--name: Copy app to nodes 
+- name: Copy app to nodes 
   copy:
     src: "{{ r_tempfile.path }}/app/index.html" 
     dest: /usr/share/nginx/html/index.html 
