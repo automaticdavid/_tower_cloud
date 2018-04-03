@@ -10,6 +10,7 @@
         region: eu-west-1 
         filters: 
           "tag:Name": "{{ aws_ec2_name }}"
+          "instance-state-name": running
       register: ec2
 
     - name: Build a list of ids
