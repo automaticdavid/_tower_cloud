@@ -33,7 +33,7 @@
         ids_and_ports: 
           - Id: "{{ item }}"
             Port: 80   
-      loop: "{{ ec2.instance_ids }}"
+      with_items: "{{ ec2.instance_ids }}"
       register: ids_and_ports
 
     - name: Output the ids_and_ports fact
