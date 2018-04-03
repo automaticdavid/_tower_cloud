@@ -20,3 +20,16 @@
 
       register: ec2
 
+
+    - name: Show the ec2 return values
+      debug:
+        msg: "{{ ec2 }}"
+
+    # - name: Add Instances to LB target 
+    #   elb_target_group:
+    #     name: "{{ aws_lb_target }}"
+    #     protocol: https
+    #     port: 443
+    #     vpc_id: vpc-01234567
+    #     modify_targets: True
+    #     state: present
