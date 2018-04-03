@@ -27,6 +27,7 @@
     - name: Build a list of ids and ports
       vars:
         ids: "{{ ec2.instances | map(attribute='instance_id') | list }}"
+        ids_and_ports: []
       set_fact:
         iter:
           - Id: item
