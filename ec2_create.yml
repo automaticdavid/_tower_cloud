@@ -30,9 +30,10 @@
 
     - name: Build the list of instances id and ports
       set_fact:
-        ids_and_ports: 
+        ids_and_ports: "{{ ids_and_ports + 
           - Id: "{{ item }}"
             Port: 80   
+        }}"
       with_items: "{{ ec2.instance_ids }}"
       register: ids_and_ports
 
