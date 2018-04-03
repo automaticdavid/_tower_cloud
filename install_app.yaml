@@ -18,15 +18,15 @@
         dest: "{{ r_tempfile.path }}"
       delegate_to: localhost
 
-    - name: Check git clone
-      command: "ls {{ r_tempfile.path }}"
-      register: dir_out
-      delegate_to: localhost
+    # - name: List git checkout
+    #   command: "ls {{ r_tempfile.path }}"
+    #   register: dir_out
+    #   delegate_to: localhost
 
-    - name: List content
-      debug: var={{item}}
-      with_items: dir_out.stdout_lines
-      delegate_to: localhost
+    # - name: Display checkout content
+    #   debug: var={{item}}
+    #   with_items: dir_out.stdout_lines
+    #   delegate_to: localhost
 
     - name: Copy conf to nodes 
       copy:
