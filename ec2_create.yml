@@ -32,7 +32,7 @@
       vars:
         ids_and_ports: []
       set_fact:
-        ids_and_ports: "{{ ids_and_ports +  [item] }}"
+        ids_and_ports: "{{ ids_and_ports +  [ {'Id': item} ] }}"
       with_items: "{{ ec2.instance_ids }}"
       
     - name: Output the ids_and_ports fact
