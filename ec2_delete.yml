@@ -25,4 +25,5 @@
          region: eu-west-1 
          wait: true
          instance_ids: "{{ ids_to_remove }}"
+      when: ids_to_remove
 
