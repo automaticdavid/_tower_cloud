@@ -29,16 +29,17 @@
         ids: "{{ ec2.instances | map(attribute='instance_id') | list }}"
         ids_and_ports: []
       set_fact:
-        iter:
-          - Id: "{{ item }}"
-            Port: 80
-        # ids_and_ports: "{{ ids_and_ports }} + {{ iter }}"   
-      with_items: "{{ ids }}"
+        # iter:
+        #   - Id: "{{ item }}"
+        #     Port: 80
+        # ids_and_ports: "{{ ids_and_ports }} + {{ iter }}" 
+        ids : "{{ ids }}"
+      # with_items: "{{ ids }}"
 
 
     - name: Output the ids_and_ports fact
       debug:
-        msg: "{{ iter }}"
+        msg: "{{ ids }}"
 
     # - name: Add Instances to LB target 
     #   elb_target_group:
