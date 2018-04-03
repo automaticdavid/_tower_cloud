@@ -31,13 +31,13 @@
         iter:
           - Id: "{{ item }}"
             Port: 80
-        # ids_and_ports: "{{ ids_and_ports }} + {{ iter }}" 
+        ids_and_ports: "{{ ids_and_ports }} + {{ iter }}" 
       with_items: "{{ ec2.instance_ids }}"
 
 
     - name: Output the ids_and_ports fact
       debug:
-        msg: "{{ iter }}"
+        msg: "{{ ids_and_ports }}"
 
     # - name: Add Instances to LB target 
     #   elb_target_group:
