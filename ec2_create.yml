@@ -28,7 +28,7 @@
       vars:
         ids: "{{ ec2.instances | map(attribute='instance_id') | list }}"
       set_fact:
-        ids_and_ports: "{{ ids_and_ports }}" +  [ { 'Id': item, 'Port': 80 } ] 
+        ids_and_ports: "{{ ids_and_ports }}" +   { 'Id': item, 'Port': 80 }  
       with_items: "{{ ids }}"
 
     - name: Output the ids_and_ports fact
