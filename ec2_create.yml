@@ -39,19 +39,16 @@
       debug:
         msg: "{{ ids_and_ports }}"
 
-    # - name: Add Instances to LB target 
-    #   elb_target_group:
-    #     name: "{{ aws_lb_target }}"
-    #     protocol: https
-    #     port: 80
-    #     vpc_id: vpc-01234567
-    #     modify_targets: True
-    #     state: present
-    #     target_type: instance
-    #     instances: 
-        #       - Id: "{{ item }}"
-        #         Port: 80
-        # with_items: "{{ ec2.instance_ids }}"
+    - name: Add Instances to LB target 
+      elb_target_group:
+        name: "{{ aws_lb_target }}"
+        protocol: https
+        port: 80
+        vpc_id: vpc-01234567
+        modify_targets: True
+        state: present
+        target_type: instance
+        instances: "{{ ids_and_ports }}"
 
 
 
