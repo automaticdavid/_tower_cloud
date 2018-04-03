@@ -18,16 +18,24 @@
         dest: "{{ r_tempfile.path }}"
       delegate_to: localhost
 
+    - name: Check git clone
+      command: "ls {{ r_tempfile.path }}"
+      register: dir_out
+
+    - name: List content
+      debug: var={{item}}
+      with_items: dir_out.stdout_lines
+
     - name: Copy conf to nodes 
       copy:
-        src: "{{ r_tempfile.path }}/myapp/config/hello.conf" 
+        src: "{{ r_tempfile.path }}/config/hello.conf" 
         dest: /etc/nginx/conf.d/default.conf 
       notify: restart_nginx
       become: True
 
     - name: Copy app to nodes 
       copy:
-        src: "{{ r_tempfile.path }}/myapp/app/index.html" 
+        src: "{{ r_tempfile.path }}/app/index.html" 
         dest: /usr/share/nginx/html/index.html 
       become: True
 
