@@ -30,7 +30,7 @@
 
     - name: Build the list of instances id and ports
       set_fact:
-        ids_and_ports: { 'Id': "{{ item }}", 'Port': 80 }  
+        ids_and_ports: "{{ ids_and_ports + { 'Id': "{{ item }}", 'Port': 80 } }}"  
       with_items: "{{ ec2.instance_ids }}"
 
 
@@ -47,5 +47,11 @@
     #     modify_targets: True
     #     state: present
     #     target_type: instance
-    #     instances: "{{ ids_ports}}"
+    #     instances: 
+        #       - Id: "{{ item }}"
+        #         Port: 80
+        # with_items: "{{ ec2.instance_ids }}"
+
+
+
 
