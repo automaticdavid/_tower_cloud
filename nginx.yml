@@ -1,6 +1,5 @@
 - name: install nginx
   hosts: "{{ ec2_nginx_scope }}"
-  become: true
   user: ec2-user
 
   roles:
