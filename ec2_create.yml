@@ -30,8 +30,8 @@
         ids_and_ports: []
       set_fact:
         iter:
-          - Id: item
-          - Port: 80
+          - Id: "{{ item }}"
+            Port: 80
         # ids_and_ports: "{{ ids_and_ports }} + {{ iter }}"   
       with_items: "{{ ids }}"
 
