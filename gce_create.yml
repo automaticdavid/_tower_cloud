@@ -7,11 +7,12 @@
 
     - name: Provision a set of instances
       gce:
-        instance_names: "{{ gce_ins_name }}"
+        base_name: "{{ gce_ins_name }}"
         num_instances: "{{ gce_ins_num }}"
         zone: europe-west1-b
         machine_type: f1-micro
         image: debian-9
+        external_ip: no
         state: present
         disk_size: 10
 
