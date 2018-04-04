@@ -8,6 +8,7 @@
     - name: Output the ids_and_ports fact
       debug:
         msg: "{{ play_hosts }}"
+      delegate_to: localhost
 
     - name: Delete a set of instances
       gce:
