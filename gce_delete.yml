@@ -1,13 +1,17 @@
-- name: create gce instances  
+- name: Delete gce instances  
   hosts: "{{ gce_ins_name }}"
   connection: local
   gather_facts: False
 
   tasks:
 
+    - name: Output the ids_and_ports fact
+      debug:
+        msg: "{{ play_hosts }}"
+
     - name: Delete a set of instances
       gce:
-        instance_names: "{{play_hosts}}"
+        instance_names: "{{ play_hosts }}"
         zone: europe-west1-b
         state: absent
       delegate_to: localhost
