@@ -14,7 +14,7 @@
       gce_lb:
         name: "{{ gce_lb_name }}"
         region: europe-west1
-        members: "{{ play_hosts | join(',') }}"
+        members: "{{ play_hosts }}"
       run_once: true
 
 
