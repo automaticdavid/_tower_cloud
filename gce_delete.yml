@@ -10,7 +10,7 @@
         instance_names: "{{play_hosts}}"
         zone: europe-west1-b
         state: absent
-        delegate_to: localhost
+      delegate_to: localhost
 
 
 
