@@ -8,7 +8,7 @@
     - name: Provision a set of instances
       gce:
         instance_names: "{{ gce_ins_name }}"
-        num_instance: "{{ gce_ins_num }}"
+        num_instances: "{{ gce_ins_num }}"
         zone: eu-west-1b
         machine_type: f1-micro
         image: debian-9
