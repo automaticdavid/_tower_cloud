@@ -1,0 +1,18 @@
+- name: create gce instances  
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: Provision a set of instances
+      gce:
+        instance_names: {{ gce_ins_name }}
+        zone: eu-west-1b
+        machine_type: f1-micro
+        image: debian-8
+        state: present
+        disk_size: 10
+
+
+
