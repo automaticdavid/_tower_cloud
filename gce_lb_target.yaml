@@ -9,14 +9,12 @@
       debug:
         msg: "{{ play_hosts }}"
       run_once: true
-      delegate_to: localhost
 
     - name: Add to LB
       gce_lb:
         name: "{{ gce_lb_name }}"
         region: europe-west1
         members: "{{ play_hosts | join(',') }}"
-      delegate_to: localhost
       run_once: true
 
 
