@@ -2,7 +2,14 @@
   hosts: "{{ gce_ins_name }}"
   connection: local
   gather_facts: False
+
   tasks:
+
+    - name: Output the ids_and_ports fact
+      debug:
+        msg: "{{ play_hosts }}"
+      run_once: true
+      delegate_to: localhost
 
     - name: Add to LB
       gce_lb:
