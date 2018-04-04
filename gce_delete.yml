@@ -1,5 +1,5 @@
 - name: create gce instances  
-  hosts: "{{ gce_ins_list }}"
+  hosts: "{{ gce_ins_name }}"
   connection: local
   gather_facts: False
 
