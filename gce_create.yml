@@ -9,7 +9,7 @@
       gce:
         instance_names: "{{ gce_ins_name }}"
         num_instances: "{{ gce_ins_num }}"
-        zone: europe-west1-1
+        zone: europe-west1-b
         machine_type: f1-micro
         image: debian-9
         state: present
