@@ -1,0 +1,17 @@
+- name: Add gce instances to LB 
+  hosts: "{{ gce_ins_name }}"
+  connection: local
+  gather_facts: False
+  tasks:
+
+    - name: Add to LB
+      gce_lb:
+        name: "{{ gce_lb_name }}"
+        region: europe-west1-b
+        members: "{{ play_hosts | join(',') }}"
+      delegate_to: localhost
+      run_once: true
+
+      
+
+
