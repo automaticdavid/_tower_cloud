@@ -1,5 +1,5 @@
 - name: create gce instances  
-  hosts: localhost
+  hosts: {{ gce_ins_list }}
   connection: local
   gather_facts: False
 
@@ -7,10 +7,14 @@
 
     - name: Delete a set of instances
       gce:
-        base_name: "{{ gce_ins_name }}"
+        instance_names: "{{play_hosts}}"
         zone: europe-west1-b
         state: absent
-        disk_size: 10
+        delegate_to: localhost
+
+
+
+
 
 
 
