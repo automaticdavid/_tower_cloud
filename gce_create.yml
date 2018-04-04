@@ -12,7 +12,7 @@
         zone: europe-west1-b
         machine_type: f1-micro
         image: debian-9
-        external_ip: no
+        external_ip: none
         state: present
         disk_size: 10
 
