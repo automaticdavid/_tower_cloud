@@ -2,7 +2,7 @@
 "instances": [
  
 	{% for INSTANCE in {{ play_hosts }} %}
-    	{"instance": "https://www.googleapis.com/compute/v1/projects/{{PROJECT_ID}}/zones/{{ZONE}}/instances/{{INSTANCE}}"},
+		{{INSTANCE}},
 	{% endfor %}
 
 ]
