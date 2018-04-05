@@ -9,7 +9,7 @@
       ec2:
          key_name: dcl
          state: present
-         # region: eu-west-1 
+         region: eu-west-1 
          instance_type: t2.micro
          image: ami-ecc27c95
          vpc_subnet_id: subnet-cb181590
