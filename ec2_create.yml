@@ -9,16 +9,16 @@
       ec2:
          key_name: dcl
          state: present
-         region: eu-west-1 
+         # region: eu-west-1 
          instance_type: t2.micro
          image: ami-ecc27c95
-         assign_public_ip: no
          vpc_subnet_id: subnet-cb181590
+         assign_public_ip: no
          wait: true
          count: "{{ aws_ec2_count }}"
          instance_tags:
             Name: "{{ aws_ec2_name }}"
-         group_id: "{{ aws_ec2_groupid }}"
+         # group_id: "{{ aws_ec2_groupid }}"
 
       register: ec2
 
