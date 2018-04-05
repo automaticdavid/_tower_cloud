@@ -1,0 +1,52 @@
+- name: Add gce instances to LB 
+  hosts: "{{ gce_ins_name }}"
+  connection: local
+  gather_facts: False
+
+  tasks:
+
+    - name: Output the ids_and_ports fact
+      debug:
+        msg: "{{ play_hosts }}"
+      run_once: true
+
+    - name: Add to LB
+      vars: 
+        PROJECT_ID: dcl-cf
+        REGION: europe-west1
+        ZONE: europe-west1-b
+        TARGET_POOL:  "{{ gce_lb_name }}"
+        URL_ROOT: https://www.googleapis.com/compute/v1/projects/
+        url: "{{URL_ROOT}}/{{PROJECT_ID}}/regions/{{REGION}}/targetPools/{{TARGET_POOL}}/addInstance"
+
+      debug:
+        msg: "{{ lookup('template', './files/rest_add_to_lb.json.j2', convert_data=False) }} "
+
+      # uri:
+      #   url: "{{ url }}"
+      #   method: POST
+      #   body_format: json
+      #   body: "{{ lookup('template', './files/rest_add_to_lb.json.j2', convert_data=False) }} "
+  
+  
+      #   validate_certs: no
+      #   headers:
+      #     Authorization: "Bearer {{ bearer }}"
+      # register: rest_tokenid
+
+
+
+
+      #   - name: config cf admin
+      #     uri:
+      #       url: "{{ cfui_uri }}/api/users/"
+      #       method: POST 
+      #       user: admin
+      #       password: "{{ vault_cfme_default_root_pw }}"
+      #       body: "{{ lookup('template', './files/rest_change-admin-password.json.j2', convert_data=False) }} "
+      #       force_basic_auth: yes
+      #       body_format: json
+      #       validate_certs: no
+      #     when: rest_result.status != 200
+
+
