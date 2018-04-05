@@ -13,7 +13,7 @@
          instance_type: t2.micro
          image: ami-ecc27c95
          assign_public_ip: no
-         vpc_subnet_id: vpc-714bfc17
+         vpc_subnet_id: subnet-cb181590
          wait: true
          count: "{{ aws_ec2_count }}"
          instance_tags:
