@@ -12,6 +12,7 @@
          region: eu-west-1 
          instance_type: t2.micro
          image: ami-ecc27c95
+         assign_public_ip: no
          wait: true
          count: "{{ aws_ec2_count }}"
          instance_tags:
