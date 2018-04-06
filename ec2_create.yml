@@ -18,7 +18,7 @@
          count: "{{ aws_ec2_count }}"
          instance_tags:
             Name: "{{ aws_ec2_name }}"
-         # group_id: "{{ aws_ec2_groupid }}"
+         group_id: "{{ aws_ec2_groupid }}"
 
       register: ec2
 
