@@ -1,4 +1,4 @@
-- name: install ngninx and git, register rhel
+- name: install nginx and git, register rhel
   hosts: "{{ ec2_nginx_scope }}"
   become: true
   user: ec2-user
@@ -22,10 +22,6 @@
         username: '{{ rhsm_username }}'
         password: '{{ rhsm_password }}'
 
-    - name: install git
-      yum:
-        name: git
-        state: latest 
 
 
 
