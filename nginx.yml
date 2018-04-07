@@ -19,8 +19,8 @@
     - name: Register system
       redhat_subscription:
         state: present
-        username: '{{ rhsm_username }}'
-        password: '{{ rhsm_password }}'
+        username: "{{ rhsm_username }}"
+        password: "{{ rhsm_password }}"
 
 
 

@@ -18,6 +18,15 @@
       set_fact:
         ids_to_remove: "{{ ids_to_remove }}"
 
+    - name: Unregister system
+      redhat_subscription:
+        state: present
+        username: "{{ rhsm_username }}"
+        password: "{{ rhsm_password }}"
+      delegate_to: "{{ item }}"
+      with_items: "{{ ids_to_remove }}"
+
+
     - name: Remove a list of instances ids
       ec2:
          state: absent
