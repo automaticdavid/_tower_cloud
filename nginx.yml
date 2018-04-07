@@ -1,9 +1,31 @@
-- name: install nginx
+- name: install ngninx and git, register rhel
   hosts: "{{ ec2_nginx_scope }}"
   become: true
   user: ec2-user
 
   roles:
     - role: nginxinc.nginx
+
+  tasks:
+
+    - name: Install RHSM and Insights
+      yum:
+        name: '{{ item }}'
+        state: present
+      with_items:
+        - redhat-access-insights
+        - subscription-manager
+      
+    - name: Register system
+      redhat_subscription:
+        state: present
+        username: '{{ rhsm_username }}'
+        password: '{{ rhsm_password }}'
+
+    - name: install git
+      yum:
+        name: git
+        state: latest 
+
 
 
