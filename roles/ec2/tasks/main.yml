@@ -2,6 +2,7 @@
   hosts: "{{ ec2_scope }}"
   become: true
 
+  tasks:
 
-  - include_tasks: ec2_delete.yml
+    - include_tasks: ec2_delete.yml
 
