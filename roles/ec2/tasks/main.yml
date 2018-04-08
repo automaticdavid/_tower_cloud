@@ -5,4 +5,5 @@
   tasks:
 
     - include_tasks: ec2_delete.yml
+      notify: unregister_rhel
 

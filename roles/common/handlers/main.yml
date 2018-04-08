@@ -1,4 +1,4 @@
-- name: Unregister system
+- name: rhsm_unregister
   redhat_subscription:
     state: absent
     username: "{{ rhsm_username }}"
