@@ -1,5 +1,5 @@
 - name: ec2 actions
-  hosts: "{{ ec2_scope }}"
+  hosts: "*{{ ec2_scope }}"
   become: true
   user: ec2-user
 
