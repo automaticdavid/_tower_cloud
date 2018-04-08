@@ -1,0 +1,7 @@
+- name: ec2 actions
+  hosts: "{{ ec2_scope }}"
+  become: true
+  user: ec2-user
+
+  roles:
+    - role: ec2

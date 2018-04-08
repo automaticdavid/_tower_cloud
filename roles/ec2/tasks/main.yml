@@ -1,0 +1,10 @@
+- name: Install nginx and register rhel
+  hosts: "{{ ec2_scope }}"
+  become: true
+  user: ec2-user
+
+tasks:
+
+  - name: Delete
+    include_tasks: ec2_delete.yml
+    notify: unregister_rhsm

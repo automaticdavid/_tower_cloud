@@ -1,0 +1,8 @@
+- Name: unregister_rhsm
+
+    - name: Unregister system
+      redhat_subscription:
+        state: absent
+        username: "{{ rhsm_username }}"
+        password: "{{ rhsm_password }}"
+      ignore_errors: yes
