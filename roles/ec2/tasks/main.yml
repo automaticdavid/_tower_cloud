@@ -1,4 +1,4 @@
 - name: ec2 delete
   include_tasks: ec2_delete.yml
-  notify: unregister_rhel
+  # notify: unregister_rhel
 
