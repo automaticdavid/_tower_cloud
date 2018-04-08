@@ -9,7 +9,7 @@
       ec2_instance_facts:
         region: eu-west-1 
         filters: 
-          "tag:Name": "*{{ ec2_scope }}"
+          "tag:Name": "{{ ec2_scope }}"
       register: ec2
 
     - name: Build a list of ids
