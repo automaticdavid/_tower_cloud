@@ -3,8 +3,8 @@
   become: true
   user: ec2-user
 
-tasks:
+  tasks:
 
-  - name: Delete
-    include_tasks: ec2_delete.yml
-    notify: unregister_rhsm
+    - name: Delete
+      include_tasks: ec2_delete.yml
+      notify: unregister_rhsm
