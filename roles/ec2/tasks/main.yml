@@ -1,9 +1,7 @@
-- name: Install nginx and register rhel
+- name: Manage ec2 stack
   hosts: "{{ ec2_scope }}"
   become: true
 
-  tasks:
 
-    - name: Delete
-      include_tasks: ec2_delete.yml
-      notify: unregister_rhsm
+  - include_tasks: ec2_delete.yml
+
