@@ -1,9 +1,4 @@
-- name: Manage ec2 stack
-  hosts: "{{ ec2_scope }}"
-  become: true
-
-  tasks:
-
-    - include_tasks: ec2_delete.yml
-      notify: unregister_rhel
+- name: ec2 delete
+  include_tasks: ec2_delete.yml
+  notify: unregister_rhel
 

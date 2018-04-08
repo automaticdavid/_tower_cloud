@@ -1,4 +1,4 @@
-- name: delete ec2 instance 
+- name: Delete ec2 instance 
   hosts: localhost
   connection: local
   gather_facts: False
