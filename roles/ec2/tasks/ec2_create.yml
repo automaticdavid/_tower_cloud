@@ -1,27 +1,16 @@
-- name: create ec2 instances  
-  hosts: localhost
-  connection: local
-  gather_facts: False
+- name: Provision a set of instances
+  ec2:
+     key_name: dcl
+     state: present
+     region: eu-west-1 
+     instance_type: t2.micro
+     image: ami-ecc27c95
+     vpc_subnet_id: "{{ aws_ec2_subnetid }}"
+     assign_public_ip: no
+     wait: true
+     count: "{{ aws_ec2_count }}"
+     instance_tags:
+        Name: "{{ aws_ec2_name }}"
+     group_id: "{{ aws_ec2_groupid }}"
 
-  tasks:
-
-    - name: Provision a set of instances
-      ec2:
-         key_name: dcl
-         state: present
-         region: eu-west-1 
-         instance_type: t2.micro
-         image: ami-ecc27c95
-         vpc_subnet_id: "{{ aws_ec2_subnetid }}"
-         assign_public_ip: no
-         wait: true
-         count: "{{ aws_ec2_count }}"
-         instance_tags:
-            Name: "{{ aws_ec2_name }}"
-         group_id: "{{ aws_ec2_groupid }}"
-
-      register: ec2
-
-
-
-
+  register: ec2
