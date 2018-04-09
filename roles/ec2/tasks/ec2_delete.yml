@@ -6,6 +6,8 @@
         "tag:Name": "{{ ec2_scope }}"
   register: ec2
   become: true
+  delegate_to: localhost
+  run_once: true
 
 - name: Build a list of ids
   vars:

@@ -10,6 +10,4 @@
       include_role: 
         name: ec2
         tasks_from: ec2_delete
-      become: true
-      delegate_to: localhost
-      run_once: true
+
