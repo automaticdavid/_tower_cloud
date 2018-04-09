@@ -5,6 +5,7 @@
       filters: 
         "tag:Name": "{{ ec2_scope }}"
   register: ec2
+  become: true
 
 - name: Build a list of ids
   vars:
