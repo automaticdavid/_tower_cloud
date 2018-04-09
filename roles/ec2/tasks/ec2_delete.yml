@@ -1,31 +1,34 @@
 
-- name: Gather details for instances names
-  local_action:
-    module: ec2_instance_facts
-    region: eu-west-1 
-    filters: 
-      "tag:Name": "{{ ec2_scope }}"
-    register: ec2
-    run_once: true
-    become: true
+- name: Gather details for instances name
+  ec2_instance_facts:
+      region: eu-west-1 
+      filters: 
+        "tag:Name": "{{ ec2_scope }}"
+  register: ec2
+  delegate_to: localhost
+  run_once: true
+  become: true
 
 - name: Build a list of ids
   vars:
     ids_to_remove: "{{ ec2.instances | map(attribute='instance_id') | list }}"
-  local_action:
-    module: set_fact
-    ids_to_remove: "{{ ids_to_remove }}"
-    run_once: true
-    become: true
+  set_fact:
+      ids_to_remove: "{{ ids_to_remove }}"
+  delegate_to: localhost
+  run_once: true
+  become: true
 
 - name: Remove a list of instances ids
-  local_action:
-    module: ec2
-    state: absent
-    region: eu-west-1 
-    wait: true
-    instance_ids: "{{ ids_to_remove }}"
-    when: ids_to_remove
-    run_once: true
-    become: true
+  ec2:
+     state: absent
+     region: eu-west-1 
+     wait: true
+     instance_ids: "{{ ids_to_remove }}"
+  when: ids_to_remove
+  delegate_to: localhost
+  run_once: true
+  become: true
+
+
+  
 
