@@ -3,6 +3,7 @@
   become: yes
   user: ec2-user
   gather_facts: no
+  become: true
 
   tasks:
 
@@ -10,4 +11,5 @@
       include_role: 
         name: ec2
         tasks_from: ec2_delete
-
+      delegate_to: localhost
+      run_once: true
