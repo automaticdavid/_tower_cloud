@@ -1,8 +1,11 @@
 - name: ec2 actions
   hosts: "*{{ ec2_scope }}"
-  become: true
+  become: yes
   user: ec2-user
-  gather_facts: False
+  gather_facts: no
 
-  roles:
-    - role: ec2
+tasks:
+
+  - include_role: 
+      name: ec2
+      tasks_from: ec2_delete

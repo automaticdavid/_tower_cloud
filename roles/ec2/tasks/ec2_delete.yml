@@ -5,18 +5,13 @@
       filters: 
         "tag:Name": "{{ ec2_scope }}"
   register: ec2
-  delegate_to: localhost
-  run_once: true
-  become: true
 
 - name: Build a list of ids
   vars:
     ids_to_remove: "{{ ec2.instances | map(attribute='instance_id') | list }}"
   set_fact:
       ids_to_remove: "{{ ids_to_remove }}"
-  delegate_to: localhost
-  run_once: true
-  become: true
+
 
 - name: Remove a list of instances ids
   ec2:
@@ -25,10 +20,8 @@
      wait: true
      instance_ids: "{{ ids_to_remove }}"
   when: ids_to_remove
-  delegate_to: localhost
-  run_once: true
-  become: true
 
 
-  
+
+
 
