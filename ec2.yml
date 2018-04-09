@@ -1,9 +1,7 @@
 - name: ec2 actions
   hosts: "*{{ ec2_scope }}"
-  become: yes
   user: ec2-user
   gather_facts: no
-  become: true
 
   tasks:
 
