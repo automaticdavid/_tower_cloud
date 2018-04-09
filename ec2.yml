@@ -16,3 +16,9 @@
         name: ec2
         tasks_from: ec2_create
       tags: create      
+
+    - name: ec2 add to lb
+      include_role: 
+        name: ec2
+        tasks_from: ec2_elb_target
+      tags: elb      
