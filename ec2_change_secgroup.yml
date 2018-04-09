@@ -1,7 +1,7 @@
 - name: Change security group of an instance
   hosts: localhost
-  connection: local
-  gather_facts: False
+  user: ec2-user
+  gather_facts: no
 
   tasks: 
 
