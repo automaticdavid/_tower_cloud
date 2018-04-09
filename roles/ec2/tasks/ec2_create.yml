@@ -1,3 +1,10 @@
+- name: add ec2 instance to ELB target 
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks: 
+
 - name: Provision a set of instances
   ec2:
      key_name: dcl
@@ -13,4 +20,3 @@
         Name: "{{ aws_ec2_name }}"
      group_id: "{{ aws_ec2_groupid }}"
 
-  register: ec2
