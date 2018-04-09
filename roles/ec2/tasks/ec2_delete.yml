@@ -1,28 +1,22 @@
-- name: Delete ec2 instance 
-  hosts: localhost
-  connection: local
-  gather_facts: False
 
-  tasks:
+- name: Gather facts for instances name
+  ec2_instance_facts:
+    region: eu-west-1 
+    filters: 
+      "tag:Name": "{{ ec2_scope }}"
+  register: ec2
 
-    - name: Gather facts for instances name
-      ec2_instance_facts:
-        region: eu-west-1 
-        filters: 
-          "tag:Name": "{{ ec2_scope }}"
-      register: ec2
+- name: Build a list of ids
+  vars:
+    ids_to_remove: "{{ ec2.instances | map(attribute='instance_id') | list }}"
+  set_fact:
+    ids_to_remove: "{{ ids_to_remove }}"
 
-    - name: Build a list of ids
-      vars:
-        ids_to_remove: "{{ ec2.instances | map(attribute='instance_id') | list }}"
-      set_fact:
-        ids_to_remove: "{{ ids_to_remove }}"
-
-    - name: Remove a list of instances ids
-      ec2:
-         state: absent
-         region: eu-west-1 
-         wait: true
-         instance_ids: "{{ ids_to_remove }}"
-      when: ids_to_remove
+- name: Remove a list of instances ids
+  ec2:
+     state: absent
+     region: eu-west-1 
+     wait: true
+     instance_ids: "{{ ids_to_remove }}"
+  when: ids_to_remove
 
