@@ -1,45 +1,39 @@
-- name: add ec2 instance to ELB target 
-  hosts: localhost
-  connection: local
-  gather_facts: False
+---
+- name: Gather facts for instances name
+  ec2_instance_facts:
+    region: eu-west-1 
+    filters: 
+      "tag:Name": "{{ ec2_scope }}"
+      "instance-state-name": running
+  register: ec2
 
-  tasks:
+- name: Build a list of ids
+  vars:
+    ids_to_add: "{{ ec2.instances | map(attribute='instance_id') | list }}"
+  set_fact:
+    ids_to_add: "{{ ids_to_add }}"
 
-    - name: Gather facts for instances name
-      ec2_instance_facts:
-        region: eu-west-1 
-        filters: 
-          "tag:Name": "{{ aws_ec2_name }}"
-          "instance-state-name": running
-      register: ec2
+- name: Build the list of instances id and ports
+  vars:
+    ids_and_ports: []
+  set_fact:
+    ids_and_ports: "{{ ids_and_ports +  [ {'Id': item, 'Port': 80} ] }}"
+  with_items: "{{ ids_to_add }}"
+  
+# - name: Output the ids_and_ports fact
+#   debug:
+#     msg: "{{ ids_and_ports }}"
 
-    - name: Build a list of ids
-      vars:
-        ids_to_add: "{{ ec2.instances | map(attribute='instance_id') | list }}"
-      set_fact:
-        ids_to_add: "{{ ids_to_add }}"
-
-    - name: Build the list of instances id and ports
-      vars:
-        ids_and_ports: []
-      set_fact:
-        ids_and_ports: "{{ ids_and_ports +  [ {'Id': item, 'Port': 80} ] }}"
-      with_items: "{{ ids_to_add }}"
-      
-    # - name: Output the ids_and_ports fact
-    #   debug:
-    #     msg: "{{ ids_and_ports }}"
-
-    - name: Add Instances to LB target 
-      elb_target_group:
-        name: "{{ aws_lb_target }}"
-        protocol: https
-        port: 80
-        vpc_id: vpc-01234567
-        region: eu-west-1 
-        modify_targets: True
-        state: present
-        targets: "{{ ids_and_ports }}"
+- name: Add Instances to LB target 
+  elb_target_group:
+    name: "{{ ec2_lb_target }}"
+    protocol: https
+    port: 80
+    vpc_id: vpc-01234567
+    region: eu-west-1 
+    modify_targets: True
+    state: present
+    targets: "{{ ids_and_ports }}"
 
 
 
