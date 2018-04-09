@@ -1,5 +1,5 @@
 - name: ec2 actions
-  hosts: "*{{ ec2_scope }}"
+  hosts: localhost
   user: ec2-user
   gather_facts: no
 
@@ -9,14 +9,10 @@
       include_role: 
         name: ec2
         tasks_from: ec2_delete
-      delegate_to: localhost
-      run_once: true
       tags: delete
 
     - name: ec2 create
       include_role: 
         name: ec2
         tasks_from: ec2_create
-      delegate_to: localhost
-      run_once: true
       tags: create      
