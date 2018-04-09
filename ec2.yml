@@ -1,3 +1,5 @@
+---
+
 - name: ec2 actions
   hosts: localhost
   user: ec2-user
@@ -15,10 +17,35 @@
       include_role: 
         name: ec2
         tasks_from: ec2_create
-      tags: create      
+      tags: create    
+
+
+# - name: rhel actions
+#   hosts: "*{{ ec2_scope }}"
+#   user: ec2-user
+#   gather_facts: no
+
+#   tasks:
+
+#   - name: rhel register
+#     include_role: 
+#       name: common
+#       tasks_from: rhel_register
+#     tags: create
+
+
+- name: ec2 LB actions
+  hosts: localhost
+  user: ec2-user
+  gather_facts: no
+
+  tasks:
 
     - name: ec2 add to lb
       include_role: 
         name: ec2
         tasks_from: ec2_elb_target
       tags: elb      
+
+
+      
