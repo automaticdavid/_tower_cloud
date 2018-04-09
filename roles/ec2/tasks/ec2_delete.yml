@@ -7,6 +7,7 @@
       "tag:Name": "{{ ec2_scope }}"
   register: ec2
   run_once: true
+  become: true
 
 - name: Build a list of ids
   vars:
@@ -15,14 +16,16 @@
     module: set_fact
     ids_to_remove: "{{ ids_to_remove }}"
   run_once: true
+  become: true
 
 - name: Remove a list of instances ids
-  ec2:
-     state: absent
-     region: eu-west-1 
-     wait: true
-     instance_ids: "{{ ids_to_remove }}"
+  local_action:
+    module: ec2
+    state: absent
+    region: eu-west-1 
+    wait: true
+    instance_ids: "{{ ids_to_remove }}"
   when: ids_to_remove
-  connection: localhost
   run_once: true
+  become: true
 
