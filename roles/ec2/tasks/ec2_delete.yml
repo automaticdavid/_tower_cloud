@@ -11,9 +11,9 @@
 - name: Build a list of ids
   vars:
     ids_to_remove: "{{ ec2.instances | map(attribute='instance_id') | list }}"
-  set_fact:
-    ids_to_remove: "{{ ids_to_remove }}"
-  connection: localhost
+  local_action:
+    set_fact:
+      ids_to_remove: "{{ ids_to_remove }}"
   run_once: true
 
 - name: Remove a list of instances ids
