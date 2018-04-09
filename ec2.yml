@@ -2,7 +2,6 @@
 
 - name: ec2 actions
   hosts: localhost
-  user: ec2-user
   gather_facts: no
 
   tasks:
@@ -36,7 +35,6 @@
 
 - name: ec2 LB actions
   hosts: localhost
-  user: ec2-user
   gather_facts: no
 
   tasks:
@@ -48,4 +46,3 @@
       tags: elb      
 
 
-      
