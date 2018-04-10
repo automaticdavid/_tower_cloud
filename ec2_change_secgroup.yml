@@ -9,7 +9,7 @@
 
     - name: Variable values debug info
       debug:
-        msg: "{{ ec2_region }}, {{ ec2_subnetid }}, {{ ec2_groupid }}, {{ ansible_limit }}" 
+        msg: "{{ ec2_region }}, {{ ec2_subnetid }}, {{ ec2_groupid }}" 
 
     - name: Change security group of an instance
       ec2:
