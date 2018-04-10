@@ -1,6 +1,7 @@
 ---
 - name: Change security group of an instance
-  hosts: all
+  hosts: amazon
+  user: ec2-user
 
   tasks: 
 
