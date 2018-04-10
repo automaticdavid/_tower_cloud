@@ -1,9 +1,6 @@
 ---
 - name: Change security group of an instance
-  hosts: localhost
-  connection: local
-  # gather_facts: no
-  user: ec2-user
+  hosts: all
 
   tasks: 
 
@@ -11,9 +8,13 @@
       debug:
         msg: "{{ ec2_region }}, {{ ec2_subnetid }}, {{ ec2_groupid }}"
 
-    - name: Variable values debug info
+    - name: ansible_play_hosts debug info
       debug:
         msg: "{{ ansible_play_hosts }}"
+
+    - name: ansible_hostname debug info
+      debug:
+        msg: "{{ ansible_hostname }}"
 
     - name: Hostvars debug info
       debug:
@@ -21,10 +22,10 @@
 
     - name: Change security group of an instance
       ec2:
+        state: running
         region: "{{ ec2_region }}" 
         vpc_subnet_id: "{{ ec2_subnetid }}"
         group_id: "{{ ec2_groupid }}"
-        state: running
         instance_ids:
           - "{{ ec2_instanceid }}"
 
