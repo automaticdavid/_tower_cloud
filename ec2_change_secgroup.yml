@@ -1,6 +1,6 @@
 ---
 
-- name: Change security group of an instance
+- name: Gather instance facts
   hosts: amazon
   gather_facts: yes
   user: ec2_user
