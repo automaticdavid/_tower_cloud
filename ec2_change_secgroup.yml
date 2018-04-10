@@ -3,6 +3,7 @@
   hosts: localhost
   connection: local
   gather_facts: no
+  user: ec2-user
 
   tasks: 
 
