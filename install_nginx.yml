@@ -1,7 +1,6 @@
 - name: Install nginx and register rhel
   hosts: "*{{ ec2_scope }}"
   user: ec2-user
-  gather_facts: no
   become: yes
 
   roles:
