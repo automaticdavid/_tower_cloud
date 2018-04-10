@@ -1,5 +1,6 @@
 - name: Change security group of an instance
   hosts: localhost
+  connection: local
   gather_facts: no
   become: true
 
