@@ -1,6 +1,12 @@
 ---
+
 - name: Change security group of an instance
   hosts: amazon
+  gather_facts: yes
+  user: ec2_user
+
+- name: Change security group of an instance
+  hosts: localhost
   gather_facts: no
 
   tasks: 
