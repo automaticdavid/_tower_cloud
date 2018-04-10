@@ -15,6 +15,10 @@
       debug:
         msg: "{{ ansible_hostname }}"
 
+    - name: Hostvars debug info
+      debug:
+        msg: "{{ hostvars }}"
+
     - name: Change security group of an instance
       ec2:
         region: "{{ ec2_region }}" 
