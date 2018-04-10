@@ -9,9 +9,9 @@
 
     - name: Change security group of an instance
       ec2:
-        region: "{{ aws_ec2_region }}" 
+        region: "{{ ec2_region }}" 
         vpc_subnet_id: "{{ ec2_subnetid }}"
-        group_id: "{{ aws_ec2_groupid }}"
+        group_id: "{{ ec2_groupid }}"
         state: running
         instance_ids:
           - i-061b1e2a76f671456
