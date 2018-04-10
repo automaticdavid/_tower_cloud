@@ -1,7 +1,8 @@
 - name: Install nginx and register rhel
-  hosts: amazon
+  hosts: all
   user: ec2-user
   become: yes
+  gather_facts: no
 
   roles:
     - role: nginxinc.nginx
