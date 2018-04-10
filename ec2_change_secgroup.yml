@@ -1,6 +1,7 @@
 ---
 - name: Change security group of an instance
   hosts: amazon
+  gather_facts: no
 
   tasks: 
 
@@ -28,5 +29,6 @@
         group_id: "{{ ec2_groupid }}"
         instance_ids:
           - "{{ ec2_instanceid }}"
+      delegate_to: localhost
 
 
