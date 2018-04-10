@@ -17,7 +17,7 @@
 
     - name: Hostvars debug info
       debug:
-        msg: "{{ hostvars }}"
+        msg: "{{ hostvars[ ansible_hostname ] }}"
 
     - name: Change security group of an instance
       ec2:
