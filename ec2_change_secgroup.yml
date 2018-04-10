@@ -8,9 +8,9 @@
   tasks: 
 
     - name: Change security group of an instance
-    ec2:
-      key_name: dcl
-      state: present
-      region: "{{ aws_ec2_region }}" 
-      group_id: "{{ aws_ec2_groupid }}"
-      instance_ids: i-061b1e2a76f671456
+      ec2:
+        key_name: dcl
+        state: present
+        region: "{{ aws_ec2_region }}" 
+        group_id: "{{ aws_ec2_groupid }}"
+        instance_ids: i-061b1e2a76f671456
