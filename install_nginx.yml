@@ -1,5 +1,5 @@
 - name: Install nginx and register rhel
-  hosts: "*{{ ec2_scope }}"
+  hosts: amazon
   user: ec2-user
   become: yes
 
