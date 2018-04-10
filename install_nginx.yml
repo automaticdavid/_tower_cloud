@@ -1,4 +1,5 @@
 - name: Install nginx and register rhel
+  hosts: amazon
   user: ec2-user
   become: yes
 
