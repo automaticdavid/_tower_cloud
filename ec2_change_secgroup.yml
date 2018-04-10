@@ -7,6 +7,12 @@
 
   tasks: 
 
+    - name: Variable values debug info
+      debug:
+        msg: "{{ ec2_region }}" 
+        msg: "{{ ec2_subnetid }}" 
+        msg: "{{ ec2_groupid }}" 
+
     - name: Change security group of an instance
       ec2:
         region: "{{ ec2_region }}" 
@@ -14,4 +20,6 @@
         group_id: "{{ ec2_groupid }}"
         state: running
         instance_ids:
-          - i-061b1e2a76f671456
+          - "{{ ec2_instanceid }}"
+
+
