@@ -13,16 +13,16 @@
         tasks_from: config_nginx
       tags: deploy
 
-  handlers:
+  # handlers:
 
-    - name: restart_nginx
-      service:
-        name: nginx
-        state: restarted
+  #   - name: restart_nginx
+  #     service:
+  #       name: nginx
+  #       state: restarted
 
 
 - name: ec2 LB actions
-  hosts: localhost
+  connection: local
   gather_facts: no
 
   tasks:
