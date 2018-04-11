@@ -13,6 +13,21 @@
         tasks_from: config_nginx
       tags: deploy
 
+  # handlers:
+
+  #   - name: restart_nginx
+  #     service:
+  #       name: nginx
+  #       state: restarted
+
+
+- name: ec2 LB actions
+  hosts: localhost
+  gather_facts: no
+  become: yes
+
+  tasks:
+
     - name: Install the app
       vars:
         state: "{{ state }}"
@@ -20,20 +35,6 @@
         name: app
         tasks_from: install_app
       tags: deploy
-
-  handlers:
-
-    - name: restart_nginx
-      service:
-        name: nginx
-        state: restarted
-
-
-- name: ec2 LB actions
-  hosts: localhost
-  gather_facts: no
-
-  tasks:
 
     - name: ec2 add to lb
       include_role: 
