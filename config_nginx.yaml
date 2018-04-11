@@ -10,7 +10,8 @@
       when: state == "present"
 
     - name: Install
-      include_role:  nginxinc.nginx
+      include_role:
+        name: nginxinc.nginx
       when: state == "present"
 
     - name: Remove
