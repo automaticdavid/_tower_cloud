@@ -8,9 +8,9 @@
     - debug: 
         msg: "{{ state }}"
 
-    # - name: Install
-    #   include_tasks: install_nginx.yml
-    #   when: "{{ state }}" == "present"
+    - name: Install
+      include_tasks: install_nginx.yml
+      when: state == "present"
 
     - name: Remove
       include_tasks: remove_nginx.yml
