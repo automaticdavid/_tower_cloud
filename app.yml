@@ -24,7 +24,6 @@
 - name: ec2 LB actions
   hosts: localhost
   gather_facts: no
-  become: yes
 
   tasks:
 
