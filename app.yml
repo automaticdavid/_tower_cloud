@@ -3,12 +3,9 @@
 - name: App actions
   hosts: "*{{ ec2_scope }}"
   gather_facts: no
-  user: ec2-users
+  user: ec2-user
 
   tasks:
-
-    - debug:
-        msg: "{{ state }}"
 
     - name: Install needed software
       include_role:
