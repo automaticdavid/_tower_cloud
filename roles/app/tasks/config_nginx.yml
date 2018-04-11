@@ -1,16 +1,16 @@
 - name: Debug state value
   debug:
-    msg: "{{ state }}" 
+    msg: "{{ state }}"
 
 - name: Register
   include_tasks: rhel_register.yml
-  when: "{{ state }}" == "present"
+  when: state == "present"
 
 - name: Install
-  import_role:
+  include_role:
     name: nginxinc.nginx
-  when: "{{ state }}" == "present"
+  when: state == "present"
 
 - name: Remove
   include_tasks: remove_nginx.yml
-  when: "{{ state }}" == "absent"
+  when: state == "absent"
