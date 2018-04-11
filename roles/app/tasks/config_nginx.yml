@@ -1,4 +1,5 @@
-- debug:
+- name: Debug state value
+  debug:
     msg: "{{ state }}"
 
 - name: Register
