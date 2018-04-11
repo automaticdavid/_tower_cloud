@@ -1,5 +1,5 @@
 - debug:
-    msg: state
+    msg: "{{ state }}"
 
 - name: Register
   include_tasks: rhel_register.yml
