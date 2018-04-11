@@ -1,17 +1,17 @@
 ---
 
-- name: App actions
-  hosts: "*{{ ec2_scope }}"
-  gather_facts: yes
-  become: yes
+# - name: App actions
+#   hosts: "*{{ ec2_scope }}"
+#   gather_facts: yes
+#   become: yes
 
-  tasks:
+#   tasks:
 
-    - name: Install needed software
-      include_role:
-        name: app
-        tasks_from: config_nginx
-      tags: deploy
+#     - name: Install needed software
+#       include_role:
+#         name: app
+#         tasks_from: config_nginx
+#       tags: deploy
 
   # handlers:
 
