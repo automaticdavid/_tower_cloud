@@ -5,9 +5,9 @@
   gather_facts: no
 
   tasks:
-    
+
     - debug:
-    msg: "{{ state }}"
+      msg: "{{ state }}"
 
     - name: Install needed software
       include_role:
