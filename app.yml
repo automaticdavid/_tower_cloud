@@ -8,11 +8,13 @@
   tasks:
 
     - name: Install needed software
+      vars:
+        state: "{{ state }}"
       include_role:
         name: app
         tasks_from: config_nginx
       tags: deploy
-
+ 
   # handlers:
 
   #   - name: restart_nginx
