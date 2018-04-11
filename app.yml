@@ -4,12 +4,13 @@
   hosts: "*{{ ec2_scope }}"
   gather_facts: yes
   become: yes
-
+  vars:
+    state: "{{ state }}"
+  
   tasks:
 
     - name: Install needed software
-      vars:
-        state: "{{ state }}"
+
       include_role:
         name: app
         tasks_from: config_nginx
