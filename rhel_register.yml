@@ -1,0 +1,18 @@
+---
+- name: Install RHSM and Insights
+  yum:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - redhat-access-insights
+    - subscription-manager
+  
+- name: Register system
+  redhat_subscription:
+    state: present
+    username: "{{ rhsm_username }}"
+    password: "{{ rhsm_password }}"
+
+
+
+

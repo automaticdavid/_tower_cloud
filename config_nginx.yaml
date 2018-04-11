@@ -5,11 +5,9 @@
 
   tasks:
 
-    - debug: 
-        msg: "{{ state }}"
-
     - name: Install
-      include_tasks: install_nginx.yml
+      include_tasks: rhel_register.yml
+      include_role:  nginxinc.nginx
       when: state == "present"
 
     - name: Remove
