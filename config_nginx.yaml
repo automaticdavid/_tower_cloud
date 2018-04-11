@@ -7,8 +7,8 @@
 
     - name: Install
       include_tasks: install_nginx.yml
-      when: "{{ state }}" == "present"
+      when: state is present"
 
     - name: Remove
       include_tasks: remove_nginx.yml
-      when: "{{ state }}" == "absent"
+      when: state is absent"
