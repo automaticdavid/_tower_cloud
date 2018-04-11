@@ -7,7 +7,7 @@
   when: state == "present"
 
 - name: Install
-  include_role:
+  import_role:
     name: nginxinc.nginx
   when: state == "present"
 
