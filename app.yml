@@ -3,7 +3,6 @@
 - name: App actions
   hosts: "*{{ ec2_scope }}"
   gather_facts: no
-  user: ec2-user
 
   tasks:
 
