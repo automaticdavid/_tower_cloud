@@ -5,8 +5,11 @@
 
   tasks:
 
-    - name: Install
+    - name: Register
       include_tasks: rhel_register.yml
+      when: state == "present"
+
+    - name: Install
       include_role:  nginxinc.nginx
       when: state == "present"
 
