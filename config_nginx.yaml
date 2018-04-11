@@ -1,0 +1,14 @@
+- name: Install/Remove NginX and Register/Unregister rhel
+  hosts: amazon
+  user: ec2-user
+  become: yes
+
+  tasks:
+
+  	- name: Install
+  		include_tasks: install_nginx.yml
+  		when: "{{ state }}" == "present"
+
+  	- name: Remove
+  		include_tasks: remove_nginx.yml
+  		when: "{{ state }}" == "absent"
