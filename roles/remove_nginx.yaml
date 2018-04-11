@@ -1,25 +1,25 @@
-- name: Remove nginx and unregister rhel
-  hosts: amazon
-  user: ec2-user
-  become: yes
+# - name: Remove nginx and unregister rhel
+#   hosts: amazon
+#   user: ec2-user
+#   become: yes
 
-  tasks:
+#   tasks:
 
-    - name: Unregister system
-      redhat_subscription:
-        state: absent
-        username: "{{ rhsm_username }}"
-        password: "{{ rhsm_password }}"
+- name: Unregister system
+  redhat_subscription:
+    state: absent
+    username: "{{ rhsm_username }}"
+    password: "{{ rhsm_password }}"
 
-    - name: Remove RHSM and Insights
-      yum:
-        name: '{{ item }}'
-        state: absent
-      with_items:
-        - redhat-access-insights
-        - subscription-manager
-        - nginx
-      
+- name: Remove RHSM and Insights
+  yum:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+    - redhat-access-insights
+    - subscription-manager
+    - nginx
+  
 
 
 
