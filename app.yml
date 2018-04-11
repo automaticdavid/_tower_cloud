@@ -21,6 +21,13 @@
         tasks_from: install_app
       tags: deploy
 
+  handlers:
+
+    - name: restart_nginx
+      service:
+        name: nginx
+        state: restarted
+
 
 - name: ec2 LB actions
   hosts: localhost

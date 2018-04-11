@@ -35,9 +35,3 @@
     dest: /usr/share/nginx/html/index.html 
   become: True
 
-handlers:
-- name: restart_nginx
-  service:
-    name: nginx
-    state: restarted
-  become: True
