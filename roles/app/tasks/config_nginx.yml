@@ -1,0 +1,15 @@
+- debug:
+    msg: state
+
+- name: Register
+  include_tasks: rhel_register.yml
+  when: state == "present"
+
+- name: Install
+  include_role:
+    name: nginxinc.nginx
+  when: state == "present"
+
+- name: Remove
+  include_tasks: remove_nginx.yml
+  when: state == "absent"
