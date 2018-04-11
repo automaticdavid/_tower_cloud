@@ -10,6 +10,7 @@
       include_role:
         name: app
         tasks_from: config_nginx
+      tags: create
 
     - name: Install the app
       vars:
@@ -17,7 +18,8 @@
       include_role: 
         name: app
         tasks_from: install_app
-    
+      tags: create
+
 
 - name: ec2 LB actions
   hosts: localhost
@@ -29,6 +31,6 @@
       include_role: 
         name: ec2
         tasks_from: ec2_elb_target
-      tags: elb      
+      tags: create    
 
 
