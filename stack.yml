@@ -10,7 +10,7 @@
   tasks:
 
     - name: Create ec2
-      import_playbook: ec2.yml  
+      include: ec2.yml  
       tags: deploy
 
     - name: Deploy app
