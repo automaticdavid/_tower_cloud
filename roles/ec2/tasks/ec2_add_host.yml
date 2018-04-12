@@ -18,7 +18,7 @@
     ids_to_add: "{{ ips_to_add }}"
 
 - name: Add hosts
-  add_hosts:
+  add_host:
     name: "{{ item }}"
   with_items: "{{ ips_to_add }}" 
 
