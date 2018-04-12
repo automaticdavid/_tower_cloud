@@ -13,7 +13,7 @@
   import_playbook: ec2.yml tags=deploy
 
 
-- name: 
+- name: Refresh Inventory with new Instances
   hosts: localhost
 
   tasks:
