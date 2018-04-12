@@ -9,6 +9,6 @@
 
 #   tasks:
 
-- import_playbook: ec2.yml tags=deploy
-- import_playbook: app.yml
+- include_playbook: ec2.yml
+- include_playbook: app.yml
 
