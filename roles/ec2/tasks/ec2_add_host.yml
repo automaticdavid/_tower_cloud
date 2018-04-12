@@ -15,7 +15,7 @@
 
 - name: Build a list of ips
   vars:
-    ids_to_add: "{{ ec2.instances | map(attribute='instance_ip') | list }}"
+    ids_to_add: "{{ ec2.instances | map(attribute='private_ip_address') | list }}"
   set_fact:
     ids_to_add: "{{ ids_to_add }}"
 
