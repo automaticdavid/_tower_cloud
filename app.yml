@@ -24,6 +24,13 @@
   #       name: nginx
   #       state: restarted
 
+    - name: Install the app
+      include_role: 
+        name: app
+        tasks_from: install_app
+      tags: deploy
+
+
 
 - name: ec2 LB actions
   hosts: localhost
@@ -31,12 +38,6 @@
   gather_facts: no
 
   tasks:
-
-    - name: Install the app
-      include_role: 
-        name: app
-        tasks_from: install_app
-      tags: deploy
 
     - name: ec2 add to lb
       include_role: 

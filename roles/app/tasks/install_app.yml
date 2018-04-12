@@ -3,13 +3,17 @@
     state: directory
     suffix: app
   register: r_tempfile
+  delegate_to: localhost
+  run_once: yes
 
 - name: Git clone the website
   git:
     repo: "{{ app }}"
     version: "{{ ver }}"
     dest: "{{ r_tempfile.path }}"
-    
+  delegate_to: localhost
+  run_once: yes
+
 # - name: List git checkout
 #   command: "ls {{ r_tempfile.path }}"
 #   register: dir_out
