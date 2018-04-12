@@ -25,11 +25,13 @@
 - name: Copy conf to nodes 
   copy:
     src: "{{ r_tempfile.path }}/config/hello.conf" 
-    dest: /etc/nginx/conf.d/default.conf 
+    dest: /etc/nginx/conf.d/default.conf
+  become: yes
   # notify: restart_nginx
 
 - name: Copy app to nodes 
   copy:
     src: "{{ r_tempfile.path }}/app/index.html" 
     dest: /usr/share/nginx/html/index.html 
+  become: yes
 
