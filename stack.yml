@@ -10,9 +10,10 @@
   import_playbook: ec2.yml tags=deploy
 
 - name: ec2 add host
-  include_role: 
-    name: ec2
-    tasks_from: ec2_add_host
+  tasks:
+    include_role: 
+      name: ec2
+      tasks_from: ec2_add_host
  
 - name: Deploy app
   import_playbook: app.yml tags=deploy
