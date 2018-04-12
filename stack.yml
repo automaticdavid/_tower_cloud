@@ -12,7 +12,7 @@
 - name: Refresh Inventory with new Instances
   hosts: localhost
   tasks:
-    -meta: refresh_inventory
+    - meta: refresh_inventory
 
 - name: Deploy app
   import_playbook: app.yml tags=deploy
