@@ -20,8 +20,8 @@
       include_role: 
         name: app
         tasks_from: install_app
-      notify: restart_nginx
       tags: deploy
+
 
 - name: ec2 LB actions
   hosts: localhost

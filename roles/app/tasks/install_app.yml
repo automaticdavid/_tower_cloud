@@ -37,3 +37,4 @@
     src: "{{ r_tempfile.path }}/app/index.html" 
     dest: /usr/share/nginx/html/index.html 
   become: yes
+  notify: restart_nginx
