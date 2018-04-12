@@ -18,7 +18,7 @@
   import_playbook: ec2.yml
   tags: deploy
 
-  - name: Deploy app
+- name: Deploy app
   import_playbook: app.yml
   tags: deploy
 
