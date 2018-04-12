@@ -13,7 +13,6 @@
   set_fact:
       ids_to_remove: "{{ ids_to_remove }}"
 
-
 - name: Remove a list of instances ids
   ec2:
      state: absent

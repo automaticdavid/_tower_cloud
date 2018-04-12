@@ -7,9 +7,9 @@
       "instance-state-name": running
   register: ec2
 
-- name: Output ec2
-  debug:
-    msg: "{{ ec2 }}"
+# - name: Output ec2
+#   debug:
+#     msg: "{{ ec2 }}"
 
 - name: Build a list of ips
   vars:
@@ -20,6 +20,7 @@
 - name: Add hosts
   add_host:
     name: "{{ item }}"
+    groups: "tag_Name_{{ ec2_scope }}"
   with_items: "{{ ips_to_add }}" 
 
 
