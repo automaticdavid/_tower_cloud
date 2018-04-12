@@ -1,9 +1,7 @@
 ---
 
 - name: Stack actions
-  hosts: "*{{ ec2_scope }}"
-  gather_facts: yes
-  become: yes
+  hosts: localhost
 
   tasks:
 
@@ -13,6 +11,14 @@
 
 - name: Deploy ec2
   import_playbook: ec2.yml tags=deploy
+
+
+- name: 
+  hosts: localhost
+
+  tasks:
+
+    - meta: refresh_inventory
 
 
 - name: Deploy app
