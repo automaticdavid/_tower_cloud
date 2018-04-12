@@ -1,0 +1,28 @@
+---
+- name: Gather facts for instances name
+  ec2_instance_facts:
+    region: eu-west-1 
+    filters: 
+      "tag:Name": "{{ ec2_scope }}"
+      "instance-state-name": running
+  register: ec2
+
+
+- name: Output ec2
+  debug:
+    msg: "{{ ec2 }}"
+
+
+- name: Build a list of ips
+  vars:
+    ids_to_add: "{{ ec2.instances | map(attribute='instance_ip') | list }}"
+  set_fact:
+    ids_to_add: "{{ ids_to_add }}"
+
+
+
+
+
+
+
+
