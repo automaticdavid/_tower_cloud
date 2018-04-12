@@ -1,17 +1,17 @@
 ---
 
-- name: Stack actions
-  hosts: "*{{ ec2_scope }}"
-  gather_facts: yes
-  become: yes
+# - name: Stack actions
+#   hosts: "*{{ ec2_scope }}"
+#   gather_facts: yes
+#   become: yes
 
-  vars:
-    state: "{{ state }}"
+#   vars:
+#     state: "{{ state }}"
 
-  tasks:
+#   tasks:
 
-    - debug:
-      msg: "Stack Deploy"
+#     - debug:
+#         msg: "Stack Deploy"
 
 
 - name: Deploy app
