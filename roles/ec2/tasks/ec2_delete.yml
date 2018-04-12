@@ -1,4 +1,5 @@
 ---
+
 - name: Gather details for instances name
   ec2_instance_facts:
       region: eu-west-1 
