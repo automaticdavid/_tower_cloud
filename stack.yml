@@ -2,27 +2,15 @@
 
 - name: Stack actions
   hosts: localhost
-
   tasks:
-
     - debug:
         msg: "Stack Deploy"
-
 
 - name: Deploy ec2
   import_playbook: ec2.yml tags=deploy
 
 
-- name: Refresh Inventory with new Instances
-  hosts: localhost
-
-  tasks:
-
-    - meta: refresh_inventory
-
+- meta: refresh_inventory
 
 - name: Deploy app
   import_playbook: app.yml tags=deploy
-
-
-

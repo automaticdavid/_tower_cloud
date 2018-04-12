@@ -1,8 +1,8 @@
 ---
 
-- name: Debug state value
-  debug:
-    msg: "{{ state }}"
+# - name: Debug state value
+#   debug:
+#     msg: "{{ state }}"
 
 - name: Node Register
   include_tasks: rhel_register.yml
