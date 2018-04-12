@@ -10,7 +10,7 @@
   import_playbook: ec2.yml tags=deploy
 
 - name: Refresh Inventory with new Instances
-  meta: refresh_inventory
+    meta: refresh_inventory
 
 - name: Deploy app
   import_playbook: app.yml tags=deploy
