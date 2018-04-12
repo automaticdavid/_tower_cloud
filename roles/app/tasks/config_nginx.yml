@@ -8,6 +8,13 @@
   include_tasks: rhel_register.yml
   when: state == "present"
 
+- name: Insight Register
+  include_role:
+    name: redhataccess.redhat-access-insights-client
+  when: 
+    - state == "present"
+    - ansible_os_family == 'RedHat'
+
 - name: NginX Install
   include_role:
     name: nginxinc.nginx
