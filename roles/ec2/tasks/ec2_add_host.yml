@@ -7,18 +7,20 @@
       "instance-state-name": running
   register: ec2
 
-
 - name: Output ec2
   debug:
     msg: "{{ ec2 }}"
-
 
 - name: Build a list of ips
   vars:
     ids_to_add: "{{ ec2.instances | map(attribute='private_ip_address') | list }}"
   set_fact:
-    ids_to_add: "{{ ids_to_add }}"
+    ids_to_add: "{{ ips_to_add }}"
 
+- name: Add hosts
+  add_hosts:
+    name: "{{ item }}"
+  with_items: "{{ ips_to_add }}" 
 
 
 
