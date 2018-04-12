@@ -5,7 +5,6 @@
   register: r_tempfile
   connection: local
   run_once: yes
-  become: no
 
 - name: Git clone the website
   git:
