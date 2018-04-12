@@ -14,13 +14,14 @@
     dest: "{{ r_tempfile.path }}"
   connection: local
   run_once: yes
+  become: no
 
-# - name: List git checkout
+# - name: Debug list result of git checkout
 #   command: "ls {{ r_tempfile.path }}"
 #   register: dir_out
 #   delegate_to: localhost
 
-# - name: Display checkout content
+# - name: Debug display checkout content
 #   debug: var={{item}}
 #   with_items: dir_out.stdout_lines
 #   delegate_to: localhost
