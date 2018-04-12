@@ -31,7 +31,6 @@
     src: "{{ r_tempfile.path }}/config/hello.conf" 
     dest: /etc/nginx/conf.d/default.conf
   become: yes
-  # notify: restart_nginx
 
 - name: Copy app to nodes 
   copy:

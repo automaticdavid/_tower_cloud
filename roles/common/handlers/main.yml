@@ -4,3 +4,9 @@
     username: "{{ rhsm_username }}"
     password: "{{ rhsm_password }}"
   ignore_errors: yes
+
+- name: restart_nginx
+  service:
+    name: nginx
+    state: restarted
+    
