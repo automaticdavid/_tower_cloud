@@ -3,15 +3,13 @@
     state: directory
     suffix: app
   register: r_tempfile
-  delegate_to: localhost
 
 - name: Git clone the website
   git:
     repo: "{{ app }}"
     version: "{{ ver }}"
     dest: "{{ r_tempfile.path }}"
-  delegate_to: localhost
-
+    
 # - name: List git checkout
 #   command: "ls {{ r_tempfile.path }}"
 #   register: dir_out
@@ -33,5 +31,4 @@
   copy:
     src: "{{ r_tempfile.path }}/app/index.html" 
     dest: /usr/share/nginx/html/index.html 
-  user: ec2-user
-
+  become: yes
