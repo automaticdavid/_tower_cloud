@@ -14,6 +14,12 @@
 #         msg: "Stack Deploy"
 
 
-- name: Deploy app
+- name: Deploy ec2
+  import_playbook: ec2.yml
+  tags: deploy
+
+  - name: Deploy app
   import_playbook: app.yml
+  tags: deploy
+
 
