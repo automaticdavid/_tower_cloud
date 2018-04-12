@@ -8,11 +8,11 @@
   vars:
     state: "{{ state }}"
 
-  debug:
-    msg: "Stack Deploy"
+  tasks:
 
+    - debug:
+      msg: "Stack Deploy"
 
-#   tasks:
 
 - name: Deploy app
   import_playbook: app.yml
