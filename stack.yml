@@ -1,14 +1,14 @@
-- name: Stack actions
-  hosts: "*{{ ec2_scope }}"
-  gather_facts: yes
-  become: yes
+# - name: Stack actions
+#   hosts: "*{{ ec2_scope }}"
+#   gather_facts: yes
+#   become: yes
 
-  vars:
-    state: "{{ state }}"
+#   vars:
+#     state: "{{ state }}"
 
 
-  tasks:
+#   tasks:
 
-    - import_playbook: ec2.yml 
-    - import_playbook: app.yml
+- import_playbook: ec2.yml 
+- import_playbook: app.yml
 
