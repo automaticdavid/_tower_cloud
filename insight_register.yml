@@ -5,9 +5,11 @@
   gather_facts: yes
   become: yes
 
-  - name: Insight Register
-  include_role:
-    name: redhataccess.redhat-access-insights-client
-  when: 
-    - state == "present"
-    - ansible_os_family == 'RedHat'
+  tasks:
+
+    - name: Insight Register
+    include_role:
+      name: redhataccess.redhat-access-insights-client
+    when: 
+      - state == "present"
+      - ansible_os_family == 'RedHat'
