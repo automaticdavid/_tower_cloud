@@ -1,8 +1,7 @@
 ---
 
 - name: Stack actions
-  hosts: all
-  connection: local
+  hosts: localhost
   tasks:
     - debug:
         msg: "Stack Deploy"
@@ -12,6 +11,7 @@
 
 - name: ec2 add host
   hosts: localhost
+
   tasks:
   - include_role: 
       name: ec2
