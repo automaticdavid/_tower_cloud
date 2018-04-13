@@ -8,8 +8,8 @@
   tasks:
 
     - name: Insight Register
-    include_role:
-      name: redhataccess.redhat-access-insights-client
-    when: 
-      - state == "present"
-      - ansible_os_family == 'RedHat'
+      include_role:
+        name: redhataccess.redhat-access-insights-client
+      when: 
+        - state == "present"
+        - ansible_os_family == 'RedHat'
