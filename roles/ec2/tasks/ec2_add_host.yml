@@ -25,6 +25,12 @@
     groups: "tag_Name_{{ ec2_scope }}"
   with_items: "{{ ips_to_add }}" 
 
+- debug:
+    msg: "{{ ips_to_add }}" 
+
+- debug:
+    msg: "{{ hostnames }}"
+
 - name: Wait for SSH to come up
   wait_for:
     host: "{{ item }}"
