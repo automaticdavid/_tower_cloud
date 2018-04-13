@@ -1,7 +1,8 @@
 ---
 
 - name: Stack actions
-  hosts: localhost
+  hosts: all
+  connection: local
   tasks:
     - debug:
         msg: "Stack Deploy"
@@ -17,4 +18,4 @@
       tasks_from: ec2_add_host
  
 - name: Deploy app
-  import_playbook: app.yml tags=deploy
+  import_playbook: app.yml
