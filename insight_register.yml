@@ -4,6 +4,7 @@
   hosts: "*{{ ec2_scope }}"
   gather_facts: yes
   become: yes
+  user: ec2-user 
 
   tasks:
 
