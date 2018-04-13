@@ -4,7 +4,7 @@
   hosts: "*{{ ec2_scope }}"
   gather_facts: yes
   become: yes
-  user: ec2-user 
+  user: ec2-user
 
   tasks:
 
@@ -12,5 +12,4 @@
       include_role:
         name: redhataccess.redhat-access-insights-client
       when: 
-        - state == "present"
         - ansible_os_family == 'RedHat'
