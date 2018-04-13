@@ -5,6 +5,13 @@
     password: "{{ rhsm_password }}"
   ignore_errors: yes
 
+# - name: insights_unregister
+# redhat_subscription:
+#   state: absent
+#   username: "{{ rhsm_username }}"
+#   password: "{{ rhsm_password }}"
+# ignore_errors: yes
+
 - name: restart_nginx
   service:
     name: nginx

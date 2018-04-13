@@ -20,7 +20,9 @@
      wait: true
      instance_ids: "{{ ids_to_remove }}"
   when: ids_to_remove
-  notify: rhsm_unregister
+  notify: 
+    - rhsm_unregister
+    # - insights_unregister
 
 
 

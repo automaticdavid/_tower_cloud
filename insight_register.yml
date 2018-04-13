@@ -1,0 +1,13 @@
+---
+
+- name: App actions
+  hosts: "*{{ ec2_scope }}"
+  gather_facts: yes
+  become: yes
+
+  - name: Insight Register
+  include_role:
+    name: redhataccess.redhat-access-insights-client
+  when: 
+    - state == "present"
+    - ansible_os_family == 'RedHat'
