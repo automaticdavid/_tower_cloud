@@ -9,7 +9,6 @@
   tasks:
 
     - name: Insight Register
-      include_role:
-        name: redhataccess.redhat-access-insights-client
-      when: 
-        - ansible_os_family == 'RedHat'
+      command: redhat-access-insights --register
+
+      

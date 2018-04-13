@@ -1,5 +1,3 @@
 # from galaxy
 - src: openstack.redhat-subscription
 - src: nginxinc.nginx
-- src: RedHatInsights.insights-client
-- src: redhataccess.redhat-access-insights-client
