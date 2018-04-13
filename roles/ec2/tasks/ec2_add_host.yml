@@ -11,11 +11,13 @@
 #   debug:
 #     msg: "{{ ec2 }}"
 
-- name: Build a list of ips
+- name: Build a list of ips and hostnames
   vars:
     ips_to_add: "{{ ec2.instances | map(attribute='private_ip_address') | list }}"
+    hostnames: "{{ ec2.instances | map(attribute='private_dns_name ') | list }}"
   set_fact:
     ips_to_add: "{{ ips_to_add }}"
+    hostnames: "{{ hostnames }}"
 
 - name: Add hosts
   add_host:
@@ -30,7 +32,7 @@
     delay: 60
     timeout: 320
     state: started
-  with_items: "{{ ips_to_add }}"
+  with_items: "{{ hostnames }}"
 
 
 
