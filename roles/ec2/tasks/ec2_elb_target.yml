@@ -30,7 +30,7 @@
     vpc_id: vpc-01234567
     region: eu-west-1 
     modify_targets: No
-    state: present
+    state: running
   register: elb
 
 - debug: 
