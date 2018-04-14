@@ -6,8 +6,8 @@
     - debug:
         msg: "Stack Deploy"
     - include_role: 
-      name: common
-      tasks_from: init
+        name: common
+        tasks_from: init
  
 - name: Deploy ec2
   import_playbook: ec2.yml tags=deploy
