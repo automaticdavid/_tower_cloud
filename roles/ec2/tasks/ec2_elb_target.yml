@@ -25,12 +25,8 @@
 #     msg: "{{ ids_and_ports }}"
 
 - name: Record exsting LB target 
-  elb_target_group:
+  elb_target_group_fact: 
     name: "{{ ec2_lb }}"
-    vpc_id: vpc-01234567
-    region: eu-west-1 
-    modify_targets: No
-    state: running
   register: elb
 
 - debug: 
