@@ -24,7 +24,7 @@
 #   debug:
 #     msg: "{{ ids_and_ports }}"
 
-- name: Record exsting LB target 
+- name: Record existing LB target 
   elb_target_group_fact: 
     name: "{{ ec2_lb }}"
   register: elb
