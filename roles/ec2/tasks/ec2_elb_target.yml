@@ -26,7 +26,7 @@
 
 - name: Record existing LB target 
   elb_target_group_facts: 
-    name: "{{ ec2_lb }}"
+    names: "{{ ec2_lb }}"
   register: elb
 
 - debug: 
