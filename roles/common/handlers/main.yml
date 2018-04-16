@@ -7,7 +7,6 @@
 
 - name: insights_unregister
   command: redhat-access-insights --unregister
-  become: yes
   ignore_errors: yes
 
 - name: restart_nginx
