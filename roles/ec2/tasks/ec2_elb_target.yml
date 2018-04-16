@@ -43,7 +43,7 @@
     port: 80
     vpc_id: vpc-01234567
     region: eu-west-1 
-    modify_targets: No
+    modify_targets: Yes
     state: present
     targets: "{{ ids_and_ports }}"
 
