@@ -27,6 +27,7 @@
 - name: Record existing LB target 
   elb_target_group_facts: 
     names: "{{ ec2_lb }}"
+    region: eu-west-1 
   register: elb
 
 - debug: 
