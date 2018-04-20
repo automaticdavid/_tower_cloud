@@ -38,7 +38,7 @@
 
 - name: Add Instances to LB target 
   elb_target_group:
-    name: "{{ ec2_lb }}"
+    name: "{{ ec2_lb_target }}"
     protocol: https
     port: 80
     vpc_id: vpc-01234567
