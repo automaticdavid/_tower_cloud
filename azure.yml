@@ -1,0 +1,23 @@
+---
+- name: azure actions
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+    - name: azure delete
+      include_role: 
+        name: azure
+        tasks_from: az_delete
+      tags: delete
+
+    - name: azure create
+      include_role: 
+        name: azure
+        tasks_from: az_create
+      tags: 
+        - deploy
+        - create    
+
+
+

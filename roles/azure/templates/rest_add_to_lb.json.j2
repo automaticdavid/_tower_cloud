@@ -1,0 +1,9 @@
+{
+"instances": [
+ 
+	{% for INSTANCE in {{ play_hosts }} %}
+		{{INSTANCE}},
+	{% endfor %}
+
+]
+}
