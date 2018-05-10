@@ -1,36 +1,42 @@
 ---
 
-- debug:
-    msg: "wat"
+- name: azure actions
+  hosts: localhost
+  gather_facts: no
 
-- name: pip install the needed azure deps
-  pip:
-    name: ansible[azure]
+  tasks:
+    
+    - debug:
+        msg: "wat"
 
-- name: provision a set of instances
-  azure_rm_virtualmachine:
-    resource_group: "{{ az_groupid }}"
-    name: "{{ az_scope }}"
-    availability_set: blue 
-    vm_size: Standard_B1s   
-    managed_disk_type: Standard_LRS
-    admin_username: dclauvel
-    # ssh_public_keys:
-    #   - path: /home/adminUser/.ssh/authorized_keys
-    #     key_data: < insert yor ssh public key here... >
-    image:
-      offer: RHEL
-      publisher: RedHat
-      sku: 7.5
-      version: latest
-    data_disks:
-        - lun: 0
-          disk_size_gb: 30
-          managed_disk_type: Standard_LRS
-  with_sequence: count="{{az_count}}"  
-  register: azure
+    - name: pip install the needed azure deps
+      pip:
+        name: ansible[azure]
 
-- debug:
-    var: azure
+    - name: provision a set of instances
+      azure_rm_virtualmachine:
+        resource_group: "{{ az_groupid }}"
+        name: "{{ az_scope }}"
+        availability_set: blue 
+        vm_size: Standard_B1s   
+        managed_disk_type: Standard_LRS
+        admin_username: dclauvel
+        # ssh_public_keys:
+        #   - path: /home/adminUser/.ssh/authorized_keys
+        #     key_data: < insert yor ssh public key here... >
+        image:
+          offer: RHEL
+          publisher: RedHat
+          sku: 7.5
+          version: latest
+        data_disks:
+            - lun: 0
+              disk_size_gb: 30
+              managed_disk_type: Standard_LRS
+      with_sequence: count="{{az_count}}"  
+      register: azure
+
+    - debug:
+        var: azure
 
 
