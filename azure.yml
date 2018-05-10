@@ -5,6 +5,9 @@
 
   tasks:
 
+    - pip:
+        ansible[azure]
+
     - name: azure delete
       include_role: 
         name: azure
