@@ -19,5 +19,9 @@
         - deploy
         - create    
 
+    - debug:
+        msg: "wut"
+      tags: create
+
 
 
