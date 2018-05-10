@@ -1,5 +1,8 @@
 ---
 
+- debug:
+    msg: "wot"
+
 - name: Provision a set of instances
   azure_rm_virtualmachine:
     resource_group: "{{ az_groupid }}"
