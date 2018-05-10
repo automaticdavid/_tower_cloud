@@ -21,7 +21,8 @@
 
     - debug:
         msg: "wut"
-      tags: create
+      tags: 
+        - create
 
 
 
