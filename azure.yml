@@ -5,9 +5,6 @@
 
   tasks:
 
-    - pip:
-        name: ansible[azure]
-
     - name: azure delete
       include_role: 
         name: azure
@@ -17,7 +14,7 @@
     - name: azure create
       include_role: 
         name: azure
-        tasks_from: az_create
+        tasks_from: az_create2
       tags: 
         - deploy
         - create    
