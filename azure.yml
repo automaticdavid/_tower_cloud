@@ -14,7 +14,7 @@
     - name: azure create
       include_role: 
         name: azure
-        tasks_from: az_create2
+        tasks_from: az_create
       tags: 
         - deploy
         - create    

@@ -4,7 +4,7 @@
   pip:
     name: ansible[azure]
 
-- name: Provision a set of instances
+- name: provision a set of instances
   azure_rm_virtualmachine:
     resource_group: "{{ az_groupid }}"
     name: "{{ az_scope }}"
@@ -28,6 +28,6 @@
   register: azure
 
 - debug:
-    var: azrure
+    var: azure
 
 
