@@ -1,7 +1,8 @@
 ---
 
-- debug:
-    msg: "wot"
+- name: pip install the needed azure deps
+  pip:
+    name: ansible[azure]
 
 - name: Provision a set of instances
   azure_rm_virtualmachine:
