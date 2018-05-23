@@ -6,7 +6,7 @@
   tasks:
 
   - block:
-      - names: ec2 delete
+      - name: ec2 delete
         include_role: 
           name: ec2
           tasks_from: ec2_delete
