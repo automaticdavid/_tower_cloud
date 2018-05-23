@@ -1,7 +1,7 @@
 ---
 - name: Gather facts for instances name
   ec2_instance_facts:
-    region: eu-west-1 
+    region:  "{{ ec2_region }}"
     filters: 
       "tag:Name": "{{ ec2_scope }}"
       "instance-state-name": running
@@ -24,25 +24,25 @@
 #   debug:
 #     msg: "{{ ids_and_ports }}"
 
-- name: Record existing LB target 
-  elb_target_group_facts: 
-    names: "{{ ec2_lb }}"
-    region: eu-west-1 
-  register: elb
+# - name: Record existing LB target 
+#   elb_target_group_facts: 
+#     names: "{{ ec2_lb }}"
+#     region:  "{{ ec2_region }}"
+#   register: elb
 
-- debug: 
-    msg: "{{ elb }}"
+# - debug: 
+#     msg: "{{ elb }}"
 
-- debug: 
-    msg: "{{ ids_and_ports }}"
+# - debug: 
+#     msg: "{{ ids_and_ports }}"
 
 - name: Add Instances to LB target 
   elb_target_group:
     name: "{{ ec2_lb_target }}"
     protocol: https
     port: 80
-    vpc_id: vpc-01234567
-    region: eu-west-1 
+    vpc_id: "{{ ec2_vpc }}"
+    region:  "{{ ec2_region }}"
     modify_targets: Yes
     state: present
     targets: "{{ ids_and_ports }}"
