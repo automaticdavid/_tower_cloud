@@ -33,8 +33,8 @@
 # - debug: 
 #     msg: "{{ elb }}"
 
-# - debug: 
-#     msg: "{{ ids_and_ports }}"
+- debug: 
+    msg: "{{ ids_and_ports }}"
 
 - name: Add Instances to LB target 
   elb_target_group:
@@ -45,6 +45,7 @@
     region:  "{{ ec2_region }}"
     modify_targets: Yes
     state: present
+    target_type: instance
     targets: "{{ ids_and_ports }}"
 
 
