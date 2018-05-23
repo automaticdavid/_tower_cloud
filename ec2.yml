@@ -5,23 +5,23 @@
 
   tasks:
 
-    - name: ec2 delete
-      block:
+  - block:
+      - names: ec2 delete
         include_role: 
           name: ec2
           tasks_from: ec2_delete
-      tags:
-        - delete
-        - destroy
+    tags:
+      - delete
+      - destroy
 
-    - name: ec2 create
-      block:
+  - block:  
+      - name: ec2 create
         include_role: 
           name: ec2
           tasks_from: ec2_create
-      tags: 
-        - deploy
-        - create    
+    tags: 
+      - deploy
+      - create    
 
 
 
