@@ -8,7 +8,6 @@
     - name:  test
       debug:
         msg: "TEST"
-  
       tags: 
         - delete
         - destroy
@@ -19,7 +18,7 @@
         tasks_from: ec2_delete
       tags: 
         - delete
-      #   - destroy
+    #   - destroy
 
     # - name: ec2 create
     #   include_role: 
