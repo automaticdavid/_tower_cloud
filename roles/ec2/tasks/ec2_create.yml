@@ -1,5 +1,4 @@
 ---
-
 - name: Provision a set of EC2 instances
   ec2:
      key_name: dcl

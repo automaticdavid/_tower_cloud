@@ -5,21 +5,29 @@
 
   tasks:
 
-    - name: ec2 delete
-      include_role: 
-        name: ec2
-        tasks_from: ec2_delete
+    - name:  test
+      debug:
+        msg: "TEST"
+  
       tags: 
         - delete
         - destroy
 
-    - name: ec2 create
-      include_role: 
-        name: ec2
-        tasks_from: ec2_create
-      tags: 
-        - deploy
-        - create    
+    # - name: ec2 delete
+    #   include_role: 
+    #     name: ec2
+    #     tasks_from: ec2_delete
+    #   tags: 
+    #     - delete
+    #     - destroy
+
+    # - name: ec2 create
+    #   include_role: 
+    #     name: ec2
+    #     tasks_from: ec2_create
+    #   tags: 
+    #     - deploy
+    #     - create    
 
 
 
