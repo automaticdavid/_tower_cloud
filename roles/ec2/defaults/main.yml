@@ -1,0 +1,7 @@
+---
+ec2_count: 2
+ec2_scope : foo
+ec2_delete: foo
+ec2_groupid : sg-0d86016242693e38f
+ec2_subnetid : subnet-0fcfce68ba2d6d393
+

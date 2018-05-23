@@ -9,7 +9,9 @@
       include_role: 
         name: ec2
         tasks_from: ec2_delete
-      tags: delete
+      tags: 
+        - delete
+        - destroy
 
     - name: ec2 create
       include_role: 
