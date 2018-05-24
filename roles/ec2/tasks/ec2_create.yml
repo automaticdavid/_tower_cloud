@@ -6,7 +6,6 @@
      region: eu-west-1 
      instance_type: t2.micro
      image: ami-ecc27c95
-     vpc_subnet_id: "{{ ec2_subnetid }}"
      assign_public_ip: no
      wait: true
      count: "{{ ec2_count }}"
