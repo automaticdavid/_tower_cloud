@@ -5,7 +5,6 @@
     resource_group: "{{ az_groupid }}"
     name: "{{ az_scope }}-{{ item }}"
     availability_set: "{{ az_set }}"
-    subnet_name: "{{ az_subnet_name }}"
     vm_size: Standard_B1s   
     managed_disk_type: Standard_LRS
     ssh_password_enabled: False 
