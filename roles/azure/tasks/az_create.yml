@@ -11,7 +11,7 @@
     admin_username: "{{ ssh_username }}"
     ssh_public_keys:
       - path: "/home/{{ ssh_username }}/.ssh/authorized_keys"
-         key_data: "{{ ssh_key }}"
+        key_data: "{{ ssh_key }}"
     image:
       offer: RHEL
       publisher: RedHat
