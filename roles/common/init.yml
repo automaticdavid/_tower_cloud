@@ -1,6 +1,6 @@
 ---
-
-- name:  Start Bastion
+# TO DO 
+- name:  Start Isolated Node
   ec2:
      key_name: dcl
      state: started

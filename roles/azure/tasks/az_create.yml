@@ -11,7 +11,7 @@
   azure_rm_virtualmachine:
     resource_group: "{{ az_groupid }}"
     name: "{{ az_scope }}"
-    availability_set: blue 
+    availability_set: "{{ az_set }}" 
     vm_size: Standard_B1s   
     managed_disk_type: Standard_LRS
     admin_username: dclauvel
