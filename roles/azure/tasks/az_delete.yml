@@ -6,8 +6,6 @@
     name: "{{ az_scope }}-{{ item }}"
     state: absent
     remove_on_absent: all
-  async: 1000
-  poll: 0 
   with_sequence: count="{{az_count}}" 
 
 - name: remove associated network interfaces 
