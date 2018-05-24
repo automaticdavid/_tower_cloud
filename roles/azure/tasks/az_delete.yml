@@ -6,7 +6,7 @@
   register: az
 
 -debug:
-  msg: az
+  var: az
 
 - name: remove a set of instances
   azure_rm_virtualmachine:
@@ -15,8 +15,5 @@
     state: absent
   with_sequence: count="{{az_count}}" 
   register: azure
-
-- debug:
-    var: azure
 
 
