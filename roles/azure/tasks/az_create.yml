@@ -7,6 +7,7 @@
     availability_set: "{{ az_set }}"
     vm_size: Standard_B1s   
     managed_disk_type: Standard_LRS
+    ssh_password_enabled: False 
     admin_username: "{{ az_admin_username }}"
     # ssh_public_keys:
     #   - path: /home/adminUser/.ssh/authorized_keys
