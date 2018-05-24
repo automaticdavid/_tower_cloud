@@ -4,4 +4,4 @@ az_scope : foo
 az_delete: foo
 az_groupid : rg-dcl
 az_set: blue
-
+az_admin_username: dclauvel
