@@ -1,19 +1,11 @@
 ---
 
-- name: Get facts for one resource group
-  azure_rm_resourcegroup_facts:
-    name: "{{ az_groupid }}"
-  register: az
-
-- debug:
-    msg: az
-
 - name: remove a set of instances
   azure_rm_virtualmachine:
     resource_group: "{{ az_groupid }}"
     name: "{{ az_scope }}-{{ item }}"
     state: absent
   with_sequence: count="{{az_count}}" 
-  register: azure
+
 
 
