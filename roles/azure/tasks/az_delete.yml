@@ -5,7 +5,7 @@
     name: "{{ az_groupid }}"
   register: az
 
--debug:
+- debug:
   var: az
 
 - name: remove a set of instances
