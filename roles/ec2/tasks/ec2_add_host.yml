@@ -7,9 +7,6 @@
       "instance-state-name": running
   register: ec2
 
-# - name: Output ec2
-#   debug:
-#     msg: "{{ ec2 }}"
 
 - name: Build a list of ips and hostnames
   vars:

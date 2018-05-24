@@ -1,9 +1,3 @@
-# - name: Remove nginx and unregister rhel
-#   hosts: amazon
-#   user: ec2-user
-#   become: yes
-
-#   tasks:
 
 - name: Unregister system
   redhat_subscription:

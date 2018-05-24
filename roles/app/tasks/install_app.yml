@@ -16,16 +16,6 @@
   run_once: yes
   become: no
 
-# - name: Debug list result of git checkout
-#   command: "ls {{ r_tempfile.path }}"
-#   register: dir_out
-#   delegate_to: localhost
-
-# - name: Debug display checkout content
-#   debug: var={{item}}
-#   with_items: dir_out.stdout_lines
-#   delegate_to: localhost
-
 - name: Copy conf to nodes 
   copy:
     src: "{{ r_tempfile.path }}/config/hello.conf" 
