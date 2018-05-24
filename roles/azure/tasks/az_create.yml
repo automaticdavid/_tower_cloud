@@ -33,6 +33,8 @@
       - lun: 0
         disk_size_gb: 30
         managed_disk_type: Standard_LRS
+  async: 1000
+  poll: 0 
   with_sequence: count="{{az_count}}" 
 
 
