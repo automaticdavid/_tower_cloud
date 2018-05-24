@@ -6,7 +6,7 @@
   tasks:
 
   - block:
-      - names: azure delete
+      - name: azure delete
         include_role: 
           name: azure
           tasks_from: az_delete
