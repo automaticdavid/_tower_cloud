@@ -1,5 +1,14 @@
 ---
 
+- name: Create network interfaces with private IP
+  azure_rm_networkinterface:
+        name: "nic-{{ az_scope }}-{{ item }}"
+        resource_group: "{{ az_groupid }}"
+        virtual_network_name: "{{ az_vnet }}"
+        subnet_name: "{{ az_subnet }}"
+        state: absent
+  with_sequence: count="{{az_count}}" 
+
 - name: remove a set of instances
   azure_rm_virtualmachine:
     resource_group: "{{ az_groupid }}"
