@@ -7,4 +7,4 @@ ec2_subnetid : subnet-0fcfce68ba2d6d393
 ec2_lb: green
 ec2_lb_target: green
 ec2_region: eu-west-1 
-ec2_vpc: vpc-01234567
+ec2_vpc: vpc-714bfc17
