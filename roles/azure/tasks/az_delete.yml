@@ -1,0 +1,14 @@
+---
+
+- name: remove a set of instances
+  azure_rm_virtualmachine:
+    resource_group: "{{ az_groupid }}"
+    name: "{{ az_scope }}-{{ item }}"
+    state: absent
+  with_sequence: count="{{az_count}}" 
+  register: azure
+
+- debug:
+    var: azure
+
+
