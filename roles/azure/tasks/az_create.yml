@@ -14,7 +14,7 @@
     image:
       offer: RHEL
       publisher: RedHat
-      sku: '7.5'
+      sku: '7-LVM'
       version: latest
     data_disks:
         - lun: 0
