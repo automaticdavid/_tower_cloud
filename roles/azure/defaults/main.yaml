@@ -4,6 +4,8 @@ az_scope : foo
 az_delete: foo
 az_groupid : rg-dcl
 az_set: blue
+az_vnet: rg-dcl-vnet
+az_subnet: default
 ssh_username: "{{ ssh_username }}"
 ssh_key: "{{ ssh_key }}"
 
