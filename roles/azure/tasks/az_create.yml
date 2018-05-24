@@ -8,19 +8,19 @@
     vm_size: Standard_B1s   
     managed_disk_type: Standard_LRS
     ssh_password_enabled: False 
-    admin_username: "{{ az_admin_username }}"
-    # ssh_public_keys:
-    #   - path: /home/adminUser/.ssh/authorized_keys
-    #     key_data: < insert yor ssh public key here... >
+    admin_username: "{{ ssh_username }}"
+    ssh_public_keys:
+      - path: "/home/{{ ssh_username }}/.ssh/authorized_keys"
+         key_data: "{{ ssh_key }}"
     image:
       offer: RHEL
       publisher: RedHat
       sku: '7-LVM'
       version: latest
     data_disks:
-        - lun: 0
-          disk_size_gb: 30
-          managed_disk_type: Standard_LRS
+      - lun: 0
+        disk_size_gb: 30
+        managed_disk_type: Standard_LRS
   with_sequence: count="{{az_count}}"  
   register: azure
 
