@@ -6,7 +6,7 @@
   register: az
 
 - debug:
-  var: az
+    msg: az
 
 - name: remove a set of instances
   azure_rm_virtualmachine:
