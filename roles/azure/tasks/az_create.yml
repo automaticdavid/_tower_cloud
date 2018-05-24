@@ -3,7 +3,7 @@
 - name: provision a set of instances
   azure_rm_virtualmachine:
     resource_group: "{{ az_groupid }}"
-    name: "{{ az_scope }}"
+    name: "{{ az_scope }}_{{ item }}"
     availability_set: "{{ az_set }}"
     vm_size: Standard_B1s   
     managed_disk_type: Standard_LRS
