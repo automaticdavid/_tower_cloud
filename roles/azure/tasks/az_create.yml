@@ -1,13 +1,5 @@
 ---
 
-- debug:
-    msg: "wat"
-
-- name: pip install the needed azure deps
-  pip:
-    name: ansible[azure]
-  ignore_errors: yes
-
 - name: provision a set of instances
   azure_rm_virtualmachine:
     resource_group: "{{ az_groupid }}"
