@@ -7,7 +7,7 @@
   run_once: yes
   become: no
 
-- name: Git clone the website
+- name: Git clone the app
   git:
     repo: "{{ app }}"
     version: "{{ ver }}"
@@ -16,15 +16,9 @@
   run_once: yes
   become: no
 
-- name: Copy conf to nodes 
-  copy:
-    src: "{{ r_tempfile.path }}/config/hello.conf" 
-    dest: /etc/nginx/conf.d/default.conf
-  become: yes
-
 - name: Copy app to nodes 
   copy:
-    src: "{{ r_tempfile.path }}/app/index.html" 
-    dest: /usr/share/nginx/html/index.html 
+    src: "{{ r_tempfile.path }}/" 
+    dest: /app/
   become: yes
-  notify: restart_nginx
+
