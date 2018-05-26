@@ -32,6 +32,8 @@
   command: nohup gunicorn -b 0.0.0.0:80 app:app &
   args:
     chdir: /app/app
+  async: 1000
+  poll: 0 
   become: yes
  
 
