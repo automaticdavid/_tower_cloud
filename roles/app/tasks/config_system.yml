@@ -1,7 +1,23 @@
 ---
 
-- name: Node Register
-  include_tasks: rhel_register.yml
+- name: Install needed packages
+  yum:
+    name: subscription-manager
+    state: present
+
+- name: Register system
+  redhat_subscription:
+    state: present
+    username: "{{ rhsm_username }}"
+    password: "{{ rhsm_password }}"
 
 - name: Install needed packages
-  include_tasks: rhel_packages.yml
+  yum:
+    name: '{{ item }}'
+    state: present
+  with_items:
+  # - redhat-access-insights
+    - pip
+
+# - name: Insight Register
+#   command: redhat-access-insights --register
