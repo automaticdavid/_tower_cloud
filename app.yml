@@ -10,10 +10,10 @@
   
   tasks:
 
-    # - name: Install needed software
-    #   include_role:
-    #     name: app
-    #     tasks_from: config_nginx
+    - name: Install needed software
+      include_role:
+        name: app
+        tasks_from: config_system
 
     - name: Install the app
       include_role: 

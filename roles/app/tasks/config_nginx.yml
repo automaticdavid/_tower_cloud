@@ -1,9 +1,5 @@
 ---
 
-- name: Node Register
-  include_tasks: rhel_register.yml
-  when: state == "present"
-
 - name: NginX Install
   include_role:
     name: nginxinc.nginx
