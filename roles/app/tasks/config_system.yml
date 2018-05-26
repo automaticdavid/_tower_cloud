@@ -12,12 +12,9 @@
     password: "{{ rhsm_password }}"
 
 - name: Add repository
-  yum_repository:
-    name: epel
-    description: EPEL YUM repo
-    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
-
-
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    
 - name: Install needed packages
   yum:
     name: '{{ item }}'
