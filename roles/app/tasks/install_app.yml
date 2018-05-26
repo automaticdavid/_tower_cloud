@@ -25,11 +25,14 @@
 - name: pip install requirements
   pip:
     requirements: /app/requirements.txt
+    extra_args: --no-cache-dir
+  become: yes
 
 - name: start gunicorn
-  command: export PYTHONPATH="app/" ; exec gunicorn -b 0.0.0.0:5000 app:app
+  command: exec gunicorn -b 0.0.0.0:80 app:app
   args:
-    chdir: /app
+    chdir: /app/app
+  become: yes
  
 
 
