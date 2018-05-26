@@ -21,7 +21,7 @@
     state: present
   with_items:
   # - redhat-access-insights
-    - pip
+    - python-pip
 
 # - name: Insight Register
 #   command: redhat-access-insights --register
