@@ -29,7 +29,7 @@
   become: yes
 
 - name: start gunicorn
-  command: exec gunicorn -b 0.0.0.0:80 app:app
+  command: nohup gunicorn -b 0.0.0.0:80 app:app &
   args:
     chdir: /app/app
   become: yes
