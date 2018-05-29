@@ -19,11 +19,12 @@
 - name: copy model from s3
   get_url:
     url: https://s3-eu-west-1.amazonaws.com/dcl-hot-dog-model-v3/cats_and_dogs_75.model
-    dest: "{{ r_tempfile.path }}/app/model/"
+    dest: "{{ r_tempfile.path }}/app/model/cats_and_dogs_75.model"
+    force: yes
   connection: local
   run_once: yes
   become: no
-  
+
 - name: zip the app
   archive:
     path: "{{ r_tempfile.path }}/*"
