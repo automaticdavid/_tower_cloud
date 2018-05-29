@@ -23,6 +23,7 @@
   # - redhat-access-insights
     - python-pip
     - unzip
+    - git-lfs
 
 # - name: Insight Register
 #   command: redhat-access-insights --register
