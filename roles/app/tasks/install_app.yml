@@ -19,7 +19,11 @@
 - name: zip the app
   archive:
     path: "{{ r_tempfile.path }}"
-    dest: "{{ r_tempfile.path }}/app.zip"
+    dest: "{{ r_tempfile.path }}"
+    format: zip
+  connection: local
+  run_once: yes
+  become: no
 
 - name: copy zip to nodes 
   copy:
