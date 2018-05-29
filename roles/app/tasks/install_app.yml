@@ -21,20 +21,19 @@
     path: "{{ r_tempfile.path }}/*"
     dest: "{{ r_tempfile.path }}/app.zip"
     format: zip
-
   connection: local
   run_once: yes
   become: no
 
-- name: copy zip to nodes 
-  copy:
-    src: "{{ r_tempfile.path }}/app.zip" 
-    dest: /app/
-  become: yes
+# - name: copy zip to nodes 
+#   copy:
+#     src: "{{ r_tempfile.path }}/app.zip" 
+#     dest: /app/
+#   become: yes
 
-- name: unzip app
+- name: unzip app on target
   unarchive:
-    src: /app/app.zip
+    src: "{{ r_tempfile.path }}/app.zip"
     dest: /app
   become: yes
 
