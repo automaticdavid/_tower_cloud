@@ -19,7 +19,7 @@
 - name: zip the app
   archive:
     path: "{{ r_tempfile.path }}"
-    dest: "{{ r_tempfile.path }}"
+    dest: "{{ r_tempfile.path }}/app.zip"
     format: zip
   connection: local
   run_once: yes
