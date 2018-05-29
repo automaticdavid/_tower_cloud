@@ -16,10 +16,21 @@
   run_once: yes
   become: no
 
-- name: copy app to nodes 
+- name: zip the app
+  archive:
+    path: "{{ r_tempfile.path }}"
+    dest: "{{ r_tempfile.path }}/app.zip"
+
+- name: copy zip to nodes 
   copy:
-    src: "{{ r_tempfile.path }}/" 
+    src: "{{ r_tempfile.path }}/app.zip" 
     dest: /app/
+  become: yes
+
+- name: unzip app
+  unarchive:
+    src: /app/app.zip
+    dest: /app
   become: yes
 
 - name: pip install requirements
