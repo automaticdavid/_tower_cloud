@@ -4,7 +4,7 @@
      key_name: dcl
      state: present
      region: eu-west-1 
-     instance_type: t2.micro
+     instance_type: t2.medium   
      image: ami-ecc27c95
      vpc_subnet_id: "{{ ec2_subnetid }}"
      assign_public_ip: no
