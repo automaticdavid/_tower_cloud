@@ -18,7 +18,7 @@
 
 - name: copy model from s3
   get_url:
-    url: https://s3-eu-west-1.amazonaws.com/dcl-hot-dog-model-v3/cats_and_dogs_75.model
+    url: https://s3-eu-west-1.amazonaws.com/dcl-hot-dog-model-v3/cats_and_cars.model
     dest: "{{ r_tempfile.path }}/app/model/cats_and_dogs.model"
     force: yes
   connection: local
