@@ -22,6 +22,7 @@
   with_items:
   # - redhat-access-insights
     - python-pip
+    - unzip
 
 # - name: Insight Register
 #   command: redhat-access-insights --register
