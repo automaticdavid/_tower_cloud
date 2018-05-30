@@ -10,7 +10,7 @@
 - name: git clone the app
   git:
     repo: "{{ app }}"
-    version: "{{ ver }}"
+    version: "{{ version }}"
     dest: "{{ r_tempfile.path }}"
   connection: local
   run_once: yes
