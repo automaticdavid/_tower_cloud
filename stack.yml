@@ -10,9 +10,7 @@
     #     tasks_from: init
  
 - name: Deploy ec2
-  import_playbook: ec2.yml 
-  tags:
-    - deploy
+  include_playbook: ec2.yml tag=deploy 
 
 - name: ec2 add host
   hosts: localhost
