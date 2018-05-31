@@ -11,7 +11,7 @@
           name: ec2
           tasks_from: ec2_delete
         when: 
-          - action == "delete" or action == "destroy"
+          - ec2_action == "delete" or ec2_action == "destroy"
     tags:
       - delete
       - destroy
