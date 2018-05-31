@@ -11,7 +11,7 @@
  
 - name: Deploy ec2
   vars: 
-    - action: deploy
+    action: deploy
   import_playbook: ec2.yml 
 
 
