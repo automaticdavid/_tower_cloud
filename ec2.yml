@@ -10,6 +10,8 @@
         include_role: 
           name: ec2
           tasks_from: ec2_delete
+        when: 
+          - action == "delete" or action == "destroy"
     tags:
       - delete
       - destroy
