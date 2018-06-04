@@ -23,6 +23,9 @@
   # - redhat-access-insights
     - python-pip
     - unzip
+    - libXext 
+    - libSM 
+    - libXrender
 
 # - name: Insight Register
 #   command: redhat-access-insights --register
