@@ -4,11 +4,17 @@
   hosts: "*{{ ec2_scope }}"
   gather_facts: yes
   become: yes
+  serial: 1
   
   vars:
     state: "{{ state }}"
   
   tasks:
+
+    - name: Remove existing app
+      include_role: 
+        name: app
+        tasks_from: remove_app
 
     - name: Install needed software
       include_role:
@@ -21,15 +27,5 @@
         tasks_from: install_app
 
 
-- name: ec2 LB actions
-  hosts: localhost
-  connection: local
-  gather_facts: no
 
-  tasks:
-
-    - name: ec2 add to lb
-      include_role: 
-        name: ec2
-        tasks_from: ec2_elb_target
 
