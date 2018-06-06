@@ -9,14 +9,13 @@
     #     name: common
     #     tasks_from: init
  
-    - name: Deploy ec2
-      vars: 
-        ec2_action: deploy
-      import_playbook: ec2.yml 
+- name: Deploy ec2
+  vars: 
+    ec2_action: deploy
+  import_playbook: ec2.yml 
 
 - name: ec2 add host
   hosts: localhost
-
   tasks:
   - include_role: 
       name: ec2
