@@ -4,8 +4,7 @@
   hosts: "*{{ ec2_scope }}"
   gather_facts: yes
   become: yes
-  serial: 1
-  
+
   vars:
     state: "{{ state }}"
     app_action: "{{ app_action }}"
