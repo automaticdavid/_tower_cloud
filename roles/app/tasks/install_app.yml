@@ -7,7 +7,7 @@
   run_once: yes
   become: no
 
-- name: git clone the app
+- name: git clone the app specific version
   git:
     repo: "{{ app }}"
     version: "{{ version }}"
@@ -18,7 +18,7 @@
   when:
     - version is defined and version != ""
 
-- name: git clone the app
+- name: git clone the app latest comit
   git:
     repo: "{{ app }}"
     dest: "{{ r_tempfile.path }}"
@@ -86,6 +86,13 @@
   poll: 0 
   become: yes
  
+- name: Remove temp files
+file:
+  path: "{{ r_tempfile.path }}"
+  state: absent
+delegate_to: localhost
+run_once: yes
+become: no
 
 
 

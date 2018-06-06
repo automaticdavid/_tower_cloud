@@ -8,6 +8,7 @@
   
   vars:
     state: "{{ state }}"
+    app_action: "{{ app_action }}"
   
   tasks:
 
@@ -15,6 +16,15 @@
       include_role: 
         name: app
         tasks_from: remove_app
+      when:
+        app_action == "update"
+
+    - name: Configure system
+      include_role: 
+        name: app
+        tasks_from: config_system
+      when:
+        app_action != "update"
 
     - name: Install the app
       include_role: 
