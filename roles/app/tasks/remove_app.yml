@@ -7,6 +7,7 @@
 - name: Kill running gunicorn
   shell: "kill {{ item }}"
   with_items: "{{ gunicorn.stdout_lines }}"
+  ignore_errors: yes
 
 - wait_for:
     path: "/proc/{{ item }}/status"
