@@ -1,7 +1,7 @@
 
 
 - name: Get running gunicorn
-  shell: "ps -ef | grep -v grep | grep -w {{ gunicorn }} | awk '{print $2}'"
+  shell: "ps -ef | grep -v grep | grep -w gunicorn | awk '{print $2}'"
   register: gunicorn
 
 - name: Kill running gunicorn
