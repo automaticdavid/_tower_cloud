@@ -16,11 +16,6 @@
         name: app
         tasks_from: remove_app
 
-    - name: Install needed software
-      include_role:
-        name: app
-        tasks_from: config_system
-
     - name: Install the app
       include_role: 
         name: app
