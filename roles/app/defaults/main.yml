@@ -1,4 +1,5 @@
 app: https://github.com/automaticdavid/demoapp.git
 version: v1.0
-state: present
 bucket: https://s3-eu-west-1.amazonaws.com/dcl-hot-dog
+state: present
+app_action: new
