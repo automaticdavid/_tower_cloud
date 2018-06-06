@@ -31,5 +31,25 @@
         tasks_from: install_app
 
 
+- name: ec2 LB actions
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    state: "{{ state }}"
+    app_action: "{{ app_action }}"
+
+  tasks:
+
+    - name: ec2 add to lb
+      include_role: 
+        name: ec2
+        tasks_from: ec2_elb_target
+      when:
+        app_action != "update"
+
+
+
 
 

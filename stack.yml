@@ -4,16 +4,15 @@
   hosts: localhost
   tasks:
     - debug:
-        msg: "Stack Deploy"
+        msg: "Full Stack ML Stack Deploy"
     # - include_role: 
     #     name: common
     #     tasks_from: init
  
-- name: Deploy ec2
-  vars: 
-    ec2_action: deploy
-  import_playbook: ec2.yml 
-
+    - name: Deploy ec2
+      vars: 
+        ec2_action: deploy
+      import_playbook: ec2.yml 
 
 - name: ec2 add host
   hosts: localhost
