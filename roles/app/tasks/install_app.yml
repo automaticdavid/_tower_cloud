@@ -79,7 +79,7 @@
   become: yes
 
 - name: start gunicorn
-  command: nohup gunicorn -b 0.0.0.0:80 app:app &
+  command: gunicorn -c cfg.py app:app
   args:
     chdir: /app/app
   async: 1000
