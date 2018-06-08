@@ -5,7 +5,7 @@
   register: gunicorn
 
 - name: Kill running gunicorn
-  shell: "kill {{ item }}"
+  shell: "kill {{ item }} 2>&1 > /dev/null"
   with_items: "{{ gunicorn.stdout_lines }}"
   ignore_errors: yes
 
