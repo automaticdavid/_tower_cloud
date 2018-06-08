@@ -45,14 +45,14 @@
   run_once: yes
   become: no
 
-- name: zip the app
-  archive:
-    path: "{{ r_tempfile.path }}/*"
-    dest: "{{ r_tempfile.path }}/app.zip"
-    format: zip
-  delegate_to: localhost
-  run_once: yes
-  become: no
+# - name: zip the app
+#   archive:
+#     path: "{{ r_tempfile.path }}/*"
+#     dest: "{{ r_tempfile.path }}/app.zip"
+#     format: zip
+#   delegate_to: localhost
+#   run_once: yes
+#   become: no
 
 # - name: copy zip to nodes 
 #   copy:
@@ -66,11 +66,17 @@
     state: directory
     mode: 0755
 
-- name: unzip app on target
-  unarchive:
-    src: "{{ r_tempfile.path }}/app.zip"
-    dest: /app
+- name: copy app to nodes 
+  copy:
+    src: "{{ r_tempfile.path }}/app/" 
+    dest: /app/
   become: yes
+
+# - name: unzip app on target
+#   unarchive:
+#     src: "{{ r_tempfile.path }}/app.zip"
+#     dest: /app
+#   become: yes
 
 - name: pip install requirements
   pip:
@@ -82,7 +88,7 @@
   command: gunicorn -c cfg.py app:app
   args:
     chdir: /app/app
-  async: 1000
+  async: 1
   poll: 0 
   become: yes
  
