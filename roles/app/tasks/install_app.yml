@@ -90,10 +90,9 @@
     marker: "# -- ANSIBLE MANAGED BLOCK -- #"
     content: |
       raw_env =  [
-      'S3_BUCKET_NAME = {{ results_bucket }}',
-      'S3_KEY = {{ AWS_KEY }}',
-      'S3_SECRET = {{ AWS_SECRET }}',
-      'S3_LOCATION =  http://{{ results_bucket }}.s3.amazonoaws.com/'
+      'S3_BUCKET_NAME={{ results_bucket }}',
+      'S3_KEY={{ AWS_KEY }}',
+      'S3_SECRET={{ AWS_SECRET }}',
       ]
 
 - name: start gunicorn
