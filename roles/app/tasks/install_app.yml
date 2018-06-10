@@ -84,13 +84,18 @@
     extra_args: --no-cache-dir
   become: yes
 
+- name: set app environement variables
+  environement:
+    S3_KEY: "{{ AWS_ACCESS_KEY_ID }}"
+    S3_SECRET: "{{ AWS_SECRET_ACCESS_KEY }}"
+    S3_BUCKET_NAME: "{{ S3_BUCKET_NAME }}"
+    
 - name: start gunicorn
   command: gunicorn -c cfg.py app:app
   args:
     chdir: /app/app
   async: 1
   poll: 0 
-  become: yes
  
 - name: Remove temp files
   file:
