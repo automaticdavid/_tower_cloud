@@ -3,4 +3,4 @@ version: v1.0
 bucket: https://s3-eu-west-1.amazonaws.com/dcl-hot-dog
 state: present
 app_action: new
-results_buckets: dcl-hot-dog-results
+results_bucket: dcl-hot-dog-results
