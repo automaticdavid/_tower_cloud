@@ -83,11 +83,23 @@
     requirements: /app/requirements.txt
     extra_args: --no-cache-dir
   become: yes
-    
+
+- name: customize gunicorn config
+  blockinfile:
+    path: /app/app/cfg.py
+    marker: "# -- ANSIBLE MANAGED BLOCK -- #"
+    content: |
+      raw_env =  [
+      'S3_BUCKET_NAME = {{ results_bucket }}',
+      'S3_KEY = {{ AWS_ACCESS_KEY_ID }}',
+      'S3_SECRET = {{ AWS_SECRET_ACCESS_KEY }}',
+      'S3_LOCATION =  http://{{ results_bucket }}.s3.amazonoaws.com/'
+      ]
+
 - name: start gunicorn
   environement:
-    S3_KEY: "aaa"
-    S3_SECRET: "aaa"
+    S3_KEY: "{{ AWS_ACCESS_KEY_ID }}"
+    S3_SECRET: "{{ AWS_SECRET_ACCESS_KEY }}"
     S3_BUCKET_NAME: "{{ results_bucket }}"
   command: gunicorn -c cfg.py app:app
   args:
