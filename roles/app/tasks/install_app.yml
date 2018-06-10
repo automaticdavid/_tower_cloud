@@ -45,21 +45,6 @@
   run_once: yes
   become: no
 
-# - name: zip the app
-#   archive:
-#     path: "{{ r_tempfile.path }}/*"
-#     dest: "{{ r_tempfile.path }}/app.zip"
-#     format: zip
-#   delegate_to: localhost
-#   run_once: yes
-#   become: no
-
-# - name: copy zip to nodes 
-#   copy:
-#     src: "{{ r_tempfile.path }}/app.zip" 
-#     dest: /app/
-#   become: yes
-
 - name: create app directory 
   file:
     path: /app
@@ -71,12 +56,6 @@
     src: "{{ r_tempfile.path }}/" 
     dest: /app/
   become: yes
-
-# - name: unzip app on target
-#   unarchive:
-#     src: "{{ r_tempfile.path }}/app.zip"
-#     dest: /app
-#   become: yes
 
 - name: pip install requirements
   pip:

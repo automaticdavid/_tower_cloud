@@ -11,24 +11,33 @@
   
   tasks:
 
+    - name: Check app already installed     
+      stat: 
+        path: /app/app/
+      register: app_dir
+
     - name: Remove existing app
       include_role: 
         name: app
         tasks_from: remove_app
       when:
-        app_action == "update"
+        - app_action == "update"
+        - app_dir.stat.exists 
 
     - name: Configure system
       include_role: 
         name: app
         tasks_from: config_system
       when:
-        app_action != "update"
+        - app_action != "update"
+        - not app_dir.stat.exists
 
     - name: Install the app
       include_role: 
         name: app
         tasks_from: install_app
+      when:
+        - not app_dir.stat.exists
 
 
 - name: ec2 LB actions
@@ -48,8 +57,4 @@
         tasks_from: ec2_elb_target
       when:
         app_action != "update"
-
-
-
-
 
