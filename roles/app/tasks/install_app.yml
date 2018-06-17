@@ -63,7 +63,7 @@
     extra_args: --no-cache-dir
   become: yes
 
-- name: customize gunicorn config
+- name: customize gunicorn config for S3
   blockinfile:
     path: /app/app/cfg.py
     marker: "# -- ANSIBLE MANAGED BLOCK -- #"
@@ -72,7 +72,32 @@
       'S3_BUCKET_NAME={{ results_bucket }}',
       'S3_KEY={{ AWS_KEY }}',
       'S3_SECRET={{ AWS_SECRET }}',
+      'OBJECT_STORE={{ object_store }}'
       ]
+  when: object_store == 's3'
+
+- name: customize gunicorn config for Azure blob
+  blockinfile:
+    path: /app/app/cfg.py
+    marker: "# -- ANSIBLE MANAGED BLOCK -- #"
+    content: |
+      raw_env =  [
+      'BLOB_ACCOUNT={{ blob_account }}',
+      'BLOB_KEY={{ blob_key }}',
+      'BLOB_CONTAINER={{ blob_container }}',
+      'OBJECT_STORE={{ object_store }}'
+      ]
+    when: object_store == 'blob'
+
+- name: customize gunicorn config for local access
+  blockinfile:
+  path: /app/app/cfg.py
+  marker: "# -- ANSIBLE MANAGED BLOCK -- #"
+  content: |
+    raw_env =  [
+    'OBJECT_STORE={{ object_store }}'
+    ]
+  when: object_store == 'local'
 
 - name: start gunicorn
   command: gunicorn -c cfg.py app:app
