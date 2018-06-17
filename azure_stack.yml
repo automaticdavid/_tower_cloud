@@ -1,0 +1,28 @@
+---
+- name: ec2 actions
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+    - name: azure delete
+    include_role: 
+      name: azure
+      tasks_from: azure_delete
+    when: 
+      - azure_setup == True 
+
+    - name: azure delete
+      include_role: 
+        name: azure
+        tasks_from: azure_delete
+      when: 
+        - azure_action == "delete" or azure_action == "destroy"
+
+
+    - name: azure create
+      include_role: 
+        name: azure
+        tasks_from: azure_create
+      when: 
+        - azure_action == "create" or azure_action == "deploy"

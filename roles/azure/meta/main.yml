@@ -1,3 +1,4 @@
 dependencies:
 - role: common
+- src: https://github.com/nehrman/ansible-role-azure
 
