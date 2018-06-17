@@ -87,7 +87,7 @@
       'BLOB_CONTAINER={{ blob_container }}',
       'OBJECT_STORE={{ object_store }}'
       ]
-    when: object_store == 'blob'
+  when: object_store == 'blob'
 
 - name: customize gunicorn config for local access
   blockinfile:
