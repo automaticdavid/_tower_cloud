@@ -16,6 +16,9 @@
         path: /app/app/
       register: app_dir
 
+    - debug:
+        var: app_dir
+
     - name: Remove existing app
       include_role: 
         name: app
