@@ -17,15 +17,15 @@
     
 - name: Install needed packages
   yum:
-    name: '{{ item }}'
+    name: [ python-pip, unzip, libXext, libSM, libXrender ]
     state: present
-  with_items:
-  # - redhat-access-insights
-    - python-pip
-    - unzip
-    - libXext 
-    - libSM 
-    - libXrender
+  # with_items:
+  # # - redhat-access-insights
+  #   - python-pip
+  #   - unzip
+  #   - libXext 
+  #   - libSM 
+  #   - libXrender
 
 # - name: Insight Register
 #   command: redhat-access-insights --register
