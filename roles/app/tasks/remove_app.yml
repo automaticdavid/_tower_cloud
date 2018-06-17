@@ -7,7 +7,19 @@
 - debug:
     msg: "{{ gunicorn }}"
 
-- name: Kill running gunicorn
+# Killing the first one is usually enough
+- name: Kill first unning gunicorn
+  shell: "kill {{ item }} 2>&1 > /dev/null"
+  with_items: "{{ gunicorn.stdout_lines }}.0"
+  ignore_errors: yes
+
+- wait_for:
+    path: "/proc/{{ item }}/status"
+    state: absent
+  with_items: "{{ gunicorn.stdout_lines }}.0"
+  ignore_errors: yes
+
+- name: Kill all running gunicorn
   shell: "kill {{ item }} 2>&1 > /dev/null"
   with_items: "{{ gunicorn.stdout_lines }}"
   ignore_errors: yes
