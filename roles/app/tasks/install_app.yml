@@ -91,12 +91,12 @@
 
 - name: customize gunicorn config for local access
   blockinfile:
-  path: /app/app/cfg.py
-  marker: "# -- ANSIBLE MANAGED BLOCK -- #"
-  content: |
-    raw_env =  [
-    'OBJECT_STORE={{ object_store }}'
-    ]
+    path: /app/app/cfg.py
+    marker: "# -- ANSIBLE MANAGED BLOCK -- #"
+    content: |
+      raw_env =  [
+      'OBJECT_STORE={{ object_store }}'
+      ]
   when: object_store == 'local'
 
 - name: start gunicorn
