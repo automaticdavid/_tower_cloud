@@ -7,7 +7,7 @@
 
     - name: azure setup
       include_role: 
-        name: nehrman.ansible-role-azure
+        name: azure
         tasks_from: setup_env
       when: 
         - azure_action == "setup" 
