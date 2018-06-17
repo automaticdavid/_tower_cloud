@@ -6,11 +6,11 @@
   tasks:
 
     - name: azure setup
-    include_role: 
-      name: azure
-      tasks_from: setup_env
-    when: 
-      - azure_action == "setup" 
+      include_role: 
+        name: azure
+        tasks_from: setup_env
+      when: 
+        - azure_action == "setup" 
 
     - name: azure delete
       include_role: 
