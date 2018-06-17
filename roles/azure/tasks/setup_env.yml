@@ -2,5 +2,5 @@
 
 - name: Setup Azure environement
   include_role:
-    name: nehrman.ansible-role-azure
+    name: ansible-role-azure
     tasks_from: setup_env.yml
