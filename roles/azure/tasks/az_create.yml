@@ -58,6 +58,8 @@
       purpose: "{{ az_environment }}"
       application: "{{ az_application }}"
       os: "{{ az_os_type_vm }}"
+  async: 1
+  poll: 0
   with_sequence: count="{{az_count}}" 
 
 
