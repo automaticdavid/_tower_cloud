@@ -14,6 +14,8 @@
 - name: Initialize an empty list for our strings
   set_fact:
     i: []
+    j: []
+
 
 - name: Build a list of ips and hostnames
   vars:
