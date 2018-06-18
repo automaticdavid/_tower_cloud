@@ -45,7 +45,7 @@
     vm_size: "{{ az_vm_size }}"
     os_type: "{{ az_os_type_vm }}"
     storage_account_name: "{{ az_storageaccount_name }}"
-    network_interface_names: "{{ az_vm_nic_name }}"
+    network_interface_names: "nic-{{ az_scope }}-{{ item }}"
     admin_username: "{{ ssh_username }}"
     ssh_public_keys:
       - path: "/home/{{ ssh_username }}/.ssh/authorized_keys"
