@@ -21,8 +21,8 @@
 #     var: item
 #   loop:  "{{ nics.results }}"
 
-# - debug:
-#     var: ips_to_add
+- debug:
+    var: ips_to_add
 
 - name: Add hosts
   add_host:
