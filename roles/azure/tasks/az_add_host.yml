@@ -10,14 +10,19 @@
 - debug:
     var: nics
 
-- name: Build a list of ips and hostnames
-  vars:
-    ips_to_add: "{{ nics.results | json_query('privateIPAddress') | list }}"
-  set_fact:
-    ips_to_add: "{{ ips_to_add }}"
+# - name: Build a list of ips and hostnames
+#   vars:
+#     ips_to_add: "{{ nics.results | json_query('privateIPAddress') | list }}"
+#   set_fact:
+#     ips_to_add: "{{ ips_to_add }}"
 
-- debug:
-    var: ips_to_add
+- name: Build a list of ips and hostnames
+  debug:
+    var: item
+  loop:  "{{ nics.results | json_query('privateIPAddress') | list }}"
+
+# - debug:
+#     var: ips_to_add
 
 - name: Add hosts
   add_host:

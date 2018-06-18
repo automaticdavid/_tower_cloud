@@ -1,6 +1,6 @@
 ---
 
-- name: Install needed packages
+- name: Verify subscription-manager is present
   yum:
     name: subscription-manager
     state: present
