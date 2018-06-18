@@ -12,7 +12,7 @@
 
 - name: Build a list of ips and hostnames
   vars:
-    ips_to_add: "{{ nics.results | map(attribute='privateIPAddress') | list }}"
+    ips_to_add: "{{ nics | json_query(results[*].ansible_facts.azure_networkinterfaces[*].properties.ipConfigurations.privateIPAddress) | list }}"
   set_fact:
     ips_to_add: "{{ ips_to_add }}"
 
