@@ -25,3 +25,13 @@
         tasks_from: az_create
       when: 
         - az_action == "create" or az_action == "deploy"
+
+
+- name: azure add host
+  hosts: localhost
+
+  tasks:
+    
+  - include_role: 
+      name: azure
+      tasks_from: az_add_host
