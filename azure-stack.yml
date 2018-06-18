@@ -10,19 +10,19 @@
         name: azure
         tasks_from: setup_env
       when: 
-        - azure_action == "setup" 
+        - az_action == "setup" 
 
     - name: azure delete
       include_role: 
         name: azure
-        tasks_from: azure_delete
+        tasks_from: az_delete
       when: 
-        - azure_action == "delete" or azure_action == "destroy"
+        - az_action == "delete" or az_action == "destroy"
 
 
     - name: azure create
       include_role: 
         name: azure
-        tasks_from: azure_create
+        tasks_from: az_create
       when: 
-        - azure_action == "create" or azure_action == "deploy"
+        - az_action == "create" or az_action == "deploy"
