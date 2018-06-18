@@ -19,7 +19,7 @@
 
 - name: Build a list of ips and hostnames 2
   debug:
-    msg:  item.properties.ipConfigurations.0.privateIPAddress 
+    msg:  "{{ item.properties.ipConfigurations.0.privateIPAddress }}"
   loop:  "{{ i }}"
 
 # - debug:
