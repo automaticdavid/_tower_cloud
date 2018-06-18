@@ -23,15 +23,15 @@
     i:  "{{ i }} + ['{{ k }}'] "
   loop:  "{{ nics.results }}"
 
-- name: Build a list of ips and hostnames 2
-  vars:
-    k:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
-  set_fact:
-    j: "{{ j }} + ['{{ k }}'] "
-  loop:  "{{ i }}"
+# - name: Build a list of ips and hostnames 2
+#   vars:
+#     k:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
+#   set_fact:
+#     j: "{{ j }} + ['{{ k }}'] "
+#   loop:  "{{ i }}"
 
 - debug:
-    msg: "{{ j }}"
+    msg: "{{ i }}"
 
   # set_fact:
   #   ips_to_add: "{{ ips_to_add }}"
