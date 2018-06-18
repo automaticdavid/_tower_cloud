@@ -12,11 +12,14 @@
 
 - name: Build a list of ips and hostnames
   vars:
-    ips_to_add: "{{ query(nics.results, 'privateIPAddress') }}"
-  # set_fact:
-  #   ips_to_add: "{{ ips_to_add }}"
+    ips_to_add: "{{ query(item, 'privateIPAddress') }}"
   debug:
     var: ips_to_add
+  loop:  "{{ nics.results }}"
+
+
+  # set_fact:
+  #   ips_to_add: "{{ ips_to_add }}"
 
 # - name: Build a list of ips and hostnames
 #   debug:
