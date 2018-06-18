@@ -5,33 +5,16 @@
 
   tasks:
 
-    - name: "azure setup"
-      include_role: 
-        name: azure
-        tasks_from: setup_env
-      when: 
-        - az_action == "setup" 
-
-    - name: "azure delete"
-      include_role: 
-        name: azure
-        tasks_from: az_delete
-      when: 
-        - az_action == "delete" or az_action == "destroy"
-
     - name: "azure create"
       include_role: 
         name: azure
         tasks_from: az_create
-      when: 
-        - az_action == "create" or az_action == "deploy"
-
 
 - name: azure add host
   hosts: localhost
 
   tasks:
-    
+
   - include_role: 
       name: azure
       tasks_from: az_add_host
