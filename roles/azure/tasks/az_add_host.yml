@@ -19,7 +19,7 @@
 
 - name: Build a list of ips and hostnames
   vars:
-    j:  j + "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
+    j:  "{{ j + item.properties.ipConfigurations.0.properties.privateIPAddress }}"
   set_fact:
     j: "{{ j }}"
   loop:  "{{ i }}"
