@@ -1,8 +1,7 @@
 ---
 
 - name:  Create {{ az_secgroup_name }} Security Group on {{ az_region }}
-  local_action:
-    module: azure_rm_securitygroup
+  azure_rm_securitygroup:
     resource_group: "{{ az_resourcegroup_name }}"
     name: "{{ az_secgroup_name }}"
     rules:
@@ -21,8 +20,7 @@
   run_once: yes
 
 - name: Create NICs
-  local_action:
-    module: azure_rm_networkinterface
+  azure_rm_networkinterface:
     resource_group: "{{ az_resourcegroup_name }}"
     name: "nic-{{ az_scope }}-{{ item }}"
     virtual_network: "{{ az_virtualnet_name }}"
@@ -36,8 +34,7 @@
   with_sequence: count="{{az_count}}" 
 
 - name: "Create Virtual Machines"
-  local_action:
-    module: azure_rm_virtualmachine
+  azure_rm_virtualmachine:
     resource_group: "{{ az_resourcegroup_name }}"
     location: "{{ az_location }}"
     availability_set: "{{ az_availabilitysets_name }}"
@@ -60,8 +57,6 @@
       purpose: "{{ az_environment }}"
       application: "{{ az_application }}"
       os: "{{ az_os_type_vm }}"
-  async: 1
-  poll: 0 
   with_sequence: count="{{az_count}}" 
 
 
