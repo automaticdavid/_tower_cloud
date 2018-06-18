@@ -39,4 +39,5 @@ az_image_sku: '7-LVM'
 az_image_version: latest
 az_application: "Python ML"
 az_os_type_vm: "Linux"
+az_vm_size: Standard_B1s   
 
