@@ -7,6 +7,26 @@
   with_sequence: count="{{az_count}}" 
   register: nics
 
-
 - debug:
     var: nics
+
+- name: Build a list of ips and hostnames
+  vars:
+    ips_to_add: "{{ nics.results | map(attribute='private_ip_address') | list }}"
+  set_fact:
+    ips_to_add: "{{ ips_to_add }}"
+
+- name: Add hosts
+  add_host:
+    name: "{{ item }}"
+    groups: "tag_Name_{{ ec2_scope }}"
+  with_items: "{{ ips_to_add }}" 
+
+- name: Wait for SSH to come up
+  wait_for:
+    host: "{{ item }}"
+    port: 22
+    delay: 15
+    timeout: 600
+    state: started
+  with_items: "{{ ips_to_add }}"
