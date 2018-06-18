@@ -10,19 +10,18 @@
 
 - name: remove associated network interfaces 
   azure_rm_networkinterface:
-        name: "nic-{{ az_scope }}-{{ item }}"
-        resource_group: "{{ az_groupid }}"
-        virtual_network_name: "{{ az_vnet }}"
-        subnet_name: "{{ az_subnet }}"
-        state: absent
+    name: "nic-{{ az_scope }}-{{ item }}"
+    resource_group: "{{ az_groupid }}"
+    virtual_network_name: "{{ az_vnet }}"
+    subnet_name: "{{ az_subnet }}"
+    state: absent
   with_sequence: count="{{az_count}}" 
-
 
 - name: remove associated disks 
   azure_rm_manage_disk:
-        name: "{{ az_scope }}-{{ item }}"
-        resource_group: "{{ az_groupid }}"
-        state: absent
+    name: "{{ az_scope }}-{{ item }}"
+    resource_group: "{{ az_groupid }}"
+    state: absent
   with_sequence: count="{{az_count}}" 
 
 
