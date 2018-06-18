@@ -7,33 +7,28 @@
   with_sequence: count="{{az_count}}" 
   register: nics
 
-# - debug:
-#     var: nics
-
-
-- name: Initialize an empty list for our strings
+- name: Initialize an empty list 
   set_fact:
-    i: []
-    j: []
+    networkinterfaces: []
+    ips_to_add: []
 
-
-- name: Build a list of ips and hostnames
+- name: Extract azure_networkinterfaces
   vars:
-    k:  "{{ item.ansible_facts.azure_networkinterfaces }}"
+    iterator:  "{{ item.ansible_facts.azure_networkinterfaces }}"
   set_fact:
-    i:  "{{ i + k  }}"
+    networkinterfaces:  "{{ networkinterfaces + iterator  }}"
   loop:  "{{ nics.results }}"
 
-- name: Build a list of ips and hostnames 2
+- name:  Extract privateIPAddress
   vars:
-    k:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
-    kk: [ '{{ k }}' ]
+    iterator:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
+    iterator_list: [ '{{ i }}' ]
   set_fact:
-    j: "{{ j +  kk }}"
-  loop:  "{{ i }}"
+    ips_to_add: "{{ ips_to_add +  iterator_list }}"
+  loop:  "{{ networkinterfaces }}"
 
 - debug:
-    msg: "{{ j }}"
+    msg: "{{ ips_to_add }}"
 
   # set_fact:
   #   ips_to_add: "{{ ips_to_add }}"
