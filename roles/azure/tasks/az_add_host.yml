@@ -19,7 +19,7 @@
 - name: Build a list of ips and hostnames
   debug:
     var: item
-  loop:  "{{ nics.results | json_query('privateIPAddress') | list }}"
+  loop:  "{{ nics.results | json_query('privateIPAddress') }}"
 
 # - debug:
 #     var: ips_to_add
