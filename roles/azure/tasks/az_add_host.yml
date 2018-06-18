@@ -1,0 +1,12 @@
+---
+
+- name: Get facts for network interfaces
+  azure_rm_networkinterface_facts:
+    resource_group: "{{ az_resourcegroup_name }}"
+    name: "nic-{{ az_scope }}-{{ item }}"
+  with_sequence: count="{{az_count}}" 
+  register: nics
+
+
+- debug:
+    var: nics
