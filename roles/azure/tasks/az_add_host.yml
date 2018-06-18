@@ -12,7 +12,7 @@
 
 - name: Build a list of ips and hostnames
   vars:
-    ips_to_add: "{{ nics.results | map(attribute='private_ip_address') | list }}"
+    ips_to_add: "{{ nics.results | map(attribute='privateIPAddress') | list }}"
   set_fact:
     ips_to_add: "{{ ips_to_add }}"
 
