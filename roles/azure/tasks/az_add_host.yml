@@ -12,7 +12,7 @@
 
 - name: Build a list of ips and hostnames
   vars:
-    i: item.ansible_facts.azure_networkinterfaces
+    i:  "{{ item.ansible_facts.azure_networkinterfaces }}"
   set_fact:
    i: "{{ i }}"
   loop:  "{{ nics.results }}"
