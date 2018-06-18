@@ -17,11 +17,16 @@
     i: "{{ i }}"
   loop:  "{{ nics.results }}"
 
+- name: Initialize an empty list for our strings
+  set_fact:
+    j: []
+
+
 - name: Build a list of ips and hostnames
   vars:
-    j:  "{{ j + item.properties.ipConfigurations.0.properties.privateIPAddress }}"
+    k:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
   set_fact:
-    j: "{{ j }}"
+    j: "{{ j }} + ['{{ k }}'] "
   loop:  "{{ i }}"
 
 - debug:
