@@ -22,3 +22,12 @@
 
 # - name: Insight Register
 #   command: redhat-access-insights --register
+
+- name: Open firewall for http & ssh
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+  loop:
+    - http
+    - ssh
