@@ -14,7 +14,7 @@
   vars:
     i:  "{{ item.ansible_facts.azure_networkinterfaces }}"
   set_fact:
-   i: "{{ i }}"
+   i: "{{ i.properties.ipConfigurations }}"
   loop:  "{{ nics.results }}"
 
 
