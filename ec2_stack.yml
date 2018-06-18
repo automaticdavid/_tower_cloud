@@ -23,3 +23,21 @@
  
 - name: Deploy app
   import_playbook: app.yml
+
+
+- name: ec2 LB actions
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    app_action: "{{ app_action }}"
+
+  tasks:
+
+    - name: ec2 add to lb
+      include_role: 
+        name: ec2
+        tasks_from: ec2_elb_target
+      when:
+        app_action != 'update'
