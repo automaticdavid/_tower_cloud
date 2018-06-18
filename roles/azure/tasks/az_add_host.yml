@@ -22,7 +22,7 @@
 - name:  Extract privateIPAddress
   vars:
     iterator:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
-    iterator_list: [ '{{ i }}' ]
+    iterator_list: [ '{{ iterator }}' ]
   set_fact:
     ips_to_add: "{{ ips_to_add +  iterator_list }}"
   loop:  "{{ networkinterfaces }}"
