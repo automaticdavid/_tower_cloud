@@ -27,8 +27,9 @@ az_availabilitysets_sku: "Aligned"
 az_managed_disk_type: "Standard_LRS"
 
 # VM variables
+scope: foo
 az_count: 2
-az_scope : foo
+az_scope : "{{ scope }}"
 az_delete: foo
 az_groupid : "{{ az_resourcegroup_name }}"
 ssh_username: "{{ ssh_username }}"

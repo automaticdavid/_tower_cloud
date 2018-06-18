@@ -1,7 +1,7 @@
 ---
 
 - name: App actions
-  hosts: "*{{ ec2_scope }}"
+  hosts: "*{{ scope }}"
   gather_facts: yes
   become: yes
 

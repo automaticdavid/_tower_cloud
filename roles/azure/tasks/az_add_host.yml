@@ -7,8 +7,7 @@
   with_sequence: count="{{az_count}}" 
   register: nics
 
-- name: Initialize an empty list 
-  set_fact:
+- set_fact:
     networkinterfaces: []
     ips_to_add: []
 
@@ -26,20 +25,6 @@
   set_fact:
     ips_to_add: "{{ ips_to_add +  iterator_list }}"
   loop:  "{{ networkinterfaces }}"
-
-- debug:
-    msg: "{{ ips_to_add }}"
-
-  # set_fact:
-  #   ips_to_add: "{{ ips_to_add }}"
-
-# - name: Build a list of ips and hostnames
-#   debug:
-#     var: item
-#   loop:  "{{ nics.results }}"
-
-# - debug:
-#     var: ips_to_add
 
 - name: Add hosts
   add_host:
