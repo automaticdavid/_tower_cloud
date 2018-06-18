@@ -18,7 +18,7 @@
   loop:  "{{ nics.results }}"
 
 - name: Build a list of ips and hostnames
-  var:
+  vars:
     j:  item.properties.ipConfigurations.0.privateIPAddress 
   set_fact:
     j: "{{ j }}"
