@@ -14,12 +14,18 @@
   vars:
     i:  "{{ item.ansible_facts.azure_networkinterfaces }}"
   set_fact:
-   i: "{{ i.properties.ipConfigurations }}"
+   i: "{{ i }}"
   loop:  "{{ nics.results }}"
 
+- name: Build a list of ips and hostnames
+  vars:
+    j:  "{{ item.properties.ipConfigurations }}"
+  set_fact:
+   j: "{{ j }}"
+  loop:  "{{ i }}"
 
 - debug:
-    var: i
+    var: j
 
   # set_fact:
   #   ips_to_add: "{{ ips_to_add }}"
