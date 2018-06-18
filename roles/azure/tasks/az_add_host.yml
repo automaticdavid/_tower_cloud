@@ -24,13 +24,15 @@
 
 - name: Build a list of ips and hostnames
   vars:
-    k:  "{{ item.properties.ipConfigurations.1.properties.privateIPAddress }}"
-  set_fact:
-    j: "{{ j }} + ['{{ k }}'] "
+    k:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
+  # set_fact:
+  #   j: "{{ j }} + ['{{ k }}'] "
+  debug:
+    msg: k
   loop:  "{{ i }}"
 
-- debug:
-    msg: "{{ j }}"
+# - debug:
+#     msg: "{{ j }}"
 
   # set_fact:
   #   ips_to_add: "{{ ips_to_add }}"
