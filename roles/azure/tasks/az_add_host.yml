@@ -14,7 +14,7 @@
   vars:
     # ips_to_add: "{{ query(item, 'privateIPAddress') }}"
   debug:
-    var: item
+    var: item.ansible_facts.azure_networkinterfaces:
   loop:  "{{ nics.results }}"
 
 
