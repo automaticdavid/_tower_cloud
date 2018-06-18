@@ -37,4 +37,5 @@ az_image_offer: RHEL
 az_image_publisher: Redhat
 az_image_sku: '7-LVM'
 az_image_version: latest
+az_application: "Python ML"
 
