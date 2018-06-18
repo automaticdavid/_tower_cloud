@@ -28,7 +28,7 @@
   vars:
     k:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
   set_fact:
-    j: "{{ j + '[ {{ k }} ]' }}"
+    j: "{{ j + ['{{ k }}'] }}"
   loop:  "{{ i }}"
 
 - debug:
