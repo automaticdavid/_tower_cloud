@@ -28,7 +28,7 @@
   # set_fact:
   #   j: "{{ j }} + ['{{ k }}'] "
   debug:
-    msg: k
+    msg: "{{ k }}"
   loop:  "{{ i }}"
 
 # - debug:
