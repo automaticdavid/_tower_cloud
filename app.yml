@@ -6,7 +6,6 @@
   become: yes
 
   vars:
-    state: "{{ state }}"
     app_action: "{{ app_action }}"
   
   tasks:

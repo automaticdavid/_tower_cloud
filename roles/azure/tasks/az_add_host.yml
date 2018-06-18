@@ -16,6 +16,9 @@
   set_fact:
     ips_to_add: "{{ ips_to_add }}"
 
+- debug:
+    var: ips_to_add
+
 - name: Add hosts
   add_host:
     name: "{{ item }}"
