@@ -19,7 +19,7 @@
 - name: Add hosts
   add_host:
     name: "{{ item }}"
-    groups: "{{ azure_scope }}"
+    groups: "{{ az_scope }}"
   with_items: "{{ ips_to_add }}" 
 
 - name: Wait for SSH to come up
