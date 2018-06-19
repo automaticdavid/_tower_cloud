@@ -7,34 +7,33 @@
   with_sequence: count="{{az_count}}" 
   register: nics
 
-- name: Get IPs to Add 
+# - name: Get IPs to Add 
+#   vars:
+#     ip_extract: "{{ nics | json_query('results[*].ansible_facts.azure_networkinterfaces[*].properties.ipConfigurations[*].properties.privateIPAddress') }}  "
+#   set_fact:  
+#     ips_to_add: "{{ lookup('flattened', ip_extract) }} "
+
+# - debug: 
+#     var: ips_to_add
+
+- set_fact:
+    networkinterfaces: []
+    ips_to_add: []
+
+- name: Extract azure_networkinterfaces
   vars:
-    ip_extract: "{{ nics | json_query('results[*].ansible_facts.azure_networkinterfaces[*].properties.ipConfigurations[*].properties.privateIPAddress') }}  "
-  set_fact:  
-    ips_to_add: "{{ lookup('flattened', ip_extract) }} | list "
+    iterator:  "{{ item.ansible_facts.azure_networkinterfaces }}"
+  set_fact:
+    networkinterfaces:  "{{ networkinterfaces + iterator  }}"
+  loop:  "{{ nics.results }}"
 
-- debug: 
-    var: ips_to_add
-
-# - set_fact:
-#     networkinterfaces: []
-#     ips_to_add: []
-
-# - name: Extract azure_networkinterfaces
-#   vars:
-#     iterator:  "{{ item.ansible_facts.azure_networkinterfaces }}"
-#   set_fact:
-#     networkinterfaces:  "{{ networkinterfaces + iterator  }}"
-#   loop:  "{{ nics.results }}"
-
-# - name:  Extract privateIPAddress
-#   vars:
-#     iterator:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
-#     iterator_list: [ '{{ iterator }}' ]
-#   set_fact:
-#     ips_to_add: "{{ ips_to_add +  iterator_list }}"
-#   loop:  "{{ networkinterfaces }}"
-
+- name:  Extract privateIPAddress
+  vars:
+    iterator:  "{{ item.properties.ipConfigurations.0.properties.privateIPAddress }}"
+    iterator_list: [ '{{ iterator }}' ]
+  set_fact:
+    ips_to_add: "{{ ips_to_add +  iterator_list }}"
+  loop:  "{{ networkinterfaces }}"
 
 - name: Add hosts
   add_host:
