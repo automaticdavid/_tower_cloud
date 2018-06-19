@@ -19,6 +19,10 @@
   with_items: "{{ gunicorn.stdout_lines.0 }}"
   ignore_errors: yes
 
+- name: Get remaining running gunicorn
+  shell: "ps -ef | grep -v grep | grep -w gunicorn | awk '{print $2}'"
+  register: gunicorn
+
 - name: Kill all running gunicorn
   shell: "kill {{ item }} 2>&1 > /dev/null"
   with_items: "{{ gunicorn.stdout_lines }}"
