@@ -21,10 +21,13 @@
     state: present
 
 - name: be sure firewalld is disabled
-  systemd: name=firewalld enabled=no
+  systemd: 
+    name: firewalld 
+    state: stopped
+    enabled: no
+    masked: yes
 
-- name: stop firewalld 
-  service: name=firewalld status=stopped enabled=no
+
 
 # - name: Insight Register
 #   command: redhat-access-insights --register
