@@ -9,7 +9,7 @@
 
 - set_fact:
     ip_extract: "{{ nics | json_query('results[*].ansible_facts.azure_networkinterfaces[*].properties.ipConfigurations[*].properties.privateIPAddress') }}  "
-    ips_to_add: "{{ lookup('flatten', ip_extract) }}"
+    ips_to_add: "{{ lookup('flattened', ip_extract) }}"
 
 - debug: 
     var: ips_to_add
