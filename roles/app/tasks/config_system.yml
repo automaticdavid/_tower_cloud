@@ -20,26 +20,9 @@
     name: [ python-pip, unzip, libXext, libSM, libXrender, firewalld ]
     state: present
 
+- name: be sure firewalld is disabled
+  systemd: name=firewalld enabled=no
+
 # - name: Insight Register
 #   command: redhat-access-insights --register
 
-# - name: Open firewall for http & ssh
-#   firewalld:
-#     service: "{{ item }}"
-#     permanent: true
-#     state: enabled
-#   with_items:
-#     - http
-#     - ssh
-
-- name: Open firewall for http 
-  firewalld:
-    port: 80/tcp
-    permanent: true
-    state: enabled
-
-- name: Open firewall for ssh
-  firewalld:
-    port: 22/tcp
-    permanent: true
-    state: enabled
