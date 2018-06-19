@@ -7,6 +7,9 @@
   with_sequence: count="{{az_count}}" 
   register: nics
 
+- debug: 
+    var: nics
+
 - set_fact:
     networkinterfaces: []
     ips_to_add: []
