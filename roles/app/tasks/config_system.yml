@@ -23,15 +23,19 @@
 - name: be sure firewalld is disabled
   systemd: name=firewalld enabled=no
 
+- name: stop firewalld 
+  service: name=firewalld status=stopped enabled=no
+
 # - name: Insight Register
 #   command: redhat-access-insights --register
 
-- name: Open firewall for http 
-  firewalld:
-    port: {{ item }}/tcp
-    permanent: true
-    state: enabled
-    immediate: true
-  with_items: 
-    - 22
-    - 80
+# - name: Open firewall for http 
+#   firewalld:
+#     port: {{ item }}/tcp
+#     permanent: true
+#     state: enabled
+#     immediate: true
+#   with_items: 
+#     - 22
+#     - 80
+
