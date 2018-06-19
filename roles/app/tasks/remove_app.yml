@@ -16,7 +16,7 @@
 - wait_for:
     path: "/proc/{{ item }}/status"
     state: absent
-  with_items: "{{ gunicorn.stdout_lines.0 }0"
+  with_items: "{{ gunicorn.stdout_lines.0 }}"
   ignore_errors: yes
 
 - name: Kill all running gunicorn
