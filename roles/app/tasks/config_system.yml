@@ -26,3 +26,12 @@
 # - name: Insight Register
 #   command: redhat-access-insights --register
 
+- name: Open firewall for http 
+  firewalld:
+    port: {{ item }}/tcp
+    permanent: true
+    state: enabled
+    immediate: true
+  with_items: 
+    - 22
+    - 80
