@@ -33,7 +33,6 @@
 #   loop:  "{{ networkinterfaces }}"
 
 
-
 - name: Add hosts
   add_host:
     name: "{{ item }}"
