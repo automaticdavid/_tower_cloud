@@ -20,7 +20,7 @@
     name: [ python-pip, unzip, libXext, libSM, libXrender, firewalld ]
     state: present
 
-- name: be sure firewalld is disabled
+- name: Configure firewalld 
   systemd: 
     name: firewalld 
     state: stopped
