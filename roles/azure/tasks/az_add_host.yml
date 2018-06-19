@@ -13,7 +13,7 @@
 
 - name: Get IPs to Add 
   vars:
-    ip_extract: "{{ nics | json_query('results[*].ansible_facts.azure_networkinterfaces[*].properties.ipConfigurations[*].privateIPAddress') }}  "
+    ips_to_add: "{{ nics | json_query('results[*].ansible_facts.azure_networkinterfaces[*].properties.ipConfigurations[*].privateIPAddress') }}  "
   set_fact:  
     # ips_to_add: "{{ lookup('flattened', ip_extract) }} "
     ips_to_add: "{{ ips_to_add }} "
