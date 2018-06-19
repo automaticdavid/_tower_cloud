@@ -6,8 +6,8 @@
     name: "{{ az_scope }}-{{ item }}"
     state: absent
     remove_on_absent: all
-  async: 5000
-  poll: 15
+  async: 1
+  poll: 0
   with_sequence: count="{{az_count}}" 
   ignore_errors: yes
 
