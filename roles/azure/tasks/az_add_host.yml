@@ -33,10 +33,7 @@
   with_items: "{{ ips_to_add }}" 
 
 - name: Wait for SSH to come up
-  wait_for:
-    host: "{{ item }}"
-    port: 22
-    delay: 15
+  wait_for_connection:
     timeout: 600
-    state: started
+    sleep: 15
   with_items: "{{ ips_to_add }}"
