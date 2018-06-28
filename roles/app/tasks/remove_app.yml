@@ -1,0 +1,47 @@
+
+
+- name: Get running gunicorn
+  shell: "ps -ef | grep -v grep | grep -w gunicorn | awk '{print $2}'"
+  register: gunicorn
+
+# Killing the first one is usually enough
+- name: Kill first unning gunicorn
+  shell: "kill {{ item }} 2>&1 > /dev/null"
+  with_items: "{{ gunicorn.stdout_lines.0 }}"
+  ignore_errors: yes
+
+- wait_for:
+    path: "/proc/{{ item }}/status"
+    state: absent
+  with_items: "{{ gunicorn.stdout_lines.0 }}"
+  ignore_errors: yes
+
+- name: Get remaining running gunicorn
+  shell: "ps -ef | grep -v grep | grep -w gunicorn | awk '{print $2}'"
+  register: gunicorn
+
+- name: Kill all running gunicorn
+  shell: "kill {{ item }} 2>&1 > /dev/null"
+  with_items: "{{ gunicorn.stdout_lines }}"
+  ignore_errors: yes
+
+- wait_for:
+    path: "/proc/{{ item }}/status"
+    state: absent
+  with_items: "{{ gunicorn.stdout_lines }}"
+  ignore_errors: yes
+  register: killed
+
+- name: Force kill stuck processes
+  shell: "kill -9 {{ item }}"
+  with_items: "{{ killed.results | select('failed') | map(attribute='item') | list }}"
+
+- name: Remove app directory 
+  file:
+    path: /app/
+    state: absent
+
+
+
+
+

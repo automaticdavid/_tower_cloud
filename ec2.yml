@@ -5,23 +5,19 @@
 
   tasks:
 
-  - block:
-      - name: ec2 delete
-        include_role: 
-          name: ec2
-          tasks_from: ec2_delete
-    tags:
-      - delete
-      - destroy
+    - name: ec2 delete
+      include_role: 
+        name: ec2
+        tasks_from: ec2_delete
+      when: 
+        - ec2_action == "delete" or ec2_action == "destroy"
 
-  - block:  
-      - name: ec2 create
-        include_role: 
-          name: ec2
-          tasks_from: ec2_create
-    tags: 
-      - deploy
-      - create    
 
+    - name: ec2 create
+      include_role: 
+        name: ec2
+        tasks_from: ec2_create
+      when: 
+        - ec2_action == "create" or ec2_action == "deploy"
 
 

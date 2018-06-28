@@ -1,0 +1,44 @@
+---
+
+- name: Verify subscription-manager is present
+  yum:
+    name: subscription-manager
+    state: present
+
+- name: Register system
+  redhat_subscription:
+    state: present
+    username: "{{ rhsm_username }}"
+    password: "{{ rhsm_password }}"
+
+- name: Add repository
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    
+- name: Install needed packages
+  yum:
+    name: [ python-pip, unzip, libXext, libSM, libXrender, firewalld ]
+    state: present
+
+- name: Configure firewalld 
+  systemd: 
+    name: firewalld 
+    state: stopped
+    enabled: no
+    masked: yes
+
+
+
+# - name: Insight Register
+#   command: redhat-access-insights --register
+
+# - name: Open firewall for http 
+#   firewalld:
+#     port: {{ item }}/tcp
+#     permanent: true
+#     state: enabled
+#     immediate: true
+#   with_items: 
+#     - 22
+#     - 80
+

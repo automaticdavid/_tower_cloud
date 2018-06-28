@@ -1,0 +1,43 @@
+---
+
+- name: Stack actions
+  hosts: localhost
+  tasks:
+    - debug:
+        msg: "Full Stack ML Stack Deploy"
+    # - include_role: 
+    #     name: common
+    #     tasks_from: init
+ 
+- name: Deploy ec2
+  vars: 
+    ec2_action: deploy
+  import_playbook: ec2.yml 
+
+- name: ec2 add host
+  hosts: localhost
+  tasks:
+  - include_role: 
+      name: ec2
+      tasks_from: ec2_add_host
+ 
+- name: Deploy app
+  import_playbook: app.yml
+
+
+- name: ec2 LB actions
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    app_action: "{{ app_action }}"
+
+  tasks:
+
+    - name: ec2 add to lb
+      include_role: 
+        name: ec2
+        tasks_from: ec2_elb_target
+      when:
+        app_action != 'update'
