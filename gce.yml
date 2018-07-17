@@ -1,11 +1,11 @@
 ---
-- name: gcp actions
+- name: gce actions
   hosts: localhost
   gather_facts: no 
 
   tasks:
 
-    - name: "gcp setup"
+    - name: "gce setup"
       include_role: 
         name: gce
         tasks_from: setup_env
