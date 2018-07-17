@@ -1,20 +1,14 @@
-- name: create gce instances  
-  hosts: localhost
-  connection: local
-  gather_facts: False
 
-  tasks:
-
-    - name: Provision a set of instances
-      gce:
-        base_name: "{{ scope }}"
-        num_instances: "{{ gce_count }}"
-        zone: "{{ gce_zone }}"
-        machine_type: "{{ gce_machine_type }}"
-        image: "{{ gce_image }}"
-        project_id: "{{ gce_project }}"
-        state: present
-        disk_size: 64
+- name: Provision a set of instances
+  gce:
+    base_name: "{{ scope }}"
+    num_instances: "{{ gce_count }}"
+    zone: "{{ gce_zone }}"
+    machine_type: "{{ gce_machine_type }}"
+    image: "{{ gce_image }}"
+    project_id: "{{ gce_project }}"
+    state: present
+    disk_size: 64
 
 
 
