@@ -6,6 +6,6 @@
     zone: "{{ gce_zone }}"
     machine_type: "{{ gce_machine_type }}"
     image: "{{ gce_image }}"
-    project_id: "{{ gce_project }}"
+    project_id: "{{ gce_project_id }}"
     state: present
     disk_size: 64
