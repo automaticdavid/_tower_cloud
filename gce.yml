@@ -14,7 +14,7 @@
 
     - name: "gce delete"
       include_role: 
-        name: azure
+        name: gce
         tasks_from: gce_delete
       when: 
         - gce_action == "delete" or gce_action == "destroy"
