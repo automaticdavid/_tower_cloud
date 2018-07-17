@@ -1,0 +1,27 @@
+---
+- name: gcp actions
+  hosts: localhost
+  gather_facts: no 
+
+  tasks:
+
+    - name: "gcp setup"
+      include_role: 
+        name: gce
+        tasks_from: setup_env
+      when: 
+        - gce_action == "setup" 
+
+    - name: "gce delete"
+      include_role: 
+        name: azure
+        tasks_from: gce_delete
+      when: 
+        - gce_action == "delete" or gce_action == "destroy"
+
+    - name: "gce create"
+      include_role: 
+        name: gce
+        tasks_from: gce_create
+      when: 
+        - gce_action == "create" or gce_action == "deploy"
