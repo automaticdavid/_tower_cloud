@@ -1,19 +1,19 @@
 ---
-- name: azure actions
+- name: gce actions
   hosts: localhost
   gather_facts: no
   tasks:
-  - name: "azure create"
+  - name: "gce create"
     include_role: 
-      name: azure
-      tasks_from: az_create
+      name: gce
+      tasks_from: gce_create
 
-- name: azure add host
+- name: gce add host
   hosts: localhost
   tasks:
   - include_role: 
-      name: azure
-      tasks_from: az_add_host
+      name: gce
+      tasks_from: gce_add_host
 
 - name: Deploy app
   import_playbook: app.yml
