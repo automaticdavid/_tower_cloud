@@ -1,4 +1,4 @@
-
+---
 - name: Provision a set of instances
   gce:
     base_name: "{{ scope }}"
@@ -9,6 +9,3 @@
     project_id: "{{ gce_project }}"
     state: present
     disk_size: 64
-
-
-
