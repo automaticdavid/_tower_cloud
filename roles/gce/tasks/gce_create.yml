@@ -9,8 +9,8 @@
     project_id: "{{ gce_project_id }}"
     state: started
     disk_size: 64
-  register: gce_instances 
+  register: gce
 
 
 - debug:
-    var: gce_instances.instance_data 
+    var: gce.instance_data 

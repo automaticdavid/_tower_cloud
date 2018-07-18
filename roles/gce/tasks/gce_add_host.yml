@@ -7,14 +7,14 @@
     zone: "{{ gce_zone }}"
     project_id: "{{ gce_project_id }}"
     state: present
-  register: gce_instances
+  register: gce
 
 - debug:
-    var: gce_instances.instance_data   
+    var: gce.instance_data   
 
 - name: Build a list of ips and hostnames
   vars:
-    ips_to_add: "{{ gce_instances.instance_data  | map(attribute='public_ip') | list }}"
+    ips_to_add: "{{ gce.instance_data  | map(attribute='public_ip') | list }}"
   set_fact:
     ips_to_add: "{{ ips_to_add }}"
 
