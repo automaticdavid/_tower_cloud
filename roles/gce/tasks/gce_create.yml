@@ -13,4 +13,4 @@
 
 
 - debug:
-    var: "{{ gce_instances.instance_data  }}" 
+    var: gce_instances.instance_data 
