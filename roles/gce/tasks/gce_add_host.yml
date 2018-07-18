@@ -16,4 +16,4 @@
     ips_to_add: "{{ ips_to_add }}"
 
 - debug:
-    var: ips_to_add
+    var: "{{ ips_to_add }}"
