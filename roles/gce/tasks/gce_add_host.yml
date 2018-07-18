@@ -10,7 +10,7 @@
   register: gce_instances
 
 - debug:
-    vars: "{{ gce_instances }}" 
+    var: "{{ gce_instances }}" 
 
 - name: Build a list of ips and hostnames
   vars:
