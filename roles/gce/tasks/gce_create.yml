@@ -7,9 +7,5 @@
     machine_type: "{{ gce_machine_type }}"
     image: "{{ gce_image }}"
     project_id: "{{ gce_project_id }}"
-    state: present
+    state: started
     disk_size: 64
-  register: gce_instances
-
-- debug:
-    var: gce_instances
