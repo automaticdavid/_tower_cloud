@@ -11,6 +11,5 @@
     disk_size: 64
   register: gce
 
-
 - debug:
     var: gce.instance_data 
