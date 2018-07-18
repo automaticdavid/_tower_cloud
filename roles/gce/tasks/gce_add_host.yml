@@ -9,6 +9,9 @@
     state: present
   register: gce_instances
 
+- debug:
+    vars: "{{ gce_instances }}" 
+
 - name: Build a list of ips and hostnames
   vars:
     ips_to_add: "{{ gce_instances | map(attribute='public_ip') | list }}"
