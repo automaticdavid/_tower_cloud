@@ -13,3 +13,7 @@
 
 - debug:
     var: gce.instance_data 
+
+
+- debug:
+    var: gce
