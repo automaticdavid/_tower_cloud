@@ -10,7 +10,7 @@
   become: no
 
 - debug: 
-  vars: "{{ gce_json_file }}" 
+    var: "{{ gce_json_file }}" 
 
 - name: create json file from credential
   copy: 
