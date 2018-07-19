@@ -14,7 +14,7 @@
 
 - name: create json file from credential
   copy: 
-    content: "{{ gce_json_file }}" 
+    content: gce_json_file 
     dest: "{{ r_tempfile }}" 
 
 - name: Provision a set of instances
