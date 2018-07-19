@@ -1,4 +1,19 @@
 ---
+
+- name: create temporary file for json
+  tempfile:
+    state: file
+    suffix: gce
+  register: r_tempfile
+  delegate_to: localhost
+  run_once: yes
+  become: no
+
+- name: create json file from credential
+  copy: 
+    content: "{{ gce_json_file }}" 
+    dest: "{{ r_tempfile }}" 
+
 - name: Provision a set of instances
   gce:
     base_name: "{{ scope }}"
@@ -7,6 +22,8 @@
     machine_type: "{{ gce_machine_type }}"
     image: "{{ gce_image }}"
     project_id: "{{ gce_project_id }}"
+    service_account_email: "{{ gce_ssh_user }}" 
+    credentials_file: "{{ r_tempfile }}" 
     state: started
     disk_size: 64
   register: gce
