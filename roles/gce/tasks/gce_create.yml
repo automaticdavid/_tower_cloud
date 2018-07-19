@@ -12,6 +12,9 @@
 - debug: 
     var: "{{ gce_json_file }}" 
 
+- debug: 
+    var: "{{ gce_ssh_username }}" 
+
 - name: create json file from credential
   copy: 
     content: gce_json_file 
