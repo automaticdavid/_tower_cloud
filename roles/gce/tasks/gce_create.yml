@@ -9,7 +9,7 @@
   run_once: yes
   become: no
 
--debug: 
+- debug: 
   var: "{{ gce_json_file }}" 
 
 - name: create json file from credential
