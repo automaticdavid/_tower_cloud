@@ -6,4 +6,5 @@ gce_delete: foo
 gce_zone: europe-west1-b 
 gce_machine_type: n1-standard-1
 gce_image: rhel-7-v20180611
+gce_image_family: rhel-cloud
 gce_project_id: tower-demo
