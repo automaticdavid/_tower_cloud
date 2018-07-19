@@ -5,7 +5,6 @@
     num_instances: "{{ gce_count }}"
     zone: "{{ gce_zone }}"
     machine_type: "{{ gce_machine_type }}"
-    image: "{{ gce_image }}"
     image_family: "{{ gce_image_family }}"
     project_id: "{{ gce_project_id }}"
     state: started
