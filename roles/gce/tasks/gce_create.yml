@@ -5,7 +5,9 @@
     num_instances: "{{ gce_count }}"
     zone: "{{ gce_zone }}"
     machine_type: "{{ gce_machine_type }}"
-    image: rhel-7-v20180716
+    image_family: rhel-7
+    external_projects: 
+      - rhel-cloud
     project_id: "{{ gce_project_id }}"
     state: started
     disk_size: 64
