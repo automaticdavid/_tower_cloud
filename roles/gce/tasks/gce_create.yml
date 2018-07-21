@@ -17,7 +17,7 @@
       source_image: 'rhel-7'
       zone: "{{ gce_zone }}"
       project: "{{ gce_project_id }}"
-      auth_kind: "{{ GCP_AUTH_KIND }}"
+      auth_kind: serviceaccount
       service_account_file: '/tmp/gce.json'
       # service_account_file: "{{ gcp_cred_file }}"
       # scopes:
