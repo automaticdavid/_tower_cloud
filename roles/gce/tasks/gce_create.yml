@@ -20,7 +20,7 @@
   become: no
 
 - copy:
-    content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
+    content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) | trim }}" 
     dest: "{{ gcp_cred_file.path }}"
 
 - debug:
