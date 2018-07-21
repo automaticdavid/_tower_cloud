@@ -20,11 +20,13 @@
   become: no
 
 - template:
-    src: ./files/gce.json.j2
+    content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
     dest: "{{ gcp_cred_file.path }}"
 
 - debug:
     msg: "the value of foo.txt is {{ lookup('file', gcp_cred_file.path) | trim }}"
+
+    
 
 - name: create a disk
   gcp_compute_disk:
