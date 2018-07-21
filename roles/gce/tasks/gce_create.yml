@@ -21,7 +21,7 @@
 
 - template:
     src: ./files/gce.json.j2
-    dest: "{{ r_tempfile }}"
+    dest: "{{gcp_cred_file }}"
 
 - name: create a disk
   gcp_compute_disk:
