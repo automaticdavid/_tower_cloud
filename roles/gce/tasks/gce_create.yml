@@ -18,7 +18,7 @@
       zone: "{{ gce_zone }}"
       project: "{{ gce_project_id }}"
       auth_kind: "{{ GCP_AUTH_KIND }}"
-      service_account_file: "{{ GCP_SERVICE_ACCOUNT_FILE }}"
+      service_account_file: '/tmp/gce.json'
       # service_account_file: "{{ gcp_cred_file }}"
       # scopes:
       #   - https://www.googleapis.com/auth/compute
