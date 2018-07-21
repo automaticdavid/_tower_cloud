@@ -1,0 +1,7 @@
+extra_vars:
+  gce_project_id: "{{ gce_project_id }}"
+  gce_private_key_id: "{{ gce_private_key_id }}" 
+  gce_private_key: "{{ gce_private_key }}"
+  gce_client_email: "{{ gce_client_email }}"
+  gce_client_id: "{{ gce_client_id }}"
+  gce_client_x509_cert_url: "{{ gce_client_x509_cert_url }}"

@@ -1,0 +1,34 @@
+fields:
+  - secret: false
+    type: string
+    id: gce_project_id
+    label: project_id
+  - secret: true
+    type: string
+    id: gce_private_key_id
+    label: private_key_id
+  - format: ssh_private_key
+    label: private_key
+    secret: true
+    multiline: true
+    type: string
+    id: gce_private_key
+  - secret: false
+    type: string
+    id: gce_client_email
+    label: client_email
+  - secret: false
+    type: string
+    id: gce_client_id
+    label: client_id
+  - secret: false
+    type: string
+    id: gce_client_x509_cert_url
+    label: client_x509_cert_url
+required:
+  - gce_project_id
+  - gce_private_key_id
+  - gce_private_key
+  - gce_client_email
+  - gce_client_id
+  - gce_client_x509_cert_url
