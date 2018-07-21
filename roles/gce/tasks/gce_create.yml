@@ -21,10 +21,10 @@
 
 - template:
     src: ./files/gce.json.j2
-    dest: "{{ gcp_cred_file.path }}"
+    dest: gcp_cred_file.path
 
 - debug:
-    var: "{{ gcp_cred_file.path }}"
+    var: gcp_cred_file.path 
 
 - name: create a disk
   gcp_compute_disk:
