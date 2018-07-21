@@ -19,7 +19,7 @@
   run_once: yes
   become: no
 
-- template:
+- copy:
     content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
     dest: "{{ gcp_cred_file.path }}"
 
