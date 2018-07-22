@@ -19,14 +19,16 @@
   run_once: yes
   become: no
 
-- copy:
-    content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
+# - copy:
+#     content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
+#     dest: "{{ gcp_cred_file.path }}"
+
+- template: 
+    source: "./files/gce.json.j2"
     dest: "{{ gcp_cred_file.path }}"
 
 - debug:
     var: "{{ lookup('file', gcp_cred_file.path) }}"
-
-    
 
 - name: create a disk
   gcp_compute_disk:
