@@ -24,7 +24,7 @@
 #     dest: "{{ gcp_cred_file.path }}"
 
 - template: 
-    source: "./files/gce.json.j2"
+    src: "./files/gce.json.j2"
     dest: "{{ gcp_cred_file.path }}"
 
 - debug:
