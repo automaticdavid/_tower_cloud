@@ -24,7 +24,7 @@
     dest: "{{ gcp_cred_file.path }}"
 
 - debug:
-    var: "json content: {{ lookup('file', gcp_cred_file.path) }}"
+    var: "{{ lookup('file', gcp_cred_file.path) }}"
 
     
 
