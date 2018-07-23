@@ -28,7 +28,7 @@
     dest: "{{ gcp_cred_file.path }}"
 
 - debug:
-    var: "{{ lookup('file', gcp_cred_file.path) }}"
+    msg: "{{ lookup('file', gcp_cred_file.path) }}"
 
 - name: create a disk
   gcp_compute_disk:
