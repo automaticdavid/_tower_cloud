@@ -1,14 +1,4 @@
 ---
-# - name: Provision a set of instances
-#   gce:
-#     base_name: "{{ scope }}"
-#     num_instances: "{{ gce_count }}"
-#     zone: "{{ gce_zone }}"
-#     machine_type: "{{ gce_machine_type }}"
-#     image: https://www.googleapis.com/compute/v1/projects/rhel-cloud/global/images/rhel-7-v20180716
-#     project_id: "{{ gce_project_id }}"
-#     state: started
-#     disk_size: 64
 
 - name: create temporary file for the gcp json 
   tempfile:
@@ -23,14 +13,13 @@
     content: "{{ lookup('template', './files/gce.json.j2') }}" 
     dest: "{{ gcp_cred_file.path }}"
 
-
 # - name: Debug
 #   debug:
 #     msg: "{{ lookup('file',  gcp_cred_file.path)  }}" 
 
-- name: create a disk
+- name: create disks
   gcp_compute_disk:
-      name: 'disk-instance'
+      name: "{{ gce_scope }}-disk-{{ item }}"
       size_gb: 50
       source_image: 'https://www.googleapis.com/compute/v1/projects/rhel-cloud/global/images/rhel-7-v20180716'
       zone: "{{ gce_zone }}"
@@ -40,11 +29,11 @@
       scopes:
         - https://www.googleapis.com/auth/compute
       state: present
-  register: disk
+  with_sequence: count="{{gce_count}}" 
 
 - name: create a network
   gcp_compute_network:
-      name: 'network-instance'
+      name: "{{ gce_scope }}-network"
       project: "{{ gce_project_id }}"
       auth_kind: serviceaccount
       service_account_file: "{{ gcp_cred_file.path }}"
@@ -53,9 +42,9 @@
       state: present
   register: network
 
-- name: create an address
+- name: create private ips
   gcp_compute_address:
-      name: 'address-instance'
+      name: "{{ gce_scope }}-privateip-{{ item }}"
       region: "{{ gce_region }}"
       project: "{{ gce_project_id }}"
       auth_kind: serviceaccount
@@ -63,20 +52,29 @@
       scopes:
         - https://www.googleapis.com/auth/compute
       state: present
-  register: address
+  with_sequence: count="{{gce_count}}" 
+
+- name: create public ips
+  gce_eip:
+    project_id: "{{ project_id }}"
+    name: "{{ gce_scope }}-publicip-{{ item }}"
+    region: "{{ gce_region }}"
+    state: present
+  with_sequence: count="{{gce_count}}" 
 
 - name: create a instance
   gcp_compute_instance:
-      name: testobject
+      name: "{{ gce_scope }}-{{ item }}"
       machine_type: n1-standard-1
       disks:
         - auto_delete: true
           boot: true
-          source: "{{ disk }}"
+          source: "{{ gce_scope }}-disk-{{ item }}"
       metadata:
         unit: "{{ gce_scope }}"
       network_interfaces:
-          - network: "{{ network }}"
+          - network_ip: "{{ gce_scope }}-publicip-{{ item }}"
+          # - network: "{{ network }}"
             # access_configs:
             #   - name: 'External NAT'
             #     nat_ip: "{{ address }}"
@@ -88,5 +86,6 @@
       scopes:
         - https://www.googleapis.com/auth/compute
       state: present
+      with_sequence: count="{{gce_count}}" 
 
 
