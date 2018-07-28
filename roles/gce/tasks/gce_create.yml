@@ -23,6 +23,11 @@
     content: "{{ lookup('template', './files/gce.json.j2') }}" 
     dest: "{{ gcp_cred_file.path }}"
 
+- lineinfile:
+    path: "{{ gcp_cred_file.path }}"
+    insertbefore: '}'
+    line: "'private_key': {{  lookup('ENV', 'gce_private_key') }}"
+
 # # - template: 
 # #     src: "./files/gce.json.j2"
 # #     dest: "{{ gcp_cred_file.path }}"
