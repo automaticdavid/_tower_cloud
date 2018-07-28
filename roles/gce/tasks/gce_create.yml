@@ -10,27 +10,27 @@
 #     state: started
 #     disk_size: 64
 
-# - name: create temporary file for the gce json 
-#   tempfile:
-#     state: file
-#     suffix: gce
-#   register: gcp_cred_file
-#   delegate_to: localhost
-#   run_once: yes
-#   become: no
+- name: create temporary file for the gce json 
+  tempfile:
+    state: file
+    suffix: gce
+  register: gcp_cred_file
+  delegate_to: localhost
+  run_once: yes
+  become: no
 
-# - copy:
-#     content: "{{ lookup('template', './files/gce.json.j2') }}" 
-#     dest: "{{ gcp_cred_file.path }}"
+- copy:
+    content: "{{ lookup('template', './files/gce.json.j2') }}" 
+    dest: "{{ gcp_cred_file.path }}"
 
 # # - template: 
 # #     src: "./files/gce.json.j2"
 # #     dest: "{{ gcp_cred_file.path }}"
 # #   delegate_to: localhost
 
-# - name: Debug
-#   debug:
-#     msg: "{{ lookup('template', './files/gce.json.j2') }}" 
+- name: Debug
+  debug:
+    msg: "{{ lookup('template', './files/gce.json.j2') }}" 
 
 - name: create a disk
   gcp_compute_disk:
@@ -40,7 +40,7 @@
       zone: "{{ gce_zone }}"
       project: "{{ gce_project_id }}"
       auth_kind: serviceaccount
-      service_account_file: "{{ lookup('env', 'GCE_PEM_FILE_PATH') }}"
+      service_account_file: "{{ gcp_cred_file.path }}"
       # scopes:
       #   - https://www.googleapis.com/auth/compute
       state: present
