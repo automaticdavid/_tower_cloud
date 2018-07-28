@@ -67,7 +67,7 @@
 
 - name: create a instance
   gcp_compute_instance:
-      name: testObject
+      name: testobject
       machine_type: n1-standard-1
       disks:
         - auto_delete: true
