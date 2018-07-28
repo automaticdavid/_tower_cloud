@@ -30,6 +30,10 @@
         - https://www.googleapis.com/auth/compute
       state: present
   with_sequence: count="{{gce_count}}" 
+  register: d
+
+- debug:
+    var: d
 
 - name: create a network
   gcp_compute_network:
