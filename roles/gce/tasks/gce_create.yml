@@ -38,7 +38,7 @@
       zone: "{{ gce_zone }}"
       project: "{{ gce_project_id }}"
       auth_kind: machineaccount
-      service_account_file: "{{ lookup('env', 'GCE_PEM_FILE_PATH') }}"
+      # service_account_file: "{{ lookup('env', 'GCE_PEM_FILE_PATH') }}"
       # scopes:
       #   - https://www.googleapis.com/auth/compute
       state: present
