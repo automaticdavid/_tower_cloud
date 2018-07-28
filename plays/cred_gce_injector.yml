@@ -1,4 +1,4 @@
-extra_vars:
+env:
   gce_project_id: "{{ gce_project_id }}"
   gce_private_key_id: "{{ gce_private_key_id }}" 
   gce_private_key: "{{ gce_private_key }}"
