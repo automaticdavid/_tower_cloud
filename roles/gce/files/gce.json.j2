@@ -2,7 +2,7 @@
     "type": "service_account",
     "project_id": "{{ lookup('ENV', 'gce_project_id') }}",
     "private_key_id": "{{ lookup('ENV', 'gce_private_key_id') }}",
-    "private_key": "{{ lookup('ENV', 'gce_private_key') | regex_escape() }}",
+    "private_key": "{{ lookup('ENV', 'gce_private_key') | quote}}",
     "client_email": "{{ lookup('ENV', 'gce_client_email') }}",
     "client_id": "{{ lookup('ENV', 'gce_client_id') }}",
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
