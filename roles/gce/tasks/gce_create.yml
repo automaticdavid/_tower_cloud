@@ -20,7 +20,7 @@
   become: no
 
 - copy:
-    content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
+    content: "{{ lookup('template', './files/gce.json.j2') }}" 
     dest: "{{ gcp_cred_file.path }}"
 
 # - template: 
@@ -29,11 +29,8 @@
 #   delegate_to: localhost
 
 - name: Debug
-  vars: 
-    f: "{{ lookup('file', gcp_cred_file.path) }}"
-    ff: "{{ f | to_json  }}"
   debug:
-    var: ff
+    msg: "{{ lookup('template', './files/gce.json.j2') }}" 
 
 - name: create a disk
   gcp_compute_disk:
