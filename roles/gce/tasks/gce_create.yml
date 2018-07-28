@@ -73,9 +73,8 @@
         - auto_delete: true
           boot: true
           source: "{{ disk }}"
-      # metadata:
-      #   startup-script-url: 'gs:://graphite-playground/bootstrap.sh'
-      #   cost-center: '12345'
+      metadata:
+        unit: "{{ gce_scope }}"
       network_interfaces:
           - network: "{{ network }}"
             # access_configs:
