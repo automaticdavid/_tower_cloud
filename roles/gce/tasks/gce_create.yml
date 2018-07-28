@@ -37,8 +37,8 @@
       source_image: 'rhel-7'
       zone: "{{ gce_zone }}"
       project: "{{ gce_project_id }}"
-      auth_kind: application
-      # service_account_file: "{{ gcp_cred_file.path }}"
+      auth_kind: serviceaccount
+      service_account_file: "{{ GCE_PEM_FILE_PATH }}"
       # scopes:
       #   - https://www.googleapis.com/auth/compute
       state: present
