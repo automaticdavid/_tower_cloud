@@ -19,13 +19,14 @@
   run_once: yes
   become: no
 
-- copy:
-    content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
-    dest: "{{ gcp_cred_file.path }}"
+# - copy:
+#     content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
+#     dest: "{{ gcp_cred_file.path }}"
 
 - template: 
     src: "./files/gce.json.j2"
     dest: "{{ gcp_cred_file.path }}"
+  delegate_to: localhost
 
 - debug:
     var: "{{ lookup('file', gcp_cred_file.path) }}"
