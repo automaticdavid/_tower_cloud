@@ -2,10 +2,11 @@
     "type": "service_account",
     "project_id": "{{ lookup('ENV', 'gce_project_id') }}",
     "private_key_id": "{{ lookup('ENV', 'gce_private_key_id') }}",
+    "private_key": "{{ lookup('ENV', 'gce_private_key') | safe }}",
     "client_email": "{{ lookup('ENV', 'gce_client_email') }}",
     "client_id": "{{ lookup('ENV', 'gce_client_id') }}",
     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
     "token_uri": "https://accounts.google.com/o/oauth2/token",
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "{{ lookup('ENV', 'gce_client_x509_cert_url') }}",
+    "client_x509_cert_url": "{{ lookup('ENV', 'gce_client_x509_cert_url') }}"
 }
