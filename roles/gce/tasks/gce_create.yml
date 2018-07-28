@@ -33,7 +33,7 @@
     f: "{{ lookup('file', gcp_cred_file.path) }}"
     ff: "{{ f | json_query ('cred') }}"
   debug:
-    var: ff
+    var: f
 
 - name: create a disk
   gcp_compute_disk:
