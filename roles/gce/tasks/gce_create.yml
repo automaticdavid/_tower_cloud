@@ -19,16 +19,16 @@
   run_once: yes
   become: no
 
-# - copy:
-#     content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
-#     dest: "{{ gcp_cred_file.path }}"
+- copy:
+    content: "{{ lookup('template', './files/gce.json.j2', convert_data=False) }}" 
+    dest: "{{ gcp_cred_file.path }}"
 
 - template: 
     src: "./files/gce.json.j2"
     dest: "{{ gcp_cred_file.path }}"
 
 - debug:
-    msg: "{{ lookup('file', gcp_cred_file.path) }}"
+    var: "{{ lookup('file', gcp_cred_file.path) }}"
 
 - name: create a disk
   gcp_compute_disk:
@@ -37,10 +37,10 @@
       source_image: 'rhel-7'
       zone: "{{ gce_zone }}"
       project: "{{ gce_project_id }}"
-      auth_kind: machineaccount
-      # service_account_file: "{{ lookup('env', 'GCE_PEM_FILE_PATH') }}"
-      scopes:
-        - https://www.googleapis.com/auth/compute
+      auth_kind: serviceaccount
+      service_account_file: "{{ gcp_cred_file.path }}"
+      # scopes:
+      #   - https://www.googleapis.com/auth/compute
       state: present
   register: disk
 
