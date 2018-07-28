@@ -37,7 +37,7 @@
 
 - name: Debug
   debug:
-    msg: "{{ lookup('file',  gcp_cred_file.path  }}" 
+    msg: "{{ lookup('file',  gcp_cred_file.path)  }}" 
 
 - name: create a disk
   gcp_compute_disk:
