@@ -10,7 +10,7 @@
 #     state: started
 #     disk_size: 64
 
-- name: create temporary file for the gce json 
+- name: create temporary file for the gcp json 
   tempfile:
     state: file
     suffix: gce
@@ -23,21 +23,10 @@
     content: "{{ lookup('template', './files/gce.json.j2') }}" 
     dest: "{{ gcp_cred_file.path }}"
 
-# - lineinfile:
-#     path: "{{ gcp_cred_file.path }}"
-#     insertbefore: '}'
-#     line: "'private_key': '{{  lookup('ENV', 'gce_private_key') | safe }}'"
-#     state: present
 
-
-# # - template: 
-# #     src: "./files/gce.json.j2"
-# #     dest: "{{ gcp_cred_file.path }}"
-# #   delegate_to: localhost
-
-- name: Debug
-  debug:
-    msg: "{{ lookup('file',  gcp_cred_file.path)  }}" 
+# - name: Debug
+#   debug:
+#     msg: "{{ lookup('file',  gcp_cred_file.path)  }}" 
 
 - name: create a disk
   gcp_compute_disk:
@@ -53,51 +42,52 @@
       state: present
   register: disk
 
-# - name: create a network
-#   gcp_compute_network:
-#       name: 'network-instance'
-#       project: "{{ gce_project_id }}"
-#       # auth_kind: "{{ gcp_cred_kind }}"
-#       # service_account_file: "{{ gcp_cred_file }}"
-#       # scopes:
-#       #   - https://www.googleapis.com/auth/compute
-#       state: present
-#   register: network
+- name: create a network
+  gcp_compute_network:
+      name: 'network-instance'
+      project: "{{ gce_project_id }}"
+      auth_kind: serviceaccount
+      service_account_file: "{{ gcp_cred_file.path }}"
+      scopes:
+        - https://www.googleapis.com/auth/compute
+      state: present
+  register: network
 
-# - name: create a address
-#   gcp_compute_address:
-#       name: 'address-instance'
-#       zone: "{{ gce_zone }}"
-#       project: "{{ gce_project_id }}"
-#       # auth_kind: "{{ gcp_cred_kind }}"
-#       # service_account_file: "{{ gcp_cred_file }}"
-#       # scopes:
-#       #   - https://www.googleapis.com/auth/compute
-#       state: present
-#   register: address
+- name: create a address
+  gcp_compute_address:
+      name: 'address-instance'
+      zone: "{{ gce_zone }}"
+      project: "{{ gce_project_id }}"
+      auth_kind: serviceaccount
+      service_account_file: "{{ gcp_cred_file.path }}"
+      scopes:
+        - https://www.googleapis.com/auth/compute
+      state: present
+  register: address
 
-# - name: create a instance
-#   gcp_compute_instance:
-#       name: testObject
-#       machine_type: n1-standard-1
-#       disks:
-#         - auto_delete: true
-#           boot: true
-#           source: "{{ disk }}"
-#       # metadata:
-#       #   startup-script-url: 'gs:://graphite-playground/bootstrap.sh'
-#       #   cost-center: '12345'
-#       network_interfaces:
-#           - network: "{{ network }}"
-#             access_configs:
-#               - name: 'External NAT'
-#                 nat_ip: "{{ address }}"
-#                 type: 'ONE_TO_ONE_NAT'
-           
-#       zone: "{{ gce_zone }}"
-#       project: "{{ gce_project_id }}"
-#       # auth_kind: service_account
-#       # service_account_file: /tmp/auth.pem
-#       # scopes:
-#       #   - https://www.googleapis.com/auth/compute
-#       state: present
+- name: create a instance
+  gcp_compute_instance:
+      name: testObject
+      machine_type: n1-standard-1
+      disks:
+        - auto_delete: true
+          boot: true
+          source: "{{ disk }}"
+      # metadata:
+      #   startup-script-url: 'gs:://graphite-playground/bootstrap.sh'
+      #   cost-center: '12345'
+      network_interfaces:
+          - network: "{{ network }}"
+            # access_configs:
+            #   - name: 'External NAT'
+            #     nat_ip: "{{ address }}"
+            #     type: 'ONE_TO_ONE_NAT'
+      zone: "{{ gce_zone }}"
+      project: "{{ gce_project_id }}"
+      auth_kind: serviceaccount
+      service_account_file: "{{ gcp_cred_file.path }}"
+      scopes:
+        - https://www.googleapis.com/auth/compute
+      state: present
+
+
