@@ -56,7 +56,7 @@
 
 - name: create public ips
   gce_eip:
-    project_id: "{{ project_id }}"
+    project_id: "{{ gce_project_id }}"
     name: "{{ gce_scope }}-publicip-{{ item }}"
     region: "{{ gce_region }}"
     state: present
