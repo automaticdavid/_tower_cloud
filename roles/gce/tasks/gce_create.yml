@@ -26,9 +26,9 @@
 - lineinfile:
     path: "{{ gcp_cred_file.path }}"
     insertbefore: '}'
-    line: "'private_key': {{  lookup('ENV', 'gce_private_key') }}"
+    line: "'private_key': '{{  lookup('ENV', 'gce_private_key') }}'"
     state: present
-    
+
 
 # # - template: 
 # #     src: "./files/gce.json.j2"
@@ -37,7 +37,7 @@
 
 - name: Debug
   debug:
-    msg: "{{ lookup('template', './files/gce.json.j2') }}" 
+    msg: "{{ lookup('file',  gcp_cred_file.path  }}" 
 
 - name: create a disk
   gcp_compute_disk:
