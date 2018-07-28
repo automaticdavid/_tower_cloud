@@ -28,8 +28,12 @@
 #     dest: "{{ gcp_cred_file.path }}"
 #   delegate_to: localhost
 
-- debug:
-    var: "{{ lookup('file', gcp_cred_file.path) | json_query ('cred')}}"
+- name: Debug
+    vars: 
+      f: "{{ lookup('file', gcp_cred_file.path) }}"
+      ff: "{{ f | json_query ('cred') }}"
+    debug:
+      var: ff
 
 - name: create a disk
   gcp_compute_disk:
