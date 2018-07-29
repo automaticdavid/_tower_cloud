@@ -101,10 +101,8 @@
     state: present
 
 - name: Add instances to IG
-  environment:
-    GOOGLE_APPLICATION_CREDENTIALS: "{{ gcp_cred_file.path }}"
   uri:
-    url: "https://www.googleapis.com/compute/v1/projects/{{ gce_project_id }}/zones/{{ gce_zone }}/instanceGroups/{{ gce_scope }}-ig/addInstances"
+    url: "https://www.googleapis.com/compute/v1/projects/{{ gce_project_id }}/zones/{{ gce_zone }}/instanceGroups/{{ gce_scope }}-ig/addInstances?key={{ gce_api_key }}"
     method: POST
     body: "{{ lookup('template', './files/ig.json.j2') }}" 
     body_format: json
