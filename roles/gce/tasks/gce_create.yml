@@ -56,8 +56,8 @@
   register: gcp_ips
   with_sequence: count="{{gce_count}}" 
 
-- debug:
-    var: gcp_ips
+# - debug:
+#     var: gcp_ips
 
 # - name: create public ips
 #   gce_eip:
@@ -79,11 +79,10 @@
     metadata:
       unit: "{{ gce_scope }}"
     network_interfaces:
-        - network_ip: "{{ item.2.address }}"
         - network: "{{ network }}"
           access_configs:
             - name: 'External NAT'
-              nat_ip: "{{ address }}"
+              nat_ip: "{{  item.2.address  }}"
               type: 'ONE_TO_ONE_NAT'
     zone: "{{ gce_zone }}"
     project: "{{ gce_project_id }}"
