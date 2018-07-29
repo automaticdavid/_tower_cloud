@@ -102,7 +102,7 @@
 
 - name: Add instances to IG
   shell: |
-    gcloud config set account "{{ gcp_account }}"
+    gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
     gcloud compute instance-groups unmanaged add-instances "{{ gce_scope }}-ig" --instances="{{ gce_scope }}" --project "{{ gce_project_id }}" --zone "{{ gce_zone }}"
   delegate_to: localhost
 
