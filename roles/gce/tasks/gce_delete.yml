@@ -2,7 +2,7 @@
 
 - include_role: 
     name: common
-    tasks_from: init
+    tasks_from: gce_env
 
 - name: Remove instances
   gce:
