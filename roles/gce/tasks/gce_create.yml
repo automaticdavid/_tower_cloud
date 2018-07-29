@@ -101,11 +101,12 @@
     state: present
 
 - name: Add instances to IG
-  uri:
-    url: "https://www.googleapis.com/compute/v1/projects/{{ gce_project_id }}/zones/{{ gce_zone }}/instanceGroups/{{ gce_scope }}-ig/addInstances?key={{ gce_api_key }}"
-    method: POST
-    body: "{{ lookup('template', './files/ig.json.j2') }}" 
-    body_format: json
+  shell: |
+    gcloud compute instance-groups unmanaged add-instances "{{ gce_scope }}-ig" 
+      --instances "{{ gce_scope }}-ig" 
+      --project "{{ gce_project_id }}" 
+      --zone "{{ gce_zone }}"
+  delegate_to: localhost
 
 
 
