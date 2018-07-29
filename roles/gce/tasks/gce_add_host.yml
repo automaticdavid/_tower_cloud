@@ -2,8 +2,7 @@
 
 - name: Get facts for a set of instances
   gce:
-    base_name: "{{ scope }}"
-    num_instances: "{{ gce_count }}"
+    name: "{{ scope }}"
     zone: "{{ gce_zone }}"
     project_id: "{{ gce_project_id }}"
     state: present

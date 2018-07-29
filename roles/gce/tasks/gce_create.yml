@@ -28,7 +28,7 @@
       state: present
   register: network
 
-- name: create disks
+- name: create disk
   gcp_compute_disk:
       name: "{{ gce_scope }}-disk"
       size_gb: 50
@@ -42,7 +42,7 @@
       state: present
   register: gcp_disk
 
-- name: reserve addresses
+- name: reserve addresse
   gcp_compute_address:
     name: "{{ gce_scope }}-privateip"
     region: "{{ gce_region }}"
