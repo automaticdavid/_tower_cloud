@@ -92,7 +92,7 @@
       - https://www.googleapis.com/auth/compute
     state: present
   with_together: 
-    - range(0, "{{ gce_count }}")
+    - "{{ range(0, gce_count) | list }}"
     - "{{ gcp_disks.results }}"
     - "{{ gcp_public_ips.results }}"
 
