@@ -30,10 +30,7 @@
         - https://www.googleapis.com/auth/compute
       state: present
   with_sequence: count="{{gce_count}}" 
-  register: d
-
-- debug:
-    var: d
+  register: gcp_disks
 
 - name: create a network
   gcp_compute_network:
@@ -73,7 +70,7 @@
     disks:
       - auto_delete: true
         boot: true
-        source: "{{ gce_scope }}-disk-{{ item }}"
+        source: "gcp_disks[ {{ item }} ]"
     metadata:
       unit: "{{ gce_scope }}"
     network_interfaces:
