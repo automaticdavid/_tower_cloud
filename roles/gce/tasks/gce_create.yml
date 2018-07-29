@@ -1,21 +1,8 @@
 ---
 
-- name: create temporary file for the gcp json 
-  tempfile:
-    state: file
-    suffix: gce
-  register: gcp_cred_file
-  delegate_to: localhost
-  run_once: yes
-  become: no
-
-- copy:
-    content: "{{ lookup('template', './files/gce.json.j2') }}" 
-    dest: "{{ gcp_cred_file.path }}"
-
-# - name: Debug
-#   debug:
-#     msg: "{{ lookup('file',  gcp_cred_file.path)  }}" 
+- include_role: 
+    name: common
+    tasks_from: gce_env
 
 - name: create a network
   gcp_compute_network:
@@ -33,7 +20,7 @@
     name: "{{ gce_scope }}-network"
     fwname: "{{ gce_scope }}-ssh"
     allowed: tcp:22
-    state: "present"
+    state: present
     src_range: ['0.0.0.0/0']
 
 - name: create disk
@@ -61,18 +48,6 @@
       - https://www.googleapis.com/auth/compute
     state: present
   register: gcp_ip
-
-# - debug:
-#     var: gcp_ips
-
-# - name: create public ips
-#   gce_eip:
-#     project_id: "{{ gce_project_id }}"
-#     name: "{{ gce_scope }}-publicip-{{ item }}"
-#     region: "{{ gce_region }}"
-#     state: present
-#   register: gcp_public_ips
-#   with_sequence: count="{{gce_count}}" 
 
 - name: create instances
   gcp_compute_instance:
