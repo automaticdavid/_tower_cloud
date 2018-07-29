@@ -32,6 +32,9 @@
   with_sequence: count="{{gce_count}}" 
   register: gcp_disks
 
+- debug:
+    var: gcp_disks
+
 - name: create a network
   gcp_compute_network:
       name: "{{ gce_scope }}-network"
