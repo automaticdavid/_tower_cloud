@@ -70,7 +70,7 @@
     disks:
       - auto_delete: true
         boot: true
-        source: "gcp_disks[ {{ item }} ]"
+        source: "{{ gcp_disks[ {{ item }} ] }}"
     metadata:
       unit: "{{ gce_scope }}"
     network_interfaces:
