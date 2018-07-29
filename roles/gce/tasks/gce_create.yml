@@ -32,9 +32,6 @@
   register: gcp_disks
   with_sequence: count="{{gce_count}}" 
 
-- debug:
-    var: gcp_disks
-
 - name: create a network
   gcp_compute_network:
       name: "{{ gce_scope }}-network"
@@ -48,27 +45,28 @@
 
 - name: create private ips
   gcp_compute_address:
-      name: "{{ gce_scope }}-privateip-{{ item }}"
-      region: "{{ gce_region }}"
-      project: "{{ gce_project_id }}"
-      auth_kind: serviceaccount
-      service_account_file: "{{ gcp_cred_file.path }}"
-      scopes:
-        - https://www.googleapis.com/auth/compute
-      state: present
-  with_sequence: count="{{gce_count}}" 
-
-- name: create public ips
-  gce_eip:
-    project_id: "{{ gce_project_id }}"
-    name: "{{ gce_scope }}-publicip-{{ item }}"
+    name: "{{ gce_scope }}-privateip-{{ item }}"
     region: "{{ gce_region }}"
+    project: "{{ gce_project_id }}"
+    auth_kind: serviceaccount
+    service_account_file: "{{ gcp_cred_file.path }}"
+    scopes:
+      - https://www.googleapis.com/auth/compute
     state: present
-  register: gcp_public_ips
+  register: gcp_ips
   with_sequence: count="{{gce_count}}" 
 
-- debug:
-    var: gcp_public_ips
+  - debug:
+    var: gcp_ips
+
+# - name: create public ips
+#   gce_eip:
+#     project_id: "{{ gce_project_id }}"
+#     name: "{{ gce_scope }}-publicip-{{ item }}"
+#     region: "{{ gce_region }}"
+#     state: present
+#   register: gcp_public_ips
+#   with_sequence: count="{{gce_count}}" 
 
 - name: create a instance
   gcp_compute_instance:
@@ -82,11 +80,11 @@
       unit: "{{ gce_scope }}"
     network_interfaces:
         - network_ip: "{{ item.2.address }}"
-        # - network: "{{ network }}"
-          # access_configs:
-          #   - name: 'External NAT'
-          #     nat_ip: "{{ address }}"
-          #     type: 'ONE_TO_ONE_NAT'
+        - network: "{{ network }}"
+          access_configs:
+            - name: 'External NAT'
+              nat_ip: "{{ address }}"
+              type: 'ONE_TO_ONE_NAT'
     zone: "{{ gce_zone }}"
     project: "{{ gce_project_id }}"
     auth_kind: serviceaccount
@@ -97,6 +95,6 @@
   with_together: 
     - "{{ range(0, gce_count) | list }}"
     - "{{ gcp_disks.results }}"
-    - "{{ gcp_public_ips.results }}"
+    - "{{ gcp_ips.results }}"
 
 
