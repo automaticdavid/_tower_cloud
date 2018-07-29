@@ -101,7 +101,7 @@
     state: present
 
 - name: Add instances to IG
-  shell: |
+  shell: >
     gcloud compute instance-groups unmanaged add-instances "{{ gce_scope }}-ig" 
       --instances="{{ gce_scope }}" 
       --project "{{ gce_project_id }}" 
