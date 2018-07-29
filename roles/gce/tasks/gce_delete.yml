@@ -21,6 +21,12 @@
     scopes:
       - https://www.googleapis.com/auth/compute
     state: absent
+ 
+- name: Delete Firewall Rule for SSH
+  gce_net:
+    name: "{{ gce_scope }}-network"
+    fwname: "{{ gce_scope }}-ssh"
+    state: absent
 
 - name: remove a network
   gcp_compute_network:
