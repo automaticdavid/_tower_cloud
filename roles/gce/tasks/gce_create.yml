@@ -81,7 +81,7 @@
     metadata:
       unit: "{{ gce_scope }}"
     network_interfaces:
-        - network_ip: "{{ item.2 }}"
+        - network_ip: "{{ item.2.address }}"
         # - network: "{{ network }}"
           # access_configs:
           #   - name: 'External NAT'
