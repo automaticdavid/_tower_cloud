@@ -68,7 +68,7 @@
 
 - name: create instances
   gcp_compute_instance:
-    name: "{{ gce_scope }}-{{ item.0 }}"
+    name: "{{ gce_scope }}"
     machine_type: n1-standard-1
     disks:
       - auto_delete: true
