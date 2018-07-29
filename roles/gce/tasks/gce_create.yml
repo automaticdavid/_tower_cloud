@@ -19,14 +19,22 @@
 
 - name: create a network
   gcp_compute_network:
-      name: "{{ gce_scope }}-network"
-      project: "{{ gce_project_id }}"
-      auth_kind: serviceaccount
-      service_account_file: "{{ gcp_cred_file.path }}"
-      scopes:
-        - https://www.googleapis.com/auth/compute
-      state: present
+    name: "{{ gce_scope }}-network"
+    project: "{{ gce_project_id }}"
+    auth_kind: serviceaccount
+    service_account_file: "{{ gcp_cred_file.path }}"
+    scopes:
+      - https://www.googleapis.com/auth/compute
+    state: present
   register: network
+
+- name: Create Firewall Rule for SSH
+  gce_net:
+    name: "{{ gce_scope }}-network"
+    fwname: "{{ gce_scope }}-ssh"
+    allowed: tcp:22
+    state: "present"
+    src_range: ['0.0.0.0/0']
 
 - name: create disk
   gcp_compute_disk:
@@ -44,7 +52,7 @@
 
 - name: reserve addresse
   gcp_compute_address:
-    name: "{{ gce_scope }}-privateip"
+    name: "{{ gce_scope }}-address"
     region: "{{ gce_region }}"
     project: "{{ gce_project_id }}"
     auth_kind: serviceaccount
