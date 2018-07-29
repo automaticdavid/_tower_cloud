@@ -23,6 +23,14 @@
     state: present
     src_range: ['0.0.0.0/0']
 
+- name: Create Firewall Rule for HTTP
+  gce_net:
+    name: "{{ gce_scope }}-network"
+    fwname: "{{ gce_scope }}-http"
+    allowed: tcp:80
+    state: present
+    src_range: ['0.0.0.0/0']
+
 - name: create disk
   gcp_compute_disk:
       name: "{{ gce_scope }}-disk"
