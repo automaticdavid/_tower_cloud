@@ -67,6 +67,9 @@
   register: gcp_public_ips
   with_sequence: count="{{gce_count}}" 
 
+- debug:
+    var: gcp_public_ips
+
 - name: create a instance
   gcp_compute_instance:
     name: "{{ gce_scope }}-{{ item.0 }}"
