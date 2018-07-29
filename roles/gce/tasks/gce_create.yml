@@ -56,7 +56,7 @@
   register: gcp_ips
   with_sequence: count="{{gce_count}}" 
 
-  - debug:
+- debug:
     var: gcp_ips
 
 # - name: create public ips
