@@ -50,7 +50,6 @@
 - debug:
     var: ig 
 
-
 - name: create disk
   gcp_compute_disk:
       name: "{{ gce_scope }}-disk"
@@ -100,5 +99,16 @@
     scopes:
       - https://www.googleapis.com/auth/compute
     state: present
+
+
+# - name: Get api token
+
+
+# - name: Add instances to IG
+
+
+
+
+
 
 
