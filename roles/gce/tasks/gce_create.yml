@@ -29,8 +29,8 @@
       scopes:
         - https://www.googleapis.com/auth/compute
       state: present
-  with_sequence: count="{{gce_count}}" 
   register: gcp_disks
+  with_sequence: count="{{gce_count}}" 
 
 - debug:
     var: gcp_disks
@@ -64,7 +64,9 @@
     name: "{{ gce_scope }}-publicip-{{ item }}"
     region: "{{ gce_region }}"
     state: present
+  register: gcp_public_ips
   with_sequence: count="{{gce_count}}" 
+
 
 - name: create a instance
   gcp_compute_instance:
@@ -73,11 +75,11 @@
     disks:
       - auto_delete: true
         boot: true
-        source: "{{ gcp_disks[ item ] }}"
+        source: "{{ gcp_disks.results[ item ] }}"
     metadata:
       unit: "{{ gce_scope }}"
     network_interfaces:
-        - network_ip: "{{ gce_scope }}-publicip-{{ item }}"
+        - network_ip: "{{ gcp_public_ips.results[ item ] }}"
         # - network: "{{ network }}"
           # access_configs:
           #   - name: 'External NAT'
