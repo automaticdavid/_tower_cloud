@@ -67,19 +67,18 @@
   register: gcp_public_ips
   with_sequence: count="{{gce_count}}" 
 
-
 - name: create a instance
   gcp_compute_instance:
-    name: "{{ gce_scope }}-{{ item }}"
+    name: "{{ gce_scope }}-{{ item.0 }}"
     machine_type: n1-standard-1
     disks:
       - auto_delete: true
         boot: true
-        source: "{{ gcp_disks.results[ item ] }}"
+        source: "{{ item.1 }}"
     metadata:
       unit: "{{ gce_scope }}"
     network_interfaces:
-        - network_ip: "{{ gcp_public_ips.results[ item ] }}"
+        - network_ip: "{{ item.2 }}"
         # - network: "{{ network }}"
           # access_configs:
           #   - name: 'External NAT'
@@ -92,6 +91,9 @@
     scopes:
       - https://www.googleapis.com/auth/compute
     state: present
-  with_sequence: count="{{gce_count}}" 
+  with_together: 
+    - range(0, "{{ gce_count }}")
+    - gcp_disks.results
+    - gcp_public_ips.results
 
 
