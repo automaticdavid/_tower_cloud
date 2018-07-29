@@ -107,6 +107,7 @@
     url: "https://www.googleapis.com/compute/v1/projects/{{ gce_project_id }}/zones/{{ gce_zone }}/instanceGroups/{{ gce_scope }}-ig/addInstances"
     method: POST
     body: "{{ lookup('template', './files/ig.json.j2') }}" 
+    body_format: json
 
 
 
