@@ -4,6 +4,9 @@
     name: common
     tasks_from: gce_env
 
+- environement:
+    GOOGLE_APPLICATION_CREDENTIALS: "{{ gcp_cred_file.path }}"
+
 - name: create a network
   gcp_compute_network:
     name: "{{ gce_scope }}-network"
@@ -100,11 +103,12 @@
       - https://www.googleapis.com/auth/compute
     state: present
 
+- name: Add instances to IG
+  uri:
+    url: "https://www.googleapis.com/compute/v1/projects/{{ gce_project_id }}/zones/{{ gce_zone }}/instanceGroups/{{ gce_scope }}-ig/addInstances"
+    method: POST
+    body: "{{ lookup('template', './files/ig.json.j2') }}" 
 
-# - name: Get api token
-
-
-# - name: Add instances to IG
 
 
 
