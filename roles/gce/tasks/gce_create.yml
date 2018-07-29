@@ -4,7 +4,7 @@
     name: common
     tasks_from: gce_env
 
-- environement:
+- environment:
     GOOGLE_APPLICATION_CREDENTIALS: "{{ gcp_cred_file.path }}"
 
 - name: create a network
