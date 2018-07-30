@@ -47,8 +47,10 @@
     scopes:
       - https://www.googleapis.com/auth/compute
     service_accounts: 
-      - "{{ lookup('ENV', 'gce_client_email') }}":
+      - toto@titi.net
         email: yes
+        scopes: 
+          - https://www.googleapis.com/auth/compute
     state: present
 
 - name: Add instances to IG
