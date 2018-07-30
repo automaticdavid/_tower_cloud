@@ -53,7 +53,12 @@
 - gce:
     instance_names: "{{ gce_scope }}-{{ item }}"
     zone: "{{ gce_zone }}"
-    state: present
+    state: stopped
+
+- gce:
+    instance_names: "{{ gce_scope }}-{{ item }}"
+    zone: "{{ gce_zone }}"
+    state: started    
     service_account_email: "{{ lookup('ENV', 'gce_client_email') }}"
 
 - name: Add instances to IG
