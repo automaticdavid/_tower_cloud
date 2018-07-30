@@ -20,7 +20,7 @@
         name: app
         tasks_from: remove_app
       when:
-        - app_action == 'update'
+        - app_action == 'update' or app_action == 'upgrade'
         - app_dir.stat.exists 
 
     - name: Configure system
