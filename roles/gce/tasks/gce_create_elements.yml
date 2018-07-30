@@ -46,7 +46,7 @@
     service_account_file: "{{ gcp_cred_file.path }}"
     scopes:
       - https://www.googleapis.com/auth/compute
-    service_accounts: "{{ lookup('ENV', 'gce_client_email') }}":
+    service_accounts: "{{ lookup('ENV', 'gce_client_email') }}"
     state: present
 
 - name: Add instances to IG
