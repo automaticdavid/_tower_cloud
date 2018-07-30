@@ -11,7 +11,7 @@
 
 
 - debug:
-    var: gce   
+    var: gce.results   
 
 - name: Build a list of ips and hostnames
   vars:
