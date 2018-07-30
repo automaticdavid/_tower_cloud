@@ -11,7 +11,7 @@
 
 
 - debug:
-    var: gce.results[0].instance_data[0].public_ip
+    var: gce.results[].instance_data[0].public_ip
 
 - name: Build a list of ips and hostnames
   vars:
