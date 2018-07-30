@@ -79,6 +79,16 @@
       ]
   when: object_store == 'blob'
 
+- name: customize gunicorn config for Google blob
+  blockinfile:
+    path: /app/app/cfg.py
+    marker: "# -- ANSIBLE MANAGED BLOCK -- #"
+    content: |
+      raw_env =  [
+      'GOOG_BUCKET_NAME={{ goog_bucket }}'
+      ]
+  when: object_store == 'goog'
+
 - name: customize gunicorn config for local access
   blockinfile:
     path: /app/app/cfg.py

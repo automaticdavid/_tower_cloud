@@ -10,4 +10,5 @@ blob_account: '{{ az_stor_account }}'
 blob_key: '{{ az_key }}'
 blob_container: results
 object_store: s3
+goog_bucket: dcl-hotdog
 
