@@ -12,8 +12,8 @@
 - name: Build a list of ips and hostnames
   vars:
     ips_to_add: "{{ gce | json_query('results[*].instance_data[*].public_ip') | flatten  }}"
-  debug:
-    var: ips_to_add 
+  set_fact:
+    ips_to_add: "{{ ips_to_add }}" 
   
 - name: Add hosts
   add_host:
