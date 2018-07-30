@@ -42,9 +42,10 @@
               type: 'ONE_TO_ONE_NAT'
     zone: "{{ gce_zone }}"
     project: "{{ gce_project_id }}"
-    auth_kind: machineaccount
-    # service_account_file: "{{ gcp_cred_file.path }}"
-    service_account_email: "{{ lookup('ENV', 'gce_client_email') }}"
+    auth_kind: serviceaccount
+    service_account_file: "{{ gcp_cred_file.path }}"
+    service_accounts: 
+      - "{{ lookup('ENV', 'gce_client_email') }}"
     scopes:
       - https://www.googleapis.com/auth/compute
     state: present
