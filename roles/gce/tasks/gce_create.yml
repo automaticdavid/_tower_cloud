@@ -44,6 +44,11 @@
     service_account_file: "{{ gcp_cred_file.path }}"
     scopes:
       - https://www.googleapis.com/auth/compute
+    service_accounts: 
+      - email: "{{ lookup('ENV', 'gce_client_email') }}" 
+        scopes:
+          - https://www.googleapis.com/auth/compute
+          - https://www.googleapis.com/auth/storage
     state: present
   register: ig
 
