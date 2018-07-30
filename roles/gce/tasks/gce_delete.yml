@@ -52,12 +52,6 @@
     fwname: "{{ gce_scope }}-ssh"
     state: absent
 
-- name: Delete Firewall Rule for SSH
-  gce_net:
-    name: "{{ gce_scope }}-network"
-    fwname: "{{ gce_scope }}-ssh"
-    state: absent
-
 - name: Delete Firewall Rule for HTTP
   gce_net:
     name: "{{ gce_scope }}-network"
@@ -84,18 +78,6 @@
       scopes:
         - https://www.googleapis.com/auth/compute
       state: absent
-
-# - debug:
-#     var: gcp_ips
-
-# - name: create public ips
-#   gce_eip:
-#     project_id: "{{ gce_project_id }}"
-#     name: "{{ gce_scope }}-publicip-{{ item }}"
-#     region: "{{ gce_region }}"
-#     state: present
-#   register: gcp_public_ips
-#   with_sequence: count="{{gce_count}}" 
 
 
 
