@@ -9,26 +9,22 @@
   register: gce
   with_sequence: count="{{gce_count}}" 
 
-
-- debug:
-    var: gce.results[0].instance_data[0].public_ip
-
 - name: Build a list of ips and hostnames
   vars:
     ips_to_add: "{{ gce | json_query('results[*].instance_data[*].public_ip') | flatten  }}"
   debug:
     var: ips_to_add 
   
-# - name: Add hosts
-#   add_host:
-#     name: "{{ item }}"
-#     groups: "{{ gce_scope }}"
-#   with_items: "{{ ips_to_add }}" 
+- name: Add hosts
+  add_host:
+    name: "{{ item }}"
+    groups: "{{ gce_scope }}"
+  with_items: "{{ ips_to_add }}" 
 
-# - name: Wait for SSH to come up
-#   wait_for_connection:
-#     timeout: 600
-#     sleep: 15
-#   delegate_to: "{{ item }}"
-#   with_items: "{{ ips_to_add }}"
+- name: Wait for SSH to come up
+  wait_for_connection:
+    timeout: 600
+    sleep: 15
+  delegate_to: "{{ item }}"
+  with_items: "{{ ips_to_add }}"
 
