@@ -15,7 +15,7 @@
 
 - name: Build a list of ips and hostnames
   vars:
-    ips_to_add: "{{ gce.results | json_query(instance_data[].public_ip)  }}"
+    ips_to_add: "{{ json_query(gce.results[].instance_data[].public_ip)  }}"
   debug:
     var: ips_to_add 
   
