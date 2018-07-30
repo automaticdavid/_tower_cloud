@@ -47,7 +47,7 @@
     scopes:
       - https://www.googleapis.com/auth/compute
     service_accounts: 
-      - email: yes
+      - email: "{{ lookup('ENV', 'gce_client_email') }}"
         scopes: 
           - https://www.googleapis.com/auth/compute
     state: present
