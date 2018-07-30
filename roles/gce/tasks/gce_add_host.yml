@@ -15,7 +15,7 @@
 
 - name: Build a list of ips and hostnames
   vars:
-    ips_to_add: "{{ gce | map(attribute='public_ip') | list }}"
+    ips_to_add: "{{ gce.results | map(attribute='public_ip') | list }}"
   set_fact:
     ips_to_add: "{{ ips_to_add }}" 
   
