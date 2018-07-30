@@ -118,7 +118,7 @@
       --instance-group="{{ gce_scope }}-ig" \ 
       --global 
       --instance-group-zone "{{ gce_zone }}"
- delegate_to: localhost
+  delegate_to: localhost
   ignore_errors: yes
 
 

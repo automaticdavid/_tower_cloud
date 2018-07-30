@@ -4,6 +4,30 @@
     name: common
     tasks_from: gce_env
 
+- name: Remove IG from backend service
+  shell: |
+    gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
+    gcloud compute backend-services remove-backend "{{ gcp_lb }}" \
+      --instance-group="{{ gce_scope }}-ig" \ 
+      --global 
+      --instance-group-zone "{{ gce_zone }}"
+ delegate_to: localhost
+
+- name: Remove instances group from IG
+  shell: |
+    gcloud compute instance-groups unmanaged remove-instances "{{ gce_scope }}-ig" \
+      --instances="{{ gce_scope }}" \
+      --project "{{ gce_project_id }}" \  
+      --zone "{{ gce_zone }}"
+  delegate_to: localhost
+
+- name: Remove instance group
+  shell: |
+    gcloud compute instance-groups unmanaged delete "{{ gce_scope }}-ig" \
+      --project "{{ gce_project_id }}" \  
+      --zone "{{ gce_zone }}"
+  delegate_to: localhost
+
 - name: Remove instances
   gce:
     base_name: "{{ scope }}"
@@ -26,6 +50,18 @@
   gce_net:
     name: "{{ gce_scope }}-network"
     fwname: "{{ gce_scope }}-ssh"
+    state: absent
+
+- name: Delete Firewall Rule for SSH
+  gce_net:
+    name: "{{ gce_scope }}-network"
+    fwname: "{{ gce_scope }}-ssh"
+    state: absent
+
+- name: Delete Firewall Rule for HTTP
+  gce_net:
+    name: "{{ gce_scope }}-network"
+    fwname: "{{ gce_scope }}-http"
     state: absent
 
 - name: remove a network
