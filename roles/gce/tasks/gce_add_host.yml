@@ -11,11 +11,11 @@
 
 
 - debug:
-    var: gce.results[].instance_data[0].public_ip
+    var: gce.results[0].instance_data[0].public_ip
 
 - name: Build a list of ips and hostnames
   vars:
-    ips_to_add: "{{ json_query(gce.results[].instance_data[].public_ip)  }}"
+    ips_to_add: "{{ json_query(gce.results[*].instance_data[*].public_ip)  }}"
   debug:
     var: ips_to_add 
   
