@@ -85,7 +85,8 @@
     marker: "# -- ANSIBLE MANAGED BLOCK -- #"
     content: |
       raw_env =  [
-      'GOOG_BUCKET_NAME={{ goog_bucket }}'
+      'GOOG_BUCKET_NAME={{ goog_bucket }}',
+      'OBJECT_STORE={{ object_store }}'
       ]
   when: object_store == 'goog'
 
