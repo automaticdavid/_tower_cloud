@@ -60,6 +60,7 @@
     gcloud compute backend-services add-backend "{{ gce_lb }}" \
       --instance-group="{{ gce_scope }}-ig" \ 
       --global  \ 
+      --project "{{ gce_project_id }}" \  
       --instance-group-zone "{{ gce_zone }}"
   delegate_to: localhost
   ignore_errors: yes
