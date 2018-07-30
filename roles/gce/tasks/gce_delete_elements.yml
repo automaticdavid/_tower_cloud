@@ -1,0 +1,36 @@
+- name: Remove instances group from IG
+  shell: |
+    gcloud compute instance-groups unmanaged remove-instances "{{ gce_scope }}-ig" \
+      --instances="{{ gce_scope }}-{{ item}}" \
+      --project "{{ gce_project_id }}" \  
+      --zone "{{ gce_zone }}"
+  delegate_to: localhost
+
+- name: Remove instances
+  gce:
+    base_name: "{{ scope }}-{{ item}}"
+    zone: "{{ gce_zone }}"
+    project_id: "{{ gce_project_id }}"
+    state: absent
+
+- name: remove addresse
+  gcp_compute_address:
+    name: "{{ gce_scope }}-address-{{ item}}"
+    region: "{{ gce_region }}"
+    project: "{{ gce_project_id }}"
+    auth_kind: serviceaccount
+    service_account_file: "{{ gcp_cred_file.path }}"
+    scopes:
+      - https://www.googleapis.com/auth/compute
+    state: absent
+
+- name: remove disk
+  gcp_compute_disk:
+      name: "{{ gce_scope }}-disk-{{ item}}"
+      zone: "{{ gce_zone }}"
+      project: "{{ gce_project_id }}"
+      auth_kind: serviceaccount
+      service_account_file: "{{ gcp_cred_file.path }}"
+      scopes:
+        - https://www.googleapis.com/auth/compute
+      state: absent

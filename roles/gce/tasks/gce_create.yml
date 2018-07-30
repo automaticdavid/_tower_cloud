@@ -47,7 +47,6 @@
     state: present
   register: ig
 
-
 - name: create instances loop
   include_role: 
     name: gce
