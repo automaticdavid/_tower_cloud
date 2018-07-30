@@ -114,7 +114,7 @@
 - name: Add IG to backend service
   shell: |
     gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
-    gcloud compute backend-services add-backend "{{ gcp_lb }}" \
+    gcloud compute backend-services add-backend "{{ gce_lb }}" \
       --instance-group="{{ gce_scope }}-ig" \ 
       --global  \ 
       --instance-group-zone "{{ gce_zone }}"

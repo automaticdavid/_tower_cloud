@@ -8,3 +8,4 @@ gce_region: europe-west1
 gce_machine_type: n1-standard-1
 gce_image: rhel-7
 gce_project_id: tower-demo
+gce_lb: red

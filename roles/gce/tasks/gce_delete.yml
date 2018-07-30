@@ -7,7 +7,7 @@
 - name: Remove IG from backend service
   shell: |
     gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
-    gcloud compute backend-services remove-backend "{{ gcp_lb }}" \
+    gcloud compute backend-services remove-backend "{{ gce_lb }}" \
       --instance-group="{{ gce_scope }}-ig" \ 
       --global  \ 
       --instance-group-zone "{{ gce_zone }}"
