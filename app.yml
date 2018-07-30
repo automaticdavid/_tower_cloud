@@ -36,6 +36,6 @@
         name: app
         tasks_from: install_app
       when:
-        - (not app_dir.stat.exists) or (app_action == 'update')
+        - (not app_dir.stat.exists) or (app_action == 'update') or (app_action == 'upgrade')
 
 
