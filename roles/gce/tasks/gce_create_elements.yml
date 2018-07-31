@@ -84,6 +84,9 @@
 - set_fact:
     found_str: "{{ ig_state.stdout }} | regex_search({{ gce_scope }}-ig)"
 
+- debug:
+    var: found_str
+
 - name: Add instance to IG
   shell: |
     gcloud compute instance-groups unmanaged add-instances "{{ gce_scope }}-ig" \
