@@ -99,4 +99,4 @@
   delegate_to: localhost
   ignore_errors: yes
   #when: found_str == ""
-  when: find_str.find(instance_name) != -1
+  when: find_str.find(instance_name) == -1
