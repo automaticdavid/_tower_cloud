@@ -82,7 +82,7 @@
     find_str: ig_state.stdout
 
 - set_fact:
-    found_str: "{{ ig_state.stdout }} | regex_search({{ gce_scope }}-ig)"
+    found_str: "{{ ig_state.stdout }} | regex_search('{{ gce_scope }}-ig')"
 
 - debug:
     var: found_str
