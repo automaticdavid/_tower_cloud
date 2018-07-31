@@ -71,7 +71,7 @@
 - name: Check if instance in IG
   shell: |
     gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
-    gcloud compute instance-groups unmanaged list-instance "{{ gce_scope }}-ig" \
+    gcloud compute instance-groups unmanaged list-instances "{{ gce_scope }}-ig" \
       --project "{{ gce_project_id }}" \  
       --zone "{{ gce_zone }}"
   delegate_to: localhost
