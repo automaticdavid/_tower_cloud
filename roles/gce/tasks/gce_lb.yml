@@ -2,10 +2,25 @@
 - include_role: 
     name: common
     tasks_from: gce_env
+
+- name: Check if IG in backend-services
+  shell: |
+    gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
+    gcloud compute instance-groups unmanaged list-instances "{{ gce_scope }}-ig" \
+      --project "{{ gce_project_id }}" \  
+      --zone "{{ gce_zone }}"
+  delegate_to: localhost
+  ignore_errors: yes
+  register: ig_state
+
+- set_fact:
+    find_str: ig_state.stdout
+
+- set_fact:
+    found_str: "{{ ig_state.stdout }} | regex_search({{ gce_scope }}-ig)"
     
 - name: Add IG to backend service
   shell: |
-    gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
     gcloud compute backend-services add-backend "{{ gce_lb }}" \
       --instance-group="{{ gce_scope }}-ig" \ 
       --global  \ 
