@@ -79,7 +79,7 @@
   register: ig_state
 
 - debug:
-    var: "{{ ig_state }}"
+    var: ig_state 
 
 - name: Add instance to IG
   shell: |
