@@ -87,6 +87,9 @@
 - debug:
     var: instance_name
 
+- debug:
+    var: find_str.find(instance_name)
+
 - name: Add instance to IG
   shell: |
     gcloud compute instance-groups unmanaged add-instances "{{ gce_scope }}-ig" \
