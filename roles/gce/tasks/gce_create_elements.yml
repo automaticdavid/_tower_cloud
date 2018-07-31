@@ -87,11 +87,11 @@
 - debug:
     var: instance_name
 
-- debug:
-    var: find_str.find("{{ instance_name }}")
-
-- set_fact:
-    found_str: "{{ find_str }}.find({{ instance_name }})"
+- name : Find IG
+  vars:
+    found_str: find_str.find("{{ instance_name }}") 
+  set_fact:
+    found_str: "{{ found_str }})"
 
 - debug:
     var: found_str
