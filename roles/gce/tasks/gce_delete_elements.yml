@@ -5,6 +5,7 @@
       --project "{{ gce_project_id }}" \  
       --zone "{{ gce_zone }}"
   delegate_to: localhost
+  ignore_errors: yes
 
 - name: Remove instances
   gce:
