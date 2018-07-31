@@ -87,6 +87,9 @@
 - debug:
     var: instance_name
 
+- debug:
+    var: find_str.find("{{ instance_name }}") 
+
 - name : Find IG
   vars:
     found_str: find_str.find("{{ instance_name }}") 
@@ -105,4 +108,4 @@
   delegate_to: localhost
   ignore_errors: yes
   #when: found_str == ""
-  when: found_str == -1
+  when: find_str.find("{{ instance_name }}")  == -1
