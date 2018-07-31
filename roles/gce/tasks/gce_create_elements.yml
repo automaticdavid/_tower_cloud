@@ -28,7 +28,7 @@
   gce:
     instance_names: "{{ gce_scope }}-{{ item }}"
     zone: "{{ gce_zone }}"
-    machine_type: n1-standard-1
+    machine_type: "{{ gce_machine_type }}"
     state: present
     disks:
       - name: "{{ gce_scope }}-disk-{{ item }}"
@@ -68,20 +68,21 @@
 #       - https://www.googleapis.com/auth/compute
 #     state: present
 
-# - gce:
-#     instance_names: "{{ gce_scope }}-{{ item }}"
-#     zone: "{{ gce_zone }}"
-#     state: stopped
-
-# - gce:
-#     instance_names: "{{ gce_scope }}-{{ item }}"
-#     zone: "{{ gce_zone }}"
-#     state: started    
-    # service_account_email: "{{ lookup('ENV', 'gce_client_email') }}"
-
-- name: Add instances to IG
+- name: Check if instance in IG
   shell: |
     gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
+    gcloud compute instance-groups unmanaged list-instance "{{ gce_scope }}-ig" \
+      --project "{{ gce_project_id }}" \  
+      --zone "{{ gce_zone }}"
+  delegate_to: localhost
+  ignore_errors: yes
+  register: ig_state
+
+- debug:
+    var: "{{ ig_state }}"
+
+- name: Add instance to IG
+  shell: |
     gcloud compute instance-groups unmanaged add-instances "{{ gce_scope }}-ig" \
       --instances="{{ gce_scope }}-{{ item }}" \
       --project "{{ gce_project_id }}" \  
