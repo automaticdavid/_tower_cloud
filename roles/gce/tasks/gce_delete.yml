@@ -12,6 +12,7 @@
       --global  \ 
       --instance-group-zone "{{ gce_zone }}"
   delegate_to: localhost
+  ignore_errors: yes
 
 - name: delete instances loop
   include_role: 
