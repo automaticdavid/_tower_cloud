@@ -78,8 +78,11 @@
   ignore_errors: yes
   register: ig_state
 
-- debug:
-    var: ig_state.stdout
+- set_fact:
+    find_str: ig_state.stdout
+
+- set_fact:
+    found_str: "{{ ig_state.stdout }} | search({{ gce_scope }}-ig)"
 
 - name: Add instance to IG
   shell: |
@@ -89,4 +92,4 @@
       --zone "{{ gce_zone }}"
   delegate_to: localhost
   ignore_errors: yes
-  when: ig_state.stdout | search("{{ gce_scope }}-ig")
+  when: found_str
