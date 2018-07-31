@@ -18,3 +18,9 @@
 - name: Deploy app
   import_playbook: app.yml
 
+- name: gce add to LB
+  hosts: localhost
+  tasks:
+  - include_role: 
+      name: gce
+      tasks_from: gce_lb
