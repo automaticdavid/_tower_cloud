@@ -11,13 +11,13 @@
       --zone "{{ gce_zone }}"
   delegate_to: localhost
   ignore_errors: yes
-  register: ig_state
+  register: be_state
 
 - set_fact:
-    find_str: ig_state.stdout
+    find_str: be_state.stdout
 
 - set_fact:
-    found_str: "{{ ig_state.stdout }} | regex_search({{ gce_scope }}-ig)"
+    found_str: "{{ be_state.stdout }} | regex_search({{ gce_scope }}-ig)"
     
 - name: Add IG to backend service
   shell: |

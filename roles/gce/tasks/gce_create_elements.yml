@@ -73,31 +73,13 @@
     gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
     gcloud compute instance-groups unmanaged list-instances "{{ gce_scope }}-ig" \
       --project "{{ gce_project_id }}" \  
-      --zone "{{ gce_zone }}"
+      --zone "{{ gce_zone }}" | grep -c "{{ gce_scope }}-{{ item }}"
   delegate_to: localhost
   ignore_errors: yes
   register: ig_state
 
-- set_fact:
-    find_str: ig_state.stdout
-
-- set_fact:
-    instance_name: "{{ gce_scope }}-{{ item }}"
-
 - debug:
-    var: instance_name
-
-- debug:
-    var: find_str.find(instance_name) 
-
-- name : Find IG
-  vars:
-    found_str: find_str.find(instance_name) 
-  set_fact:
-    found_str: "{{ found_str }})"
-
-- debug:
-    var: found_str
+    var: ig_state
 
 - name: Add instance to IG
   shell: |
@@ -107,5 +89,4 @@
       --zone "{{ gce_zone }}"
   delegate_to: localhost
   ignore_errors: yes
-  #when: found_str == ""
-  when: find_str.find(instance_name)  == -1
+  when: ig_state == 0
