@@ -88,7 +88,7 @@
     var: instance_name
 
 - debug:
-    var: find_str.find(instance_name)
+    var: find_str.find("{{ instance_name }}")
 
 - name: Add instance to IG
   shell: |
