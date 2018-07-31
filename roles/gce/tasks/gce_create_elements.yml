@@ -95,4 +95,4 @@
       --zone "{{ gce_zone }}"
   delegate_to: localhost
   ignore_errors: yes
-  when: found_str != ""
+  when: found_str == ""
