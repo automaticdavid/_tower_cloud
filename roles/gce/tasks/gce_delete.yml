@@ -20,12 +20,12 @@
     tasks_from: gce_delete_elements
   with_sequence: count="{{gce_count}}" 
 
-- name: Remove instance group
-  shell: |
-    gcloud compute instance-groups unmanaged delete "{{ gce_scope }}-ig" \
-      --project "{{ gce_project_id }}" \  
-      --zone "{{ gce_zone }}"
-  delegate_to: localhost
+# - name: Remove instance group
+#   shell: |
+#     gcloud compute instance-groups unmanaged delete "{{ gce_scope }}-ig" \
+#       --project "{{ gce_project_id }}" \  
+#       --zone "{{ gce_zone }}"
+#   delegate_to: localhost
 
 - name: Delete Firewall Rule for SSH
   gce_net:

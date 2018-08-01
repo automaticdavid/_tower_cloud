@@ -31,21 +31,21 @@
     state: present
     src_range: ['0.0.0.0/0']
 
-- name: create a instance group
-  gcp_compute_instance_group:
-    name: "{{ gce_scope }}-ig"
-    named_ports:
-      - name: http
-        port: 80
-    network: "{{ network }}"
-    zone: "{{ gce_zone }}"
-    project: "{{ gce_project_id }}"
-    auth_kind: serviceaccount
-    service_account_file: "{{ gcp_cred_file.path }}"
-    scopes:
-      - https://www.googleapis.com/auth/compute
-    state: present
-  register: ig
+# - name: create a instance group
+#   gcp_compute_instance_group:
+#     name: "{{ gce_scope }}-ig"
+#     named_ports:
+#       - name: http
+#         port: 80
+#     network: "{{ network }}"
+#     zone: "{{ gce_zone }}"
+#     project: "{{ gce_project_id }}"
+#     auth_kind: serviceaccount
+#     service_account_file: "{{ gcp_cred_file.path }}"
+#     scopes:
+#       - https://www.googleapis.com/auth/compute
+#     state: present
+#   register: ig
 
 - name: create instances loop
   include_role: 
