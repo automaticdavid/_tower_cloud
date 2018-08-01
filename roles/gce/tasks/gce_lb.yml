@@ -34,6 +34,3 @@
   until: http_responses.status == 200
   retries: 60
   delay: 10
-
-- debug:
-    var: http_responses
