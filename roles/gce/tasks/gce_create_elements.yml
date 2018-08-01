@@ -78,6 +78,9 @@
   ignore_errors: yes
   register: ig_state
 
+- degug:
+    var: ig_state.stdout
+
 - name: Add instance to IG
   shell: |
     gcloud compute instance-groups unmanaged add-instances "{{ gce_scope }}-ig" \
