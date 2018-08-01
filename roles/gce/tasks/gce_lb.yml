@@ -24,3 +24,8 @@
   delegate_to: localhost
   ignore_errors: yes
   when: be_state.stdout == "0"
+
+- name: Smoke test
+  wait_for:
+    host: "{{ gce_lb }}.automatic.sh"
+    search_regex: "Is it"
