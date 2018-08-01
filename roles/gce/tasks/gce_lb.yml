@@ -26,7 +26,7 @@
   when: be_state.stdout == "0"
 
 - uri:
-    url: "{{ gce_lb }}.automatic.sh"
+    url: "http://{{ gce_lb }}.automatic.sh"
     return_content: yes
   register: http_responses
   delegate_to: localhost
