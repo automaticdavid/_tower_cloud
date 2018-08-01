@@ -1,4 +1,4 @@
-- name: Remove instances group from IG
+- name: Remove instances from IG
   shell: |
     gcloud compute instance-groups unmanaged remove-instances "{{ gce_lb }}-ig" \
       --instances="{{ gce_scope }}-{{ item}}" \
