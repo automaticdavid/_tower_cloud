@@ -78,7 +78,7 @@
   ignore_errors: yes
   register: ig_state
 
-- degug:
+- debug:
     var: ig_state.stdout
 
 - name: Add instance to IG
