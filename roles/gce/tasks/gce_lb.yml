@@ -27,9 +27,11 @@
 
 - name: Smoke test
   uri:
-    url: "{{ gce_lb }}.automatic.sh"
+    url: "http://{{ gce_lb }}.automatic.sh"
+    return_content: yes
   register: http_responses
-  until: http_responses.status == '200'
+  delegate_to: localhost
+  until: http_responses.results.status == '200'
   retries: 50
   delay: 5
 
