@@ -32,8 +32,8 @@
   register: http_responses
   delegate_to: localhost
   until: http_responses.status == 200
-  retries: 50
-  delay: 5
+  retries: 60
+  delay: 10
 
 - debug:
     var: http_responses
