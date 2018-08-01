@@ -31,7 +31,7 @@
     return_content: yes
   register: http_responses
   delegate_to: localhost
-  until: http_responses.results.status == '200'
+  until: http_responses.status == '200'
   retries: 50
   delay: 5
 
