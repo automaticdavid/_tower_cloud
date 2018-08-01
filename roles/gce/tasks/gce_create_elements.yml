@@ -34,7 +34,7 @@
       - name: "{{ gce_scope }}-disk-{{ item }}"
         mode: READ_WRITE
     disk_auto_delete: true
-    network: "{{ gce_scope }}-network"
+    network: "{{ gce_lb }}-network"
     service_account_permissions:
       - storage-full
     service_account_email: "{{ lookup('ENV', 'gce_client_email') }}"
