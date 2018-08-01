@@ -86,4 +86,4 @@
       --zone "{{ gce_zone }}"
   delegate_to: localhost
   ignore_errors: yes
-  when: ig_state == 0
+  when: ig_state.stdout == 0
