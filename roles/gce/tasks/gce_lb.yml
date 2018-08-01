@@ -3,27 +3,33 @@
     name: common
     tasks_from: gce_env
 
-- name: Check if IG in backend-services
-  shell: |
-    gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
-    gcloud compute backend-services describe "{{ gce_lb }}" \
-      --global  \ 
-      --project "{{ gce_project_id }}" | grep -c "{{ gce_scope }}-ig" | cat
-  delegate_to: localhost
-  ignore_errors: yes
-  register: be_state
+# - name: Check if IG in backend-services
+#   shell: |
+#     gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
+#     gcloud compute backend-services describe "{{ gce_lb }}" \
+#       --global  \ 
+#       --project "{{ gce_project_id }}" | grep -c "{{ gce_scope }}-ig" | cat
+#   delegate_to: localhost
+#   ignore_errors: yes
+#   register: be_state
 
     
-- name: Add IG to backend service
-  shell: |
-    gcloud compute backend-services add-backend "{{ gce_lb }}" \
-      --instance-group="{{ gce_scope }}-ig" \ 
-      --global  \ 
-      --project "{{ gce_project_id }}" \  
-      --instance-group-zone "{{ gce_zone }}"
-  delegate_to: localhost
-  ignore_errors: yes
-  when: be_state.stdout == "0"
+# - name: Add IG to backend service
+#   shell: |
+#     gcloud compute backend-services add-backend "{{ gce_lb }}" \
+#       --instance-group="{{ gce_scope }}-ig" \ 
+#       --global  \ 
+#       --project "{{ gce_project_id }}" \  
+#       --instance-group-zone "{{ gce_zone }}"
+#   delegate_to: localhost
+#   ignore_errors: yes
+#   when: be_state.stdout == "0"
+
+- name: Add instances to LB loop
+  include_role: 
+    name: gce
+    tasks_from: gce_lb_elements
+  with_sequence: count="{{gce_count}}" 
 
 - name: Smoke test
   uri:
