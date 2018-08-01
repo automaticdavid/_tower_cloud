@@ -68,22 +68,4 @@
 #       - https://www.googleapis.com/auth/compute
 #     state: present
 
-- name: Check if instance in IG
-  shell: |
-    gcloud auth activate-service-account --key-file "{{ gcp_cred_file.path }}"
-    gcloud compute instance-groups unmanaged list-instances "{{ gce_lb }}-ig" \
-      --project "{{ gce_project_id }}" \  
-      --zone "{{ gce_zone }}" | grep -c "{{ gce_scope }}-{{ item }}" | cat
-  delegate_to: localhost
-  ignore_errors: yes
-  register: ig_state
 
-- name: Add instance to IG
-  shell: |
-    gcloud compute instance-groups unmanaged add-instances "{{ gce_lb }}-ig" \
-      --instances="{{ gce_scope }}-{{ item }}" \
-      --project "{{ gce_project_id }}" \  
-      --zone "{{ gce_zone }}"
-  delegate_to: localhost
-  ignore_errors: yes
-  when: ig_state.stdout == "0"
