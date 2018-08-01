@@ -29,8 +29,8 @@
 
 - name: Delete Firewall Rule for SSH
   gce_net:
-    name: "{{ gce_scope }}-network"
-    fwname: "{{ gce_scope }}-ssh"
+    name: "{{ gce_lb }}-network"
+    fwname: "{{ gce_lb }}-ssh"
     state: absent
 
 - name: Delete Firewall Rule for HTTP

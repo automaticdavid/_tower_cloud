@@ -17,16 +17,16 @@
 
 - name: Create Firewall Rule for SSH
   gce_net:
-    name: "{{ gce_scope }}-network"
-    fwname: "{{ gce_scope }}-ssh"
+    name: "{{ gce_lb }}-network"
+    fwname: "{{ gce_lb }}-ssh"
     allowed: tcp:22
     state: present
     src_range: ['0.0.0.0/0']
 
 - name: Create Firewall Rule for HTTP
   gce_net:
-    name: "{{ gce_scope }}-network"
-    fwname: "{{ gce_scope }}-http"
+    name: "{{ gce_lb }}-network"
+    fwname: "{{ gce_lb }}-http"
     allowed: tcp:80
     state: present
     src_range: ['0.0.0.0/0']
