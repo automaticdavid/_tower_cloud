@@ -9,3 +9,4 @@ gce_machine_type: n1-standard-1
 gce_image: rhel-7
 gce_project_id: tower-demo
 gce_lb: red
+gce_source_image: 'https://www.googleapis.com/compute/v1/projects/rhel-cloud/global/images/rhel-7-v20180716'
