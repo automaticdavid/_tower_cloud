@@ -15,3 +15,6 @@
      group_id: "{{ ec2_groupid }}"
   register: ec2
 
+- debug: 
+    msg: "{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}" 
+
