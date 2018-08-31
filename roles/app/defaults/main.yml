@@ -1,4 +1,4 @@
-app: https://github.com/automaticdavid/demoapp.git
+app: https://github.com/automaticdavid/hot-dog.git
 version: v1.0
 bucket: https://s3-eu-west-1.amazonaws.com/dcl-hot-dog
 state: present
