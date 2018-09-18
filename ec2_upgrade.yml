@@ -2,12 +2,15 @@
 
 - name: Stack actions
   hosts: localhost
+
   tasks:
+
     - debug:
         msg: "Full Stack ML Stack Upgrade"
     # - include_role: 
     #     name: common
     #     tasks_from: init
+
  
 
 - name: ec2 Rolling Upgade 
@@ -16,9 +19,25 @@
 
   tasks:
 
-    - debug: var=ec2_id
+    - name: Get list of relevant EC2 IDs
+      set_fact: 
+        list_of_ids: {{ groups['tag_Name_' + scope ]|map('extract', hostvars, 'ec2_id')|list }}
 
-    - fail:
+    - debug: 
+        var: list_of_ids
+
+    - name: Remove Instances from LB target 
+      elb_target_group:
+        name: "{{ ec2_lb_target }}"
+        protocol: http
+        port: 80
+        vpc_id: "{{ ec2_vpc }}"
+        region:  "{{ ec2_region }}"
+        modify_targets: Yes
+        state: present
+        target_type: instance
+        targets: "{{ ids_and_ports }}"
+
 
     - name: remove ec2 from lb
       include_role: 
@@ -30,15 +49,15 @@
         name: app
         tasks_from: app.yml
 
-    - name: Smoke Test
-      uri:
-        url: ip
-        return_content: yes
-      register: http_responses
-      delegate_to: localhost
-      until: http_responses.status == 200
-      retries: 60
-      delay: 10
+    # - name: Smoke Test
+    #   uri:
+    #     url: ip
+    #     return_content: yes
+    #   register: http_responses
+    #   delegate_to: localhost
+    #   until: http_responses.status == 200
+    #   retries: 60
+    #   delay: 10
 
     - name: add ec2 to lb
       include_role: 
