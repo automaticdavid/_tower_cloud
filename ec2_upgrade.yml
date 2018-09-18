@@ -1,0 +1,41 @@
+---
+
+- name: Stack actions
+  hosts: localhost
+  tasks:
+    - debug:
+        msg: "Full Stack ML Stack Upgrade"
+    # - include_role: 
+    #     name: common
+    #     tasks_from: init
+ 
+
+- name: ec2 Rolling Upgade 
+  hosts: "*{{ scope }}"
+  gather_facts: no
+
+  tasks:
+
+    - debug: var=hostvars
+
+    - fail:
+
+    - name: remove ec2 from lb
+      include_role: 
+        name: ec2
+        tasks_from: ec2_elb_remove
+
+    - name: 
+      include_role:
+        name: app
+        tasks_from: app.yml
+
+    - name: Smoke Test
+
+    - name: add ec2 to lb
+      include_role: 
+        name: ec2
+        tasks_from: ec2_elb_add
+
+
+
