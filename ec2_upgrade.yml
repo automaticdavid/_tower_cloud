@@ -31,6 +31,14 @@
         tasks_from: app.yml
 
     - name: Smoke Test
+      uri:
+        url: ip
+        return_content: yes
+      register: http_responses
+      delegate_to: localhost
+      until: http_responses.status == 200
+      retries: 60
+      delay: 10
 
     - name: add ec2 to lb
       include_role: 
