@@ -16,7 +16,7 @@
 
   tasks:
 
-    - debug: var=hostvars
+    - debug: ec2_id
 
     - fail:
 
