@@ -19,9 +19,3 @@
         tasks_from: ec2_create
       when: 
         - ec2_action == "create" or ec2_action == "deploy"
-
-    - name: Jenkins env inject
-      debug:
-        msg: "JENKINS_EXPORT VAR_NAME=value"
-
-
