@@ -4,6 +4,7 @@
   hosts: "*{{ scope }}"
   gather_facts: yes
   become: yes
+  serial: 1
 
   vars:
     app_action: "{{ app_action }}"
