@@ -21,7 +21,7 @@
 
     - name: Get list of relevant EC2 IDs
       set_fact: 
-        list_of_ids: {{ groups['tag_Name_' + scope ]|map('extract', hostvars, 'ec2_id')|list }}
+        list_of_ids: "{{ groups['tag_Name_' + scope ]|map('extract', hostvars, 'ec2_id')|list }}"
 
     - debug: 
         var: list_of_ids
