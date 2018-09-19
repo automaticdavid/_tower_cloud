@@ -4,39 +4,16 @@
   hosts: "*{{ scope }}"
   gather_facts: yes
   become: yes
-  serial: 1
 
-  vars:
-    app_action: "{{ app_action }}"
-  
   tasks:
-
-    - name: Check app already installed     
-      stat: 
-        path: /app/app/
-      register: app_dir
-
-    - name: Remove existing app
-      include_role: 
-        name: app
-        tasks_from: remove_app
-      when:
-        - app_action == 'update' or app_action == 'upgrade'
-        - app_dir.stat.exists 
 
     - name: Configure system
       include_role: 
         name: app
         tasks_from: config_system
-      when:
-        - app_action != 'update'
-        - not app_dir.stat.exists
-
+    
     - name: Install the app
       include_role: 
         name: app
         tasks_from: install_app
-      when:
-        - (not app_dir.stat.exists) or (app_action == 'update') or (app_action == 'upgrade')
-
-
+    

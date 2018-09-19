@@ -13,7 +13,7 @@
 
  
 - name: Deploy app
-  import_playbook: app.yml
+  import_playbook: app_upgrade.yml
 
 
 # - name: ec2 Rolling Upgade 
