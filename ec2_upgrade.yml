@@ -14,11 +14,11 @@
       run_once: yes
       delegate_to: localhost
 
-    - name: Build the list of instances id and ports
+    - name: Build the list of all instances id and ports
       vars:
         all_ids_and_ports: []
       set_fact:
-        all_ids_and_ports: "{{ ids_and_ports +  [ {'Id': item, 'Port': 80} ] }}"
+        all_ids_and_ports: "{{ all_ids_and_ports +  [ {'Id': item, 'Port': 80} ] }}"
       with_items: "{{ list_of_all_ids }}"
       run_once: yes
       delegate_to: localhost
