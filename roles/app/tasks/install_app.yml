@@ -66,6 +66,7 @@
       'OBJECT_STORE={{ object_store }}'
       ]
   when: object_store == 's3'
+  become: yes
 
 - name: customize gunicorn config for Azure blob
   blockinfile:
@@ -79,6 +80,7 @@
       'OBJECT_STORE={{ object_store }}'
       ]
   when: object_store == 'blob'
+  become: yes
 
 - name: customize gunicorn config for Google blob
   blockinfile:
@@ -90,6 +92,7 @@
       'OBJECT_STORE={{ object_store }}'
       ]
   when: object_store == 'goog'
+  become: yes
 
 - name: customize gunicorn config for local access
   blockinfile:
@@ -100,6 +103,7 @@
       'OBJECT_STORE={{ object_store }}'
       ]
   when: object_store == 'local'
+  become: yes
 
 - name: start gunicorn
   command: gunicorn -c cfg.py app:app
@@ -107,6 +111,7 @@
     chdir: /app/app
   async: 1
   poll: 0 
+  become: yes
  
 - name: Remove temp files
   file:
