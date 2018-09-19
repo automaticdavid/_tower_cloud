@@ -1,19 +1,79 @@
 ---
 
-- name: Stack actions
-  hosts: localhost
-
+- name: App Upgrade
+  hosts: "*{{ scope }}"
+  gather_facts: yes
+  become: yes
+  serial: 1
+  
   tasks:
 
-    - debug:
-        msg: "Full Stack ML Stack Upgrade"
-    # - include_role: 
-    #     name: common
-    #     tasks_from: init
+    - name: Get list of relevant EC2 IDs
+      set_fact: 
+        list_of_all_ids: "{{ groups['tag_Name_' + scope ]|map('extract', hostvars, 'ec2_id')|list }}"
+      run_once: yes
+      delegate_to: localhost
 
- 
-- name: Deploy app
-  import_playbook: app_upgrade.yml
+    - name: Get list of EC2 IDs for target group
+      set_fact: 
+        list_of_ids: "{{ list_of_all_ids | difference([ec2_id]) }}"
+      run_once: yes
+      delegate_to: localhost
+
+    - name: Build the list of instances id and ports
+      vars:
+        ids_and_ports: []
+      set_fact:
+        ids_and_ports: "{{ ids_and_ports +  [ {'Id': item, 'Port': 80} ] }}"
+      with_items: "{{ list_of_ids }}"
+
+    - name: Remove {{ ec2_id }} from Target Group
+      elb_target_group:
+        name: "{{ ec2_lb_target }}"
+        protocol: http
+        port: 80
+        vpc_id: "{{ ec2_vpc }}"
+        region:  "{{ ec2_region }}"
+        modify_targets: Yes
+        state: present
+        target_type: instance
+        targets: "{{ ids_and_ports }}"
+
+    - name: Check app already installed     
+      stat: 
+        path: /app/app/
+      register: app_dir
+
+    - name: Remove existing app
+      include_role: 
+        name: app
+        tasks_from: remove_app
+      when:
+        - app_dir.stat.exists 
+
+    - name: Install the app
+      include_role: 
+        name: app
+        tasks_from: install_app
+
+    - name: Build the list of instances id and ports
+      vars:
+        all_ids_and_ports: []
+      set_fact:
+        all_ids_and_ports: "{{ ids_and_ports +  [ {'Id': item, 'Port': 80} ] }}"
+      with_items: "{{ list_of_all_ids }}"
+
+    - name: Add {{ ec2_id }} to Target Group
+      elb_target_group:
+        name: "{{ ec2_lb_target }}"
+        protocol: http
+        port: 80
+        vpc_id: "{{ ec2_vpc }}"
+        region:  "{{ ec2_region }}"
+        modify_targets: Yes
+        state: present
+        target_type: instance
+        targets: "{{ all_ids_and_ports }}"
 
 
 # - name: ec2 Rolling Upgade 
