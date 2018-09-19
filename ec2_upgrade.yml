@@ -58,7 +58,6 @@
       include_role: 
         name: app
         tasks_from: remove_app
-      become: yes
       when:
         - app_dir.stat.exists 
 
@@ -66,8 +65,6 @@
       include_role: 
         name: app
         tasks_from: install_app
-      become: yes
-
 
     - name: Add {{ ec2_id }} to Target Group
       elb_target_group:

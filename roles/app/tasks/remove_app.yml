@@ -8,6 +8,7 @@
 - name: Kill first unning gunicorn
   shell: "kill {{ item }} 2>&1 > /dev/null"
   with_items: "{{ gunicorn.stdout_lines.0 }}"
+  become: yes
   ignore_errors: yes
   when: gunicorn.stdout_lines.0 is defined
 
@@ -25,6 +26,7 @@
 - name: Kill all running gunicorn
   shell: "kill {{ item }} 2>&1 > /dev/null"
   with_items: "{{ gunicorn.stdout_lines }}"
+  become: yes
   ignore_errors: yes
   when: gunicorn.stdout_lines is defined and (gunicorn.stdout_lines|length>0)
 
@@ -39,12 +41,14 @@
 - name: Force kill stuck processes
   shell: "kill -9 {{ item }}"
   with_items: "{{ killed.results | select('failed') | map(attribute='item') | list }}"
+  become: yes
   when: killed.results is defined and and (killed.results|length>0)
 
 - name: Remove app directory 
   file:
     path: /app/
     state: absent
+  become: yes
 
 
 
