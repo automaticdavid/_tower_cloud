@@ -3,7 +3,6 @@
 - name: App Upgrade
   hosts: "*{{ scope }}"
   gather_facts: yes
-  become: yes
   serial: 1
   
   tasks:
@@ -23,12 +22,6 @@
       run_once: yes
       delegate_to: localhost
 
-    - name: Remove upgraded ID from list of EC2 IDs
-      set_fact: 
-        list_of_ids: "{{ list_of_all_ids | difference([ec2_id]) }}"
-      run_once: yes
-      delegate_to: localhost
-
     - name: Build the rolling upgrade list of instances id and ports
       vars:
         ids_and_ports: []
@@ -36,6 +29,11 @@
         ids_and_ports: "{{ ids_and_ports +  [ {'Id': item, 'Port': 80} ] }}"
       with_items: "{{ list_of_ids }}"
       run_once: yes
+      delegate_to: localhost
+
+    - name: Remove current upgraded ID from list of EC2 IDs
+      set_fact: 
+        list_of_ids: "{{ list_of_all_ids | difference([ec2_id]) }}"
       delegate_to: localhost
 
     - name: Remove {{ ec2_id }} from Target Group
@@ -54,12 +52,14 @@
     - name: Check app already installed     
       stat: 
         path: /app/app/
-      register: app_dir
+      become: yes
+      register: app_dir    
 
     - name: Remove existing app
       include_role: 
         name: app
         tasks_from: remove_app
+      become: yes
       when:
         - app_dir.stat.exists 
 
@@ -67,6 +67,8 @@
       include_role: 
         name: app
         tasks_from: install_app
+      become: yes
+
 
     - name: Add {{ ec2_id }} to Target Group
       elb_target_group:
