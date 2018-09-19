@@ -46,6 +46,7 @@
         state: present
         target_type: instance
         targets: "{{ ids_and_ports }}"
+        wait: yes
       delegate_to: localhost
 
     - name: Check app already installed     
@@ -77,6 +78,7 @@
         state: present
         target_type: instance
         targets: "{{ all_ids_and_ports }}"
+        wait: yes
       delegate_to: localhost
 
 
