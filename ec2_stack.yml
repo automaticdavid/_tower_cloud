@@ -39,5 +39,3 @@
       include_role: 
         name: ec2
         tasks_from: ec2_elb_target
-      when:
-        app_action != 'update'
