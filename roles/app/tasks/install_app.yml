@@ -48,6 +48,18 @@
     dest: /app/
   become: yes
 
+- name: update pip and setup tools
+  command: pip install --upgrade pip
+  become: yes
+
+- name: update pip and setup tools
+  command: pip install --upgrade pip
+  become: yes
+
+- name: update pip and setup tools
+  command: pip install -U setuptools
+  become: yes
+  
 - name: pip install requirements
   pip:
     requirements: /app/requirements.txt
